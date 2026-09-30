@@ -350,6 +350,13 @@
       return parts[parts.length - 1];
     }
 
+    function getShortName(fullName) {
+      if (!fullName) return "";
+      const parts = fullName.trim().split(" ");
+      if (parts.length === 1) return parts[0];
+      return `${parts[0].charAt(0)}. ${parts.slice(1).join(" ")}`;
+    }
+
     async function fetchLiveStats() {
       const btn = document.getElementById("refresh-btn");
       if (btn) btn.innerText = "⏳ Chargement...";
@@ -400,7 +407,7 @@
                 <div class="side-box side-blue ${p1Winning ? 'winning' : ''}">
                   ${p1Winning ? '<div class="win-badge">GAGNE</div>' : ''}
                   <div class="participant-name">${bet.p1.name}</div>
-                  <div class="selection-text">${bet.p1.player}</div>
+                  <div class="selection-text">${getShortName(bet.p1.player)}</div>
                   <div class="stat-number">${st1.points} <span style="font-size: 0.9rem; font-weight: 700;">pts</span></div>
                   <div class="stat-detail">${st1.gp} GP</div>
                 </div>
@@ -410,7 +417,7 @@
                 <div class="side-box side-red ${p2Winning ? 'winning' : ''}">
                   ${p2Winning ? '<div class="win-badge">GAGNE</div>' : ''}
                   <div class="participant-name">${bet.p2.name}</div>
-                  <div class="selection-text">${bet.p2.player}</div>
+                  <div class="selection-text">${getShortName(bet.p2.player)}</div>
                   <div class="stat-number">${st2.points} <span style="font-size: 0.9rem; font-weight: 700;">pts</span></div>
                   <div class="stat-detail">${st2.gp} GP</div>
                 </div>
