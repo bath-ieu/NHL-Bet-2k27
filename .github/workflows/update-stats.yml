@@ -24,7 +24,12 @@ jobs:
           python -c "
           import urllib.request, json
 
-          player_ids = [8482671, 8482083, 8477956, 8475184, 8478402, 8480803]
+          player_ids = [
+              8482671, 8482083, 8477956, 8475184, 8480018, 
+              8483457, 8483515, 8484140, 8482088, 8481559, 
+              8479318, 8476468, 8480893, 8484230, 8486067, 
+              8480843, 8478048
+          ]
           stats = {}
 
           for pid in player_ids:
@@ -35,13 +40,15 @@ jobs:
                       data = json.loads(response.read().decode())
                       pts, gp = 0, 0
                       if 'featuredStats' in data and 'regularSeason' in data['featuredStats'] and 'subSeason' in data['featuredStats']['regularSeason']:
-                          pts = data['featuredStats']['regularSeason']['subSeason'].get('points', 0)
-                          gp = data['featuredStats']['regularSeason']['subSeason'].get('gamesPlayed', 0)
+                          sub = data['featuredStats']['regularSeason']['subSeason']
+                          pts = sub.get('points', sub.get('wins', 0))
+                          gp = sub.get('gamesPlayed', 0)
                       elif 'seasonTotals' in data:
                           reg = [s for s in data['seasonTotals'] if s.get('gameTypeId') == 2]
                           if reg:
-                              pts = reg[-1].get('points', 0)
-                              gp = reg[-1].get('gamesPlayed', 0)
+                              last = reg[-1]
+                              pts = last.get('points', last.get('wins', 0))
+                              gp = last.get('gamesPlayed', 0)
                       stats[str(pid)] = {'points': pts, 'gp': gp}
               except Exception as e:
                   print(f'Error for {pid}: {e}')
