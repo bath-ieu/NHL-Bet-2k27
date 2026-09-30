@@ -201,6 +201,7 @@
       font-weight: 600;
       color: var(--text-muted);
       margin-top: 4px;
+      text-align: center;
     }
 
     .vs-divider {
@@ -242,7 +243,7 @@
       },
       {
         id: "bet-2",
-        title: "David Pastrnak — Over/Under",
+        playerName: "David Pastrnak",
         stake: 10,
         type: "OU",
         target: 99.5,
@@ -253,7 +254,7 @@
       },
       {
         id: "bet-3",
-        title: "Chris Kreider — Over/Under",
+        playerName: "Chris Kreider",
         stake: 5,
         type: "OU",
         target: 64.5,
@@ -261,13 +262,6 @@
         playerId: "8475184",
         p1: { name: "Math", selection: "OVER ▲", sub: "plus de" },
         p2: { name: "Simon", selection: "UNDER ▼", sub: "moins de" }
-      },
-      {
-        id: "bet-4",
-        stake: 10,
-        type: "H2H",
-        p1: { name: "Phil", player: "Connor McDavid", playerId: "8478402" },
-        p2: { name: "Math", player: "Evan Bouchard", playerId: "8480803" }
       }
     ];
 
@@ -284,7 +278,6 @@
       if (btn) btn.innerText = "⏳ Chargement...";
       
       try {
-        // Lecture du fichier stats.json généré par le robot GitHub
         const res = await fetch(`./stats.json?t=${Date.now()}`);
         if (res.ok) {
           const data = await res.json();
@@ -299,7 +292,7 @@
     }
 
     function renderApp() {
-      const userBalances = { "Will": 0, "Ben": 0, "Simon": 0, "Gab": 0, "Math": 0, "Phil": 0 };
+      const userBalances = { "Will": 0, "Ben": 0, "Simon": 0, "Gab": 0, "Math": 0 };
       const betsListEl = document.getElementById("bets-list");
       betsListEl.innerHTML = "";
 
@@ -318,7 +311,7 @@
 
           const p1LastName = getLastName(bet.p1.player);
           const p2LastName = getLastName(bet.p2.player);
-          const betTitle = `${p1LastName} vs ${p2LastName} — Total de points`;
+          const betTitle = `${p1LastName} vs ${p2LastName} - Points`;
 
           cardHTML = `
             <div class="bet-card">
@@ -357,10 +350,12 @@
           if (p1Winning) { userBalances[bet.p1.name] += bet.stake; userBalances[bet.p2.name] -= bet.stake; }
           else if (p2Winning) { userBalances[bet.p2.name] += bet.stake; userBalances[bet.p1.name] -= bet.stake; }
 
+          const betTitle = `${bet.playerName} - Over/Under ${bet.targetDisplay}pts`;
+
           cardHTML = `
             <div class="bet-card">
               <div class="bet-header">
-                <span class="bet-title">${bet.title}</span>
+                <span class="bet-title">${betTitle}</span>
                 <span class="bet-stake">${bet.stake} $</span>
               </div>
               <div class="bet-body">
@@ -372,8 +367,8 @@
                 </div>
                 
                 <div class="vs-divider">
-                  <div class="stat-number" style="font-size:1.5rem">${st.points}</div>
-                  <div class="stat-detail">pts · ${st.gp} GP</div>
+                  <div class="stat-number" style="font-size:1.4rem;">${st.points} <span style="font-size: 0.9rem; font-weight: 700;">pts</span></div>
+                  <div class="stat-detail">${st.gp} GP</div>
                 </div>
                 
                 <div class="side-box side-red ${p2Winning ? 'winning' : ''}">
