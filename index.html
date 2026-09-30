@@ -106,7 +106,7 @@
 
     .leaderboard-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(85px, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(80px, 1fr));
       gap: 10px;
     }
     .user-pill {
@@ -278,7 +278,6 @@
 </head>
 <body>
 
-  <!-- EN-TÊTE PRINCIPALE DE PAGE -->
   <header class="main-header">
     <div class="top-accent-bar">
       <div class="bar-red"></div>
@@ -292,13 +291,11 @@
     </div>
   </header>
 
-  <!-- BILAN FINANCIER EN HAUT -->
   <div class="leaderboard-card">
     <div class="leaderboard-title">Bilan (Gains / Pertes)</div>
     <div class="leaderboard-grid" id="leaderboard"></div>
   </div>
 
-  <!-- EN-TÊTE DE SECTION -->
   <div class="section-header">
     <span class="section-label">Les Paris</span>
     <button class="refresh-btn-main" onclick="fetchLiveStats()" id="refresh-btn">
@@ -306,7 +303,6 @@
     </button>
   </div>
 
-  <!-- LISTE DES PARIS -->
   <div class="bets-list" id="bets-list"></div>
 
   <script>
@@ -339,6 +335,91 @@
         playerId: "8475184",
         p1: { name: "Math", selection: "OVER ▲" },
         p2: { name: "Simon", selection: "UNDER ▼" }
+      },
+      {
+        id: "bet-4",
+        playerName: "Nick Suzuki",
+        stake: 5,
+        type: "OU",
+        target: 99.5,
+        targetDisplay: "99,5",
+        playerId: "8480018",
+        p1: { name: "Gab", selection: "OVER ▲" },
+        p2: { name: "Ben", selection: "UNDER ▼" }
+      },
+      {
+        id: "bet-5",
+        playerName: "Lane Hutson",
+        stake: 5,
+        type: "OU",
+        target: 89.5,
+        targetDisplay: "89,5",
+        playerId: "8483457",
+        p1: { name: "Gab", selection: "OVER ▲" },
+        p2: { name: "Ben", selection: "UNDER ▼" }
+      },
+      {
+        id: "bet-6",
+        playerName: "Juraj Slafkovský",
+        stake: 10,
+        type: "OU",
+        target: 77.5,
+        targetDisplay: "77,5",
+        playerId: "8483515",
+        p1: { name: "Reg", selection: "OVER ▲" },
+        p2: { name: "Ben", selection: "UNDER ▼" }
+      },
+      {
+        id: "bet-7",
+        playerName: "Matvei Michkov",
+        stake: 5,
+        type: "OU",
+        target: 64.5,
+        targetDisplay: "64,5",
+        playerId: "8484140",
+        p1: { name: "Sim", selection: "OVER ▲" },
+        p2: { name: "Ben", selection: "UNDER ▼" }
+      },
+      {
+        id: "bet-8",
+        playerName: "Alexis Lafrenière",
+        stake: 5,
+        type: "OU",
+        target: 62.5,
+        targetDisplay: "62,5",
+        playerId: "8482088",
+        p1: { name: "Ben", selection: "OVER ▲" },
+        p2: { name: "Phil", selection: "UNDER ▼" }
+      },
+      {
+        id: "bet-9",
+        stake: 10,
+        type: "H2H",
+        p1: { name: "Math", player: "Jack Hughes", playerId: "8481559" },
+        p2: { name: "Gab", player: "Auston Matthews", playerId: "8479318" }
+      },
+      {
+        id: "bet-10",
+        stake: 5,
+        type: "H2H",
+        p1: { name: "Phil", player: "J.T. Miller", playerId: "8476468" },
+        p2: { name: "Sim", player: "Kirill Marchenko", playerId: "8480893" }
+      },
+      {
+        id: "bet-11",
+        stake: 5,
+        type: "H2H",
+        p1: { name: "Will", player: "Otto Stenberg", playerId: "8484230" },
+        p2: { name: "Reg", player: "Gavin McKenna", playerId: "8486067" }
+      },
+      {
+        id: "bet-12",
+        stake: 5,
+        type: "H2H",
+        category: "Victoires",
+        unit: "v.",
+        p1: { name: "Math", player: "Lukas Dostal", playerId: "8480843" },
+        p2: { name: "Ben", player: "Igor Shesterkin", playerId: "8478048" }
       }
     ];
 
@@ -376,7 +457,13 @@
     }
 
     function renderApp() {
-      const userBalances = { "Will": 0, "Ben": 0, "Simon": 0, "Gab": 0, "Math": 0 };
+      const userBalances = {};
+
+      bets.forEach(b => {
+        if (b.p1 && b.p1.name) userBalances[b.p1.name] = 0;
+        if (b.p2 && b.p2.name) userBalances[b.p2.name] = 0;
+      });
+
       const betsListEl = document.getElementById("bets-list");
       betsListEl.innerHTML = "";
 
@@ -395,7 +482,9 @@
 
           const p1LastName = getLastName(bet.p1.player);
           const p2LastName = getLastName(bet.p2.player);
-          const betTitle = `${p1LastName} vs ${p2LastName} - Points`;
+          const categoryLabel = bet.category || "Points";
+          const unitLabel = bet.unit || "pts";
+          const betTitle = `${p1LastName} vs ${p2LastName} - ${categoryLabel}`;
 
           cardHTML = `
             <div class="bet-card">
@@ -408,7 +497,7 @@
                   ${p1Winning ? '<div class="win-badge">GAGNE</div>' : ''}
                   <div class="participant-name">${bet.p1.name}</div>
                   <div class="selection-text">${getShortName(bet.p1.player)}</div>
-                  <div class="stat-number">${st1.points} <span style="font-size: 0.9rem; font-weight: 700;">pts</span></div>
+                  <div class="stat-number">${st1.points} <span style="font-size: 0.9rem; font-weight: 700;">${unitLabel}</span></div>
                   <div class="stat-detail">${st1.gp} GP</div>
                 </div>
                 
@@ -418,7 +507,7 @@
                   ${p2Winning ? '<div class="win-badge">GAGNE</div>' : ''}
                   <div class="participant-name">${bet.p2.name}</div>
                   <div class="selection-text">${getShortName(bet.p2.player)}</div>
-                  <div class="stat-number">${st2.points} <span style="font-size: 0.9rem; font-weight: 700;">pts</span></div>
+                  <div class="stat-number">${st2.points} <span style="font-size: 0.9rem; font-weight: 700;">${unitLabel}</span></div>
                   <div class="stat-detail">${st2.gp} GP</div>
                 </div>
               </div>
