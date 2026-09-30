@@ -31,15 +31,9 @@
       background: var(--card-bg);
       border-radius: 18px;
       padding: 18px;
-      margin-bottom: 25px;
+      margin-bottom: 20px;
       box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03);
       border: 1px solid var(--border-color);
-    }
-    .leaderboard-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 15px;
     }
     .leaderboard-title {
       font-size: 0.85rem;
@@ -47,16 +41,7 @@
       color: var(--text-muted);
       text-transform: uppercase;
       letter-spacing: 1px;
-    }
-    .refresh-btn {
-      background: var(--bg-light);
-      color: var(--text-dark);
-      border: 1px solid var(--border-color);
-      padding: 6px 12px;
-      border-radius: 20px;
-      font-weight: 600;
-      font-size: 0.75rem;
-      cursor: pointer;
+      margin-bottom: 12px;
     }
 
     .leaderboard-grid {
@@ -76,16 +61,38 @@
     .negative { color: var(--loss-red); }
     .neutral { color: var(--text-muted); }
 
-    /* Section Titre */
+    /* Section Titre & Bouton Refresh */
+    .section-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 15px;
+      padding: 0 4px;
+    }
     .section-label {
-      font-size: 0.8rem;
+      font-size: 0.85rem;
       font-weight: 800;
       color: var(--text-muted);
       text-transform: uppercase;
       letter-spacing: 1px;
-      margin-bottom: 12px;
-      padding-left: 4px;
     }
+
+    .refresh-btn-main {
+      background: var(--card-bg);
+      color: var(--text-dark);
+      border: 1.5px solid var(--border-color);
+      padding: 8px 16px;
+      border-radius: 20px;
+      font-weight: 700;
+      font-size: 0.8rem;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.04);
+      transition: all 0.2s;
+    }
+    .refresh-btn-main:active { transform: scale(0.96); }
 
     /* Cartes de Paris */
     .bets-list { display: flex; flex-direction: column; gap: 18px; }
@@ -102,7 +109,7 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
-      margin-bottom: 15px;
+      margin-bottom: 18px;
     }
     .bet-title {
       font-weight: 800;
@@ -134,6 +141,8 @@
       flex-direction: column;
       justify-content: center;
       min-height: 110px;
+      position: relative;
+      transition: all 0.3s ease;
     }
 
     .side-blue {
@@ -143,6 +152,29 @@
     .side-red {
       background: var(--red-bg);
       border: 2px solid var(--red-border);
+    }
+
+    /* Style du gagnant (Contour vert épais + fond teinté) */
+    .side-box.winning {
+      border: 3.5px solid var(--win-green) !important;
+      background-color: #F0FDF4 !important;
+      box-shadow: 0 0 14px rgba(22, 163, 74, 0.25);
+    }
+
+    .win-badge {
+      position: absolute;
+      top: -11px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: var(--win-green);
+      color: white;
+      font-size: 0.65rem;
+      font-weight: 900;
+      padding: 2px 8px;
+      border-radius: 10px;
+      letter-spacing: 0.5px;
+      white-space: nowrap;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.15);
     }
 
     .participant-name {
@@ -179,31 +211,25 @@
       text-align: center;
       padding: 0 4px;
     }
-
-    /* Bas de Carte */
-    .bet-footer {
-      margin-top: 15px;
-      padding-top: 10px;
-      text-align: center;
-      font-size: 0.85rem;
-      font-weight: 600;
-      color: var(--text-muted);
-    }
   </style>
 </head>
 <body>
 
   <!-- BILAN FINANCIER EN HAUT -->
   <div class="leaderboard-card">
-    <div class="leaderboard-header">
-      <span class="leaderboard-title">Bilan (Gains / Pertes)</span>
-      <button class="refresh-btn" onclick="fetchLiveStats()">Actualiser</button>
-    </div>
+    <div class="leaderboard-title">Bilan (Gains / Pertes)</div>
     <div class="leaderboard-grid" id="leaderboard"></div>
   </div>
 
+  <!-- EN-TÊTE DE SECTION AVEC BOUTON DE MISE À JOUR NHL -->
+  <div class="section-header">
+    <span class="section-label">Les Paris</span>
+    <button class="refresh-btn-main" onclick="fetchLiveStats()" id="refresh-btn">
+      🔄 Sync Stats NHL
+    </button>
+  </div>
+
   <!-- LISTE DES PARIS -->
-  <div class="section-label">Les Paris</div>
   <div class="bets-list" id="bets-list"></div>
 
   <script>
@@ -243,6 +269,9 @@
     const playerStats = {};
 
     async function fetchLiveStats() {
+      const btn = document.getElementById("refresh-btn");
+      btn.innerText = "⏳ Chargement...";
+      
       const playerIds = [8482671, 8482083, 8477956, 8475184];
       const apiEndpoint = atob("aHR0cHM6Ly9hcGktd2ViLm5obGUuY29tL3YxL3BsYXllci8=");
       
@@ -263,7 +292,9 @@
           playerStats[id] = playerStats[id] || { points: 0, gp: 0 };
         }
       }
+      
       renderApp();
+      btn.innerText = "🔄 Sync Stats NHL";
     }
 
     function renderApp() {
@@ -284,11 +315,6 @@
           if (p1Winning) { userBalances[bet.p1.name] += bet.stake; userBalances[bet.p2.name] -= bet.stake; }
           else if (p2Winning) { userBalances[bet.p2.name] += bet.stake; userBalances[bet.p1.name] -= bet.stake; }
 
-          let statusText = "Égalité — aucun point encore";
-          if (st1.points !== st2.points) {
-            statusText = p1Winning ? `${bet.p1.name} mène par ${st1.points - st2.points} pts` : `${bet.p2.name} mène par ${st2.points - st1.points} pts`;
-          }
-
           cardHTML = `
             <div class="bet-card">
               <div class="bet-header">
@@ -296,21 +322,24 @@
                 <span class="bet-stake">${bet.stake} $</span>
               </div>
               <div class="bet-body">
-                <div class="side-box side-blue">
+                <div class="side-box side-blue ${p1Winning ? 'winning' : ''}">
+                  ${p1Winning ? '<div class="win-badge">GAGNE</div>' : ''}
                   <div class="participant-name">${bet.p1.name}</div>
                   <div class="selection-text">${bet.p1.player}</div>
                   <div class="stat-number">${st1.points}</div>
                   <div class="stat-detail">pts · ${st1.gp} GP</div>
                 </div>
+                
                 <div class="vs-divider">VS</div>
-                <div class="side-box side-red">
+                
+                <div class="side-box side-red ${p2Winning ? 'winning' : ''}">
+                  ${p2Winning ? '<div class="win-badge">GAGNE</div>' : ''}
                   <div class="participant-name">${bet.p2.name}</div>
                   <div class="selection-text">${bet.p2.player}</div>
                   <div class="stat-number">${st2.points}</div>
                   <div class="stat-detail">pts · ${st2.gp} GP</div>
                 </div>
               </div>
-              <div class="bet-footer">${statusText}</div>
             </div>
           `;
 
@@ -320,12 +349,8 @@
           let p1Winning = st.points > bet.target;
           let p2Winning = st.points <= bet.target;
 
-          if (st.points > 0 || st.gp > 0) {
-            if (p1Winning) { userBalances[bet.p1.name] += bet.stake; userBalances[bet.p2.name] -= bet.stake; }
-            else { userBalances[bet.p2.name] += bet.stake; userBalances[bet.p1.name] -= bet.stake; }
-          }
-
-          let statusText = st.gp === 0 ? `Pas encore commencé — ligne à ${bet.targetDisplay} pts` : (p1Winning ? `${bet.p1.name} (OVER) mène` : `${bet.p2.name} (UNDER) mène`);
+          if (p1Winning) { userBalances[bet.p1.name] += bet.stake; userBalances[bet.p2.name] -= bet.stake; }
+          else if (p2Winning) { userBalances[bet.p2.name] += bet.stake; userBalances[bet.p1.name] -= bet.stake; }
 
           cardHTML = `
             <div class="bet-card">
@@ -334,22 +359,25 @@
                 <span class="bet-stake">${bet.stake} $</span>
               </div>
               <div class="bet-body">
-                <div class="side-box side-blue">
+                <div class="side-box side-blue ${p1Winning ? 'winning' : ''}">
+                  ${p1Winning ? '<div class="win-badge">GAGNE</div>' : ''}
                   <div class="participant-name">${bet.p1.name}</div>
                   <div class="selection-text">${bet.p1.selection}<br>${bet.p1.sub}</div>
                   <div class="stat-number">${bet.targetDisplay}</div>
                 </div>
+                
                 <div class="vs-divider">
                   <div class="stat-number" style="font-size:1.5rem">${st.points}</div>
                   <div class="stat-detail">pts · ${st.gp} GP</div>
                 </div>
-                <div class="side-box side-red">
+                
+                <div class="side-box side-red ${p2Winning ? 'winning' : ''}">
+                  ${p2Winning ? '<div class="win-badge">GAGNE</div>' : ''}
                   <div class="participant-name">${bet.p2.name}</div>
                   <div class="selection-text">${bet.p2.selection}<br>${bet.p2.sub}</div>
                   <div class="stat-number">${bet.targetDisplay}</div>
                 </div>
               </div>
-              <div class="bet-footer">${statusText}</div>
             </div>
           `;
         }
@@ -357,7 +385,7 @@
         betsListEl.innerHTML += cardHTML;
       });
 
-      // Leaderboard
+      // Rendu du Leaderboard
       const leaderboardEl = document.getElementById("leaderboard");
       leaderboardEl.innerHTML = "";
       Object.keys(userBalances).forEach(user => {
