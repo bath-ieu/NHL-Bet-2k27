@@ -220,11 +220,11 @@
     <div class="leaderboard-grid" id="leaderboard"></div>
   </div>
 
-  <!-- EN-TÊTE DE SECTION AVEC BOUTON DE MISE À JOUR NHL -->
+  <!-- EN-TÊTE DE SECTION -->
   <div class="section-header">
     <span class="section-label">Les Paris</span>
     <button class="refresh-btn-main" onclick="fetchLiveStats()" id="refresh-btn">
-      🔄 Sync Stats NHL
+      🔄 Actualiser
     </button>
   </div>
 
@@ -237,8 +237,8 @@
         id: "bet-1",
         stake: 10,
         type: "H2H",
-        p1: { name: "Will", player: "Owen Power", playerId: 8482671 },
-        p2: { name: "Ben", player: "Jamie Drysdale", playerId: 8482083 }
+        p1: { name: "Will", player: "Owen Power", playerId: "8482671" },
+        p2: { name: "Ben", player: "Jamie Drysdale", playerId: "8482083" }
       },
       {
         id: "bet-2",
@@ -247,7 +247,7 @@
         type: "OU",
         target: 99.5,
         targetDisplay: "99,5",
-        playerId: 8477956,
+        playerId: "8477956",
         p1: { name: "Simon", selection: "OVER ▲", sub: "plus de" },
         p2: { name: "Gab", selection: "UNDER ▼", sub: "moins de" }
       },
@@ -258,7 +258,7 @@
         type: "OU",
         target: 64.5,
         targetDisplay: "64,5",
-        playerId: 8475184,
+        playerId: "8475184",
         p1: { name: "Math", selection: "OVER ▲", sub: "plus de" },
         p2: { name: "Simon", selection: "UNDER ▼", sub: "moins de" }
       },
@@ -266,8 +266,8 @@
         id: "bet-4",
         stake: 10,
         type: "H2H",
-        p1: { name: "Phil", player: "Connor McDavid", playerId: 8478402 },
-        p2: { name: "Math", player: "Evan Bouchard", playerId: 8480803 }
+        p1: { name: "Phil", player: "Connor McDavid", playerId: "8478402" },
+        p2: { name: "Math", player: "Evan Bouchard", playerId: "8480803" }
       }
     ];
 
@@ -279,72 +279,22 @@
       return parts[parts.length - 1];
     }
 
-    // Fetch avec contrôle de délai strict (3 secondes max)
-    async function fetchWithTimeout(resource, options = {}) {
-      const { timeout = 3000 } = options;
-      const controller = new AbortController();
-      const timer = setTimeout(() => controller.abort(), timeout);
-      try {
-        const response = await fetch(resource, { ...options, signal: controller.signal });
-        clearTimeout(timer);
-        return response;
-      } catch (error) {
-        clearTimeout(timer);
-        throw error;
-      }
-    }
-
-    async function fetchPlayerData(id) {
-      const nhlUrl = `https://api-web.nhle.com/v1/player/${id}/landing`;
-      const endpoints = [
-        nhlUrl,
-        `https://api.allorigins.win/raw?url=${encodeURIComponent(nhlUrl)}`,
-        `https://corsproxy.io/?${encodeURIComponent(nhlUrl)}`
-      ];
-
-      for (let url of endpoints) {
-        try {
-          const res = await fetchWithTimeout(url, { timeout: 3500 });
-          if (res.ok) {
-            const data = await res.json();
-            let points = 0, gp = 0;
-
-            if (data.featuredStats?.regularSeason?.subSeason) {
-              points = data.featuredStats.regularSeason.subSeason.points ?? 0;
-              gp = data.featuredStats.regularSeason.subSeason.gamesPlayed ?? 0;
-            } else if (data.seasonTotals && Array.isArray(data.seasonTotals)) {
-              const reg = data.seasonTotals.filter(s => s.gameTypeId === 2);
-              if (reg.length > 0) {
-                points = reg[reg.length - 1].points ?? 0;
-                gp = reg[reg.length - 1].gamesPlayed ?? 0;
-              }
-            }
-            return { points, gp };
-          }
-        } catch (e) {
-          // Passe à l'URL suivante si échec ou timeout
-        }
-      }
-      return { points: 0, gp: 0 };
-    }
-
     async function fetchLiveStats() {
       const btn = document.getElementById("refresh-btn");
       if (btn) btn.innerText = "⏳ Chargement...";
       
-      const playerIds = [8482671, 8482083, 8477956, 8475184, 8478402, 8480803];
-      
       try {
-        // Exécution simultanée pour tous les joueurs
-        const results = await Promise.all(playerIds.map(id => fetchPlayerData(id)));
-        playerIds.forEach((id, index) => {
-          playerStats[id] = results[index];
-        });
+        // Lecture du fichier stats.json généré par le robot GitHub
+        const res = await fetch(`./stats.json?t=${Date.now()}`);
+        if (res.ok) {
+          const data = await res.json();
+          Object.assign(playerStats, data);
+        }
       } catch (err) {
-        console.error("Erreur lors de la mise à jour :", err);
+        console.error("Erreur lors de la lecture des statistiques :", err);
       } finally {
         renderApp();
-        if (btn) btn.innerText = "🔄 Sync Stats NHL";
+        if (btn) btn.innerText = "🔄 Actualiser";
       }
     }
 
