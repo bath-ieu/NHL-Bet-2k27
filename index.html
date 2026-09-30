@@ -3,11 +3,11 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>NHL Bet Tracker 2026-27</title>
+  <title>NHL Side Bets 2026-27</title>
   <style>
     :root {
-      --bg-light: #F4F6FB;
-      --card-bg: #FFFFFF;
+      --bg-light: #F8FAFC;
+      --card-bg: rgba(255, 255, 255, 0.94);
       --border-color: #E2E8F0;
       --text-dark: #0F172A;
       --text-muted: #64748B;
@@ -21,18 +21,81 @@
 
       --win-green: #16A34A;
       --loss-red: #DC2626;
+
+      --nhl-red: #D10C27;
+      --nhl-blue: #00205B;
     }
 
     * { box-sizing: border-box; margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; }
-    body { background-color: var(--bg-light); color: var(--text-dark); padding: 20px 15px; max-width: 600px; margin: 0 auto; }
+    
+    /* ARRIÈRE-PLAN TEXTURE PATINOIRE USÉE (GLACE) */
+    body { 
+      background-color: var(--bg-light);
+      background-image: 
+        radial-gradient(circle at 50% 30%, rgba(255, 255, 255, 0.85) 0%, rgba(240, 244, 248, 0.6) 100%),
+        url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='500' height='500' viewBox='0 0 500 500'%3E%3Cg stroke='%2394A3B8' stroke-width='0.8' opacity='0.22' stroke-linecap='round'%3E%3Cpath d='M30 80 Q 140 180, 260 60 M120 320 Q 300 280, 440 400 M380 80 Q 310 220, 480 320 M80 420 Q 220 480, 320 380 M20 260 Q 140 320, 260 220 M280 30 Q 360 140, 470 50 M100 480 Q 260 420, 450 490'/%3E%3Cpath d='M50 160 Q 180 80, 290 180 M200 380 Q 360 460, 480 300 M320 160 Q 420 280, 490 180' stroke-width='0.5' opacity='0.15'/%3E%3C/g%3E%3C/svg%3E");
+      background-attachment: fixed;
+      color: var(--text-dark); 
+      padding: 0 15px 30px 15px; 
+      max-width: 600px; 
+      margin: 0 auto; 
+    }
+
+    /* BARRES D'ACCENT ROUGE & BLEU EN HAUT */
+    .top-accent-bar {
+      display: flex;
+      justify-content: space-between;
+      width: 100%;
+      height: 7px;
+      margin-bottom: 22px;
+    }
+    .bar-red {
+      width: 35%;
+      background-color: var(--nhl-red);
+      border-bottom-right-radius: 4px;
+    }
+    .bar-blue {
+      width: 28%;
+      background-color: var(--nhl-blue);
+      border-bottom-left-radius: 4px;
+    }
+
+    /* EN-TÊTE PRINCIPALE */
+    .main-header {
+      margin-bottom: 22px;
+    }
+    .header-content {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 0 4px;
+    }
+    .hockey-icon {
+      font-size: 2.2rem;
+      line-height: 1;
+    }
+    .header-title {
+      font-size: 1.85rem;
+      font-weight: 900;
+      color: var(--text-dark);
+      letter-spacing: -0.5px;
+    }
+    .header-title .nhl-highlight {
+      color: var(--nhl-red);
+    }
+    .header-title .dot {
+      color: var(--text-dark);
+      margin: 0 4px;
+    }
 
     /* En-tête / Leaderboard */
     .leaderboard-card {
       background: var(--card-bg);
+      backdrop-filter: blur(8px);
       border-radius: 18px;
       padding: 18px;
       margin-bottom: 20px;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.04);
       border: 1px solid var(--border-color);
     }
     .leaderboard-title {
@@ -50,7 +113,7 @@
       gap: 10px;
     }
     .user-pill {
-      background: var(--bg-light);
+      background: rgba(244, 246, 251, 0.8);
       border-radius: 12px;
       padding: 10px 6px;
       text-align: center;
@@ -99,9 +162,10 @@
 
     .bet-card {
       background: var(--card-bg);
+      backdrop-filter: blur(8px);
       border-radius: 20px;
       padding: 18px;
-      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.03);
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.04);
       border: 1px solid var(--border-color);
     }
 
@@ -214,6 +278,20 @@
   </style>
 </head>
 <body>
+
+  <!-- EN-TÊTE PRINCIPALE DE PAGE -->
+  <header class="main-header">
+    <div class="top-accent-bar">
+      <div class="bar-red"></div>
+      <div class="bar-blue"></div>
+    </div>
+    <div class="header-content">
+      <span class="hockey-icon">🏒</span>
+      <h1 class="header-title">
+        Side Bets <span class="nhl-highlight">NHL</span><span class="dot">·</span>2026-27
+      </h1>
+    </div>
+  </header>
 
   <!-- BILAN FINANCIER EN HAUT -->
   <div class="leaderboard-card">
