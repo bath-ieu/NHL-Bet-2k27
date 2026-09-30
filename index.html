@@ -125,7 +125,7 @@
       font-size: 0.9rem;
     }
 
-    /* Grille du Pari (Bleu vs Rouge) */
+    /* Grille du Pari */
     .bet-body {
       display: grid;
       grid-template-columns: 1fr auto 1fr;
@@ -142,7 +142,7 @@
       justify-content: center;
       min-height: 110px;
       position: relative;
-      transition: all 0.3s ease;
+      transition: all 0.2s ease;
     }
 
     .side-blue {
@@ -154,11 +154,10 @@
       border: 2px solid var(--red-border);
     }
 
-    /* Style du gagnant (Contour vert épais + fond teinté) */
+    /* Style du gagnant */
     .side-box.winning {
-      border: 3.5px solid var(--win-green) !important;
-      background-color: #F0FDF4 !important;
-      box-shadow: 0 0 14px rgba(22, 163, 74, 0.25);
+      border-color: var(--win-green) !important;
+      box-shadow: 0 0 10px rgba(22, 163, 74, 0.2);
     }
 
     .win-badge {
@@ -236,7 +235,6 @@
     const bets = [
       {
         id: "bet-1",
-        title: "Total de points",
         stake: 10,
         type: "H2H",
         p1: { name: "Will", player: "Owen Power", playerId: 8482671 },
@@ -267,6 +265,13 @@
     ];
 
     const playerStats = {};
+
+    // Extrait le nom de famille d'un joueur ("Owen Power" -> "Power")
+    function getLastName(fullName) {
+      if (!fullName) return "";
+      const parts = fullName.trim().split(" ");
+      return parts[parts.length - 1];
+    }
 
     async function fetchLiveStats() {
       const btn = document.getElementById("refresh-btn");
@@ -315,10 +320,15 @@
           if (p1Winning) { userBalances[bet.p1.name] += bet.stake; userBalances[bet.p2.name] -= bet.stake; }
           else if (p2Winning) { userBalances[bet.p2.name] += bet.stake; userBalances[bet.p1.name] -= bet.stake; }
 
+          // Génération du titre dynamique avec noms de famille
+          const p1LastName = getLastName(bet.p1.player);
+          const p2LastName = getLastName(bet.p2.player);
+          const betTitle = `${p1LastName} vs ${p2LastName} — Total de points`;
+
           cardHTML = `
             <div class="bet-card">
               <div class="bet-header">
-                <span class="bet-title">${bet.title}</span>
+                <span class="bet-title">${betTitle}</span>
                 <span class="bet-stake">${bet.stake} $</span>
               </div>
               <div class="bet-body">
