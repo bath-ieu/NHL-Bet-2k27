@@ -279,62 +279,73 @@
       return parts[parts.length - 1];
     }
 
-    // Fonction d'appel robuste avec repli automatique si bloqué par le navigateur
+    // Fetch avec contrôle de délai strict (3 secondes max)
+    async function fetchWithTimeout(resource, options = {}) {
+      const { timeout = 3000 } = options;
+      const controller = new AbortController();
+      const timer = setTimeout(() => controller.abort(), timeout);
+      try {
+        const response = await fetch(resource, { ...options, signal: controller.signal });
+        clearTimeout(timer);
+        return response;
+      } catch (error) {
+        clearTimeout(timer);
+        throw error;
+      }
+    }
+
     async function fetchPlayerData(id) {
       const nhlUrl = `https://api-web.nhle.com/v1/player/${id}/landing`;
-      
-      const endpointsToTry = [
+      const endpoints = [
         nhlUrl,
         `https://api.allorigins.win/raw?url=${encodeURIComponent(nhlUrl)}`,
         `https://corsproxy.io/?${encodeURIComponent(nhlUrl)}`
       ];
 
-      let data = null;
-
-      for (let url of endpointsToTry) {
+      for (let url of endpoints) {
         try {
-          const res = await fetch(url);
+          const res = await fetchWithTimeout(url, { timeout: 3500 });
           if (res.ok) {
-            data = await res.json();
-            if (data && (data.featuredStats || data.seasonTotals)) break;
+            const data = await res.json();
+            let points = 0, gp = 0;
+
+            if (data.featuredStats?.regularSeason?.subSeason) {
+              points = data.featuredStats.regularSeason.subSeason.points ?? 0;
+              gp = data.featuredStats.regularSeason.subSeason.gamesPlayed ?? 0;
+            } else if (data.seasonTotals && Array.isArray(data.seasonTotals)) {
+              const reg = data.seasonTotals.filter(s => s.gameTypeId === 2);
+              if (reg.length > 0) {
+                points = reg[reg.length - 1].points ?? 0;
+                gp = reg[reg.length - 1].gamesPlayed ?? 0;
+              }
+            }
+            return { points, gp };
           }
         } catch (e) {
-          // Essaie l'URL suivante en cas de blocage CORS
+          // Passe à l'URL suivante si échec ou timeout
         }
       }
-
-      if (!data) return { points: 0, gp: 0 };
-
-      let points = 0;
-      let gp = 0;
-
-      if (data.featuredStats?.regularSeason?.subSeason) {
-        points = data.featuredStats.regularSeason.subSeason.points ?? 0;
-        gp = data.featuredStats.regularSeason.subSeason.gamesPlayed ?? 0;
-      } else if (data.seasonTotals && Array.isArray(data.seasonTotals)) {
-        const regSeasons = data.seasonTotals.filter(s => s.gameTypeId === 2);
-        if (regSeasons.length > 0) {
-          const lastSeason = regSeasons[regSeasons.length - 1];
-          points = lastSeason.points ?? 0;
-          gp = lastSeason.gamesPlayed ?? 0;
-        }
-      }
-
-      return { points, gp };
+      return { points: 0, gp: 0 };
     }
 
     async function fetchLiveStats() {
       const btn = document.getElementById("refresh-btn");
-      btn.innerText = "⏳ Chargement...";
+      if (btn) btn.innerText = "⏳ Chargement...";
       
       const playerIds = [8482671, 8482083, 8477956, 8475184, 8478402, 8480803];
       
-      for (let id of playerIds) {
-        playerStats[id] = await fetchPlayerData(id);
+      try {
+        // Exécution simultanée pour tous les joueurs
+        const results = await Promise.all(playerIds.map(id => fetchPlayerData(id)));
+        playerIds.forEach((id, index) => {
+          playerStats[id] = results[index];
+        });
+      } catch (err) {
+        console.error("Erreur lors de la mise à jour :", err);
+      } finally {
+        renderApp();
+        if (btn) btn.innerText = "🔄 Sync Stats NHL";
       }
-      
-      renderApp();
-      btn.innerText = "🔄 Sync Stats NHL";
     }
 
     function renderApp() {
