@@ -279,27 +279,27 @@
       return parts[parts.length - 1];
     }
 
-    // Récupération robuste des stats avec contournement des blocages CORS
+    // Fonction d'appel robuste avec repli automatique si bloqué par le navigateur
     async function fetchPlayerData(id) {
-      const targetUrl = `https://api-web.nhle.com/v1/player/${id}/landing`;
+      const nhlUrl = `https://api-web.nhle.com/v1/player/${id}/landing`;
+      
+      const endpointsToTry = [
+        nhlUrl,
+        `https://api.allorigins.win/raw?url=${encodeURIComponent(nhlUrl)}`,
+        `https://corsproxy.io/?${encodeURIComponent(nhlUrl)}`
+      ];
+
       let data = null;
 
-      // Essai 1 : Appel direct
-      try {
-        const res = await fetch(targetUrl);
-        if (res.ok) data = await res.json();
-      } catch (e) {
-        // Bloqué par CORS
-      }
-
-      // Essai 2 : Via proxy CORS si l'essai direct à échoué
-      if (!data) {
+      for (let url of endpointsToTry) {
         try {
-          const proxyUrl = `https://corsproxy.io/?${encodeURIComponent(targetUrl)}`;
-          const res = await fetch(proxyUrl);
-          if (res.ok) data = await res.json();
+          const res = await fetch(url);
+          if (res.ok) {
+            data = await res.json();
+            if (data && (data.featuredStats || data.seasonTotals)) break;
+          }
         } catch (e) {
-          console.error(`Erreur de connexion pour le joueur ${id}`, e);
+          // Essaie l'URL suivante en cas de blocage CORS
         }
       }
 
@@ -308,13 +308,10 @@
       let points = 0;
       let gp = 0;
 
-      // Priorité 1 : sous-saison régulière courante
       if (data.featuredStats?.regularSeason?.subSeason) {
         points = data.featuredStats.regularSeason.subSeason.points ?? 0;
         gp = data.featuredStats.regularSeason.subSeason.gamesPlayed ?? 0;
-      } 
-      // Priorité 2 : Dernier enregistrement dans l'historique complet (gameTypeId = 2 pour saison régulière)
-      else if (data.seasonTotals && Array.isArray(data.seasonTotals)) {
+      } else if (data.seasonTotals && Array.isArray(data.seasonTotals)) {
         const regSeasons = data.seasonTotals.filter(s => s.gameTypeId === 2);
         if (regSeasons.length > 0) {
           const lastSeason = regSeasons[regSeasons.length - 1];
