@@ -46,7 +46,7 @@
 
     .leaderboard-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(90px, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(85px, 1fr));
       gap: 10px;
     }
     .user-pill {
@@ -261,12 +261,18 @@
         playerId: 8475184,
         p1: { name: "Math", selection: "OVER ▲", sub: "plus de" },
         p2: { name: "Simon", selection: "UNDER ▼", sub: "moins de" }
+      },
+      {
+        id: "bet-4",
+        stake: 10,
+        type: "H2H",
+        p1: { name: "Phil", player: "Connor McDavid", playerId: 8478402 },
+        p2: { name: "Math", player: "Evan Bouchard", playerId: 8480803 }
       }
     ];
 
     const playerStats = {};
 
-    // Extrait le nom de famille d'un joueur ("Owen Power" -> "Power")
     function getLastName(fullName) {
       if (!fullName) return "";
       const parts = fullName.trim().split(" ");
@@ -277,7 +283,7 @@
       const btn = document.getElementById("refresh-btn");
       btn.innerText = "⏳ Chargement...";
       
-      const playerIds = [8482671, 8482083, 8477956, 8475184];
+      const playerIds = [8482671, 8482083, 8477956, 8475184, 8478402, 8480803];
       const apiEndpoint = atob("aHR0cHM6Ly9hcGktd2ViLm5obGUuY29tL3YxL3BsYXllci8=");
       
       for (let id of playerIds) {
@@ -303,7 +309,7 @@
     }
 
     function renderApp() {
-      const userBalances = { "Will": 0, "Ben": 0, "Simon": 0, "Gab": 0, "Math": 0 };
+      const userBalances = { "Will": 0, "Ben": 0, "Simon": 0, "Gab": 0, "Math": 0, "Phil": 0 };
       const betsListEl = document.getElementById("bets-list");
       betsListEl.innerHTML = "";
 
@@ -320,7 +326,6 @@
           if (p1Winning) { userBalances[bet.p1.name] += bet.stake; userBalances[bet.p2.name] -= bet.stake; }
           else if (p2Winning) { userBalances[bet.p2.name] += bet.stake; userBalances[bet.p1.name] -= bet.stake; }
 
-          // Génération du titre dynamique avec noms de famille
           const p1LastName = getLastName(bet.p1.player);
           const p2LastName = getLastName(bet.p2.player);
           const betTitle = `${p1LastName} vs ${p2LastName} — Total de points`;
