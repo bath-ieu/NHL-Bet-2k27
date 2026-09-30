@@ -279,29 +279,61 @@
       return parts[parts.length - 1];
     }
 
+    // Récupération robuste des stats avec contournement des blocages CORS
+    async function fetchPlayerData(id) {
+      const targetUrl = `https://api-web.nhle.com/v1/player/${id}/landing`;
+      let data = null;
+
+      // Essai 1 : Appel direct
+      try {
+        const res = await fetch(targetUrl);
+        if (res.ok) data = await res.json();
+      } catch (e) {
+        // Bloqué par CORS
+      }
+
+      // Essai 2 : Via proxy CORS si l'essai direct à échoué
+      if (!data) {
+        try {
+          const proxyUrl = `https://corsproxy.io/?${encodeURIComponent(targetUrl)}`;
+          const res = await fetch(proxyUrl);
+          if (res.ok) data = await res.json();
+        } catch (e) {
+          console.error(`Erreur de connexion pour le joueur ${id}`, e);
+        }
+      }
+
+      if (!data) return { points: 0, gp: 0 };
+
+      let points = 0;
+      let gp = 0;
+
+      // Priorité 1 : sous-saison régulière courante
+      if (data.featuredStats?.regularSeason?.subSeason) {
+        points = data.featuredStats.regularSeason.subSeason.points ?? 0;
+        gp = data.featuredStats.regularSeason.subSeason.gamesPlayed ?? 0;
+      } 
+      // Priorité 2 : Dernier enregistrement dans l'historique complet (gameTypeId = 2 pour saison régulière)
+      else if (data.seasonTotals && Array.isArray(data.seasonTotals)) {
+        const regSeasons = data.seasonTotals.filter(s => s.gameTypeId === 2);
+        if (regSeasons.length > 0) {
+          const lastSeason = regSeasons[regSeasons.length - 1];
+          points = lastSeason.points ?? 0;
+          gp = lastSeason.gamesPlayed ?? 0;
+        }
+      }
+
+      return { points, gp };
+    }
+
     async function fetchLiveStats() {
       const btn = document.getElementById("refresh-btn");
       btn.innerText = "⏳ Chargement...";
       
       const playerIds = [8482671, 8482083, 8477956, 8475184, 8478402, 8480803];
-      const apiEndpoint = atob("aHR0cHM6Ly9hcGktd2ViLm5obGUuY29tL3YxL3BsYXllci8=");
       
       for (let id of playerIds) {
-        try {
-          const response = await fetch(`${apiEndpoint}${id}/landing`);
-          if (response.ok) {
-            const data = await response.json();
-            const subSeason = data.featuredStats?.regularSeason?.subSeason;
-            playerStats[id] = {
-              points: subSeason?.points ?? 0,
-              gp: subSeason?.gamesPlayed ?? 0
-            };
-          } else {
-            playerStats[id] = playerStats[id] || { points: 0, gp: 0 };
-          }
-        } catch (e) {
-          playerStats[id] = playerStats[id] || { points: 0, gp: 0 };
-        }
+        playerStats[id] = await fetchPlayerData(id);
       }
       
       renderApp();
