@@ -153,7 +153,6 @@
     }
     .refresh-btn-main:active { transform: scale(0.96); }
 
-    /* SECTION FILTRES */
     .filters-container {
       margin-bottom: 18px;
       padding: 0 4px;
@@ -175,7 +174,6 @@
     }
     .filter-btn:hover { border-color: var(--text-muted); }
     
-    /* Style bouton actif : fond gris, texte blanc */
     .filter-btn.active {
       background-color: var(--text-muted);
       color: white;
@@ -250,7 +248,6 @@
       border: 2px solid var(--red-border);
     }
 
-    /* Style du gagnant : conserve la couleur de fond d'origine */
     .side-box.winning {
       border-color: var(--win-green) !important;
       box-shadow: 0 0 10px rgba(22, 163, 74, 0.2);
@@ -349,10 +346,7 @@
     </button>
   </div>
   
-  <!-- SECTION FILTRES PAR PERSONNE -->
-  <div class="filters-container" id="filters-container">
-    <!-- Boutons générés dynamiquement par JS -->
-  </div>
+  <div class="filters-container" id="filters-container"></div>
 
   <div class="bets-list" id="bets-list"></div>
 
@@ -363,7 +357,7 @@
         stake: 10,
         type: "H2H",
         p1: { name: "Will", player: "Owen Power", playerId: "8482671" },
-        p2: { name: "Ben", player: "Jamie Drysdale", playerId: "8482083" }
+        p2: { name: "Ben", player: "Jamie Drysdale", playerId: "8482142" }
       },
       {
         id: "bet-2",
@@ -427,7 +421,7 @@
         type: "OU",
         target: 64.5,
         targetDisplay: "64,5",
-        playerId: "8484140",
+        playerId: "8484387",
         p1: { name: "Sim", selection: "OVER ▲" },
         p2: { name: "Ben", selection: "UNDER ▼" }
       },
@@ -438,7 +432,7 @@
         type: "OU",
         target: 62.5,
         targetDisplay: "62,5",
-        playerId: "8482088",
+        playerId: "8482109",
         p1: { name: "Ben", selection: "OVER ▲" },
         p2: { name: "Phil", selection: "UNDER ▼" }
       },
@@ -476,7 +470,7 @@
         id: "bet-14",
         stake: 5,
         type: "H2H",
-        p1: { name: "Ben", player: "Sam O'Reilly", playerId: "8484972" },
+        p1: { name: "Ben", player: "Ryan O'Reilly", playerId: "8475158" },
         p2: { name: "Will", player: "Bryan Rust", playerId: "8475810" }
       },
       {
@@ -484,14 +478,14 @@
         stake: 5,
         type: "H2H",
         p1: { name: "Ben", player: "Filip Hronek", playerId: "8479425" },
-        p2: { name: "Math", player: "Cole Hutson", playerId: "8484803" }
+        p2: { name: "Math", player: "Cole Hutson", playerId: "8484873" }
       },
       {
         id: "bet-16",
         stake: 5,
         type: "H2H",
-        p1: { name: "Sim", player: "Mikhail Sergachev", playerId: "8479333" },
-        p2: { name: "Will", player: "Bowen Byram", playerId: "8481522" }
+        p1: { name: "Sim", player: "Mikhail Sergachev", playerId: "8479410" },
+        p2: { name: "Will", player: "Bowen Byram", playerId: "8481524" }
       },
       {
         id: "bet-17",
@@ -541,19 +535,19 @@
         stakePerPerson: 5,
         type: "MULTI",
         participants: [
-          { name: "Phil", player: "Tim Stutzle", playerId: "8482093" },
+          { name: "Phil", player: "Tim Stutzle", playerId: "8482116" },
           { name: "Reg", player: "Artemi Panarin", playerId: "8478550" },
           { name: "Math", player: "Matthew Tkachuk", playerId: "8479314" },
-          { name: "Will", player: "Leo Carlsson", playerId: "8484157" },
-          { name: "Ben", player: "Brady Tkachuk", playerId: "8480829" },
-          { name: "Sim", player: "Cutter Gauthier", playerId: "8483492" },
+          { name: "Will", player: "Leo Carlsson", playerId: "8484153" },
+          { name: "Ben", player: "Brady Tkachuk", playerId: "8480801" },
+          { name: "Sim", player: "Cutter Gauthier", playerId: "8483445" },
           { name: "Gab", player: "Aleksander Barkov", playerId: "8477493" }
         ]
       }
     ];
 
     const playerStats = {};
-    let currentFilter = 'Tous'; // Stocke le nom de la personne filtrée
+    let currentFilter = 'Tous';
 
     function getLastName(fullName) {
       if (!fullName) return "";
@@ -587,8 +581,7 @@
         if (btn) btn.innerText = "🔄 Actualiser";
       }
     }
-    
-    // Extrait tous les noms uniques des participants pour créer les filtres
+
     function getAllParticipants() {
       const names = new Set();
       bets.forEach(bet => {
@@ -599,18 +592,17 @@
           bet.participants.forEach(p => names.add(p.name));
         }
       });
-      return Array.from(names).sort(); // Trie par ordre alphabétique
+      return Array.from(names).sort();
     }
 
     function setFilter(name) {
       currentFilter = name;
-      renderApp(); // Re-rebdre l'application pour appliquer le filtre visuel
+      renderApp();
     }
 
     function renderApp() {
       const userBalances = {};
 
-      // Initialisation des balances pour TOUS les utilisateurs, indépendamment du filtre
       bets.forEach(b => {
         if (b.p1 && b.p1.name) userBalances[b.p1.name] = 0;
         if (b.p2 && b.p2.name) userBalances[b.p2.name] = 0;
@@ -622,7 +614,6 @@
       const betsListEl = document.getElementById("bets-list");
       betsListEl.innerHTML = "";
       
-      // Génération des boutons de filtre (une seule fois ou à chaque render pour simplifier l'état active)
       const filtersContainer = document.getElementById("filters-container");
       filtersContainer.innerHTML = "";
       
@@ -636,7 +627,6 @@
       });
 
       bets.forEach(bet => {
-        // --- ÉTAPE 1 : CALCULS (Toujours effectués pour le bilan global) ---
         let p1Winning = false;
         let p2Winning = false;
         let winnerNameMulti = null;
@@ -678,7 +668,6 @@
           });
         }
 
-        // --- ÉTAPE 2 : FILTRAGE VISUEL ---
         if (currentFilter !== 'Tous') {
           let involved = false;
           if (bet.type === 'H2H' || bet.type === 'OU') {
@@ -686,10 +675,9 @@
           } else if (bet.type === 'MULTI') {
             if (bet.participants.some(p => p.name === currentFilter)) involved = true;
           }
-          if (!involved) return; // Passe au pari suivant si la personne n'est pas concernée
+          if (!involved) return;
         }
 
-        // --- ÉTAPE 3 : RENDU HTML (Seulement si non filtré) ---
         let cardHTML = "";
 
         if (bet.type === "H2H") {
@@ -764,7 +752,6 @@
           let winnerPlayerIdMulti = null;
           let boxesHTML = "";
           
-          // Recalcule le gagnant juste pour l'affichage de l'image
           statsListMulti.forEach(item => {
              if (item.name === winnerNameMulti) winnerPlayerIdMulti = item.playerId;
           });
@@ -806,7 +793,6 @@
         betsListEl.innerHTML += cardHTML;
       });
 
-      // --- ÉTAPE 4 : RENDU DU BILAN GLOBAL (Inchangé) ---
       const leaderboardEl = document.getElementById("leaderboard");
       leaderboardEl.innerHTML = "";
       Object.keys(userBalances).forEach(user => {
