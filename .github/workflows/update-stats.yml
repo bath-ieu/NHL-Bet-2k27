@@ -2,8 +2,9 @@ name: Auto Update NHL Stats
 
 on:
   schedule:
-    - cron: '0 */3 * * *'
-  workflow_dispatch:
+    # S'exécute automatiquement à chaque heure (minute 0)
+    - cron: '0 * * * *'
+  workflow_dispatch: # Permet de lancer la mise à jour manuellement dans GitHub
 
 jobs:
   update:
@@ -28,8 +29,8 @@ jobs:
               8482671, 8482083, 8477956, 8475184, 8480018, 
               8483457, 8483515, 8484140, 8482088, 8481559, 
               8479318, 8476468, 8480893, 8484230, 8486067, 
-              8480843, 8478048, 8482116, 8478550, 8479314, 
-              8484152, 8483439
+              8480843, 8478048, 8482093, 8478550, 8479314, 
+              8484157, 8480829, 8483492, 8477493
           ]
           stats = {}
 
