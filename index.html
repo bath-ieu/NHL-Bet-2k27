@@ -269,18 +269,6 @@
       box-shadow: 0 2px 4px rgba(0,0,0,0.15);
     }
 
-    .injury-badge {
-      background-color: var(--nhl-red);
-      color: white;
-      font-size: 0.62rem;
-      font-weight: 800;
-      padding: 2px 5px;
-      border-radius: 6px;
-      margin-left: 4px;
-      display: inline-block;
-      vertical-align: middle;
-    }
-
     .participant-name {
       font-size: 1.1rem;
       font-weight: 800;
@@ -394,6 +382,17 @@
         p2: { name: "Sim", selection: "UNDER ▼" }
       },
       {
+        id: "bet-newhook",
+        playerName: "Alex Newhook",
+        stake: 5,
+        type: "OU",
+        target: 60.5,
+        targetDisplay: "60,5",
+        playerId: "8481618",
+        p1: { name: "Will", selection: "OVER ▲" },
+        p2: { name: "Math", selection: "UNDER ▼" }
+      },
+      {
         id: "bet-4",
         playerName: "Nick Suzuki",
         stake: 5,
@@ -493,6 +492,13 @@
         p2: { name: "Math", player: "Cole Hutson", playerId: "8484873" }
       },
       {
+        id: "bet-holloway-snuggerud",
+        stake: 5,
+        type: "H2H",
+        p1: { name: "Ben", player: "Dylan Holloway", playerId: "8482077" },
+        p2: { name: "Sim", player: "Jimmy Snuggerud", playerId: "8483516" }
+      },
+      {
         id: "bet-16",
         stake: 5,
         type: "H2H",
@@ -563,11 +569,10 @@
 
     function getPlayerStat(pid) {
       const st = playerStats[pid];
-      if (!st) return { points: 0, gp: 0, injured: false };
+      if (!st) return { points: 0, gp: 0 };
       return {
         points: (typeof st.points === 'number' && !isNaN(st.points)) ? st.points : 0,
-        gp: (typeof st.gp === 'number' && !isNaN(st.gp)) ? st.gp : 0,
-        injured: !!st.injured
+        gp: (typeof st.gp === 'number' && !isNaN(st.gp)) ? st.gp : 0
       };
     }
 
@@ -713,9 +718,6 @@
           const p1StatText = unitLabel === "Ronde" ? `Ronde ${st1.points}` : `${st1.points} <span style="font-size: 0.9rem; font-weight: 700;">${unitLabel}</span>`;
           const p2StatText = unitLabel === "Ronde" ? `Ronde ${st2.points}` : `${st2.points} <span style="font-size: 0.9rem; font-weight: 700;">${unitLabel}</span>`;
 
-          const p1InjBadge = st1.injured ? '<span class="injury-badge">🩹 IR</span>' : '';
-          const p2InjBadge = st2.injured ? '<span class="injury-badge">🩹 IR</span>' : '';
-
           cardHTML = `
             <div class="bet-card">
               <div class="bet-header">
@@ -727,7 +729,7 @@
                   ${p1Winning ? '<div class="win-badge">WIN</div>' : ''}
                   <div class="participant-name">${bet.p1.name}</div>
                   ${bet.p1.logo ? `<img src="${bet.p1.logo}" alt="Logo" class="team-logo-img" />` : ''}
-                  <div class="selection-text">${getShortName(bet.p1.player)}${p1InjBadge}</div>
+                  <div class="selection-text">${getShortName(bet.p1.player)}</div>
                   <div class="stat-number">${p1StatText}</div>
                   <div class="stat-detail">${st1.gp} GP</div>
                 </div>
@@ -736,7 +738,7 @@
                   ${p2Winning ? '<div class="win-badge">WIN</div>' : ''}
                   <div class="participant-name">${bet.p2.name}</div>
                   ${bet.p2.logo ? `<img src="${bet.p2.logo}" alt="Logo" class="team-logo-img" />` : ''}
-                  <div class="selection-text">${getShortName(bet.p2.player)}${p2InjBadge}</div>
+                  <div class="selection-text">${getShortName(bet.p2.player)}</div>
                   <div class="stat-number">${p2StatText}</div>
                   <div class="stat-detail">${st2.gp} GP</div>
                 </div>
@@ -746,12 +748,11 @@
         } else if (bet.type === "OU") {
           const st = getPlayerStat(bet.playerId);
           const betTitle = `${bet.playerName} - Over/Under ${bet.targetDisplay}pts`;
-          const injBadge = st.injured ? '<span class="injury-badge">🩹 IR</span>' : '';
 
           cardHTML = `
             <div class="bet-card">
               <div class="bet-header">
-                <span class="bet-title">${betTitle}${injBadge}</span>
+                <span class="bet-title">${betTitle}</span>
                 <span class="bet-stake">${bet.stake} $</span>
               </div>
               <div class="bet-body">
@@ -784,12 +785,11 @@
 
           statsListMulti.forEach(item => {
             const isWinner = (item.name === winnerNameMulti && maxPointsMulti > 0);
-            const pInjBadge = item.stats.injured ? '<span class="injury-badge">🩹 IR</span>' : '';
             boxesHTML += `
               <div class="side-box ${isWinner ? 'winning' : ''}" style="min-height: 95px; padding: 10px 6px;">
                 ${isWinner ? '<div class="win-badge">WIN</div>' : ''}
                 <div class="participant-name" style="font-size: 0.95rem;">${item.name}</div>
-                <div class="selection-text" style="font-size: 0.68rem; margin-bottom: 4px;">${getShortName(item.player)}${pInjBadge}</div>
+                <div class="selection-text" style="font-size: 0.68rem; margin-bottom: 4px;">${getShortName(item.player)}</div>
                 <div class="stat-number" style="font-size: 1.3rem;">${item.stats.points} <span style="font-size: 0.75rem;">pts</span></div>
                 <div class="stat-detail" style="font-size: 0.65rem;">${item.stats.gp} GP</div>
               </div>
