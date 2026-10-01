@@ -125,7 +125,7 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
-      margin-bottom: 15px;
+      margin-bottom: 12px;
       padding: 0 4px;
     }
     .section-label {
@@ -152,6 +152,36 @@
       transition: all 0.2s;
     }
     .refresh-btn-main:active { transform: scale(0.96); }
+
+    /* SECTION FILTRES */
+    .filters-container {
+      margin-bottom: 18px;
+      padding: 0 4px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+    .filter-btn {
+      background: var(--card-bg);
+      color: var(--text-dark);
+      border: 1.5px solid var(--border-color);
+      padding: 7px 14px;
+      border-radius: 18px;
+      font-weight: 700;
+      font-size: 0.8rem;
+      cursor: pointer;
+      transition: all 0.2s;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.03);
+    }
+    .filter-btn:hover { border-color: var(--text-muted); }
+    
+    /* Style bouton actif : fond gris, texte blanc */
+    .filter-btn.active {
+      background-color: var(--text-muted);
+      color: white;
+      border-color: var(--text-muted);
+      box-shadow: inset 0 1px 3px rgba(0,0,0,0.15);
+    }
 
     .bets-list { display: flex; flex-direction: column; gap: 18px; }
 
@@ -308,7 +338,7 @@
   </header>
 
   <div class="leaderboard-card">
-    <div class="leaderboard-title">Bilan (Gains / Pertes)</div>
+    <div class="leaderboard-title">Bilan global (Gains / Pertes)</div>
     <div class="leaderboard-grid" id="leaderboard"></div>
   </div>
 
@@ -317,6 +347,11 @@
     <button class="refresh-btn-main" onclick="fetchLiveStats()" id="refresh-btn">
       🔄 Actualiser
     </button>
+  </div>
+  
+  <!-- SECTION FILTRES PAR PERSONNE -->
+  <div class="filters-container" id="filters-container">
+    <!-- Boutons générés dynamiquement par JS -->
   </div>
 
   <div class="bets-list" id="bets-list"></div>
@@ -518,9 +553,11 @@
     ];
 
     const playerStats = {};
+    let currentFilter = 'Tous'; // Stocke le nom de la personne filtrée
 
     function getLastName(fullName) {
       if (!fullName) return "";
+      if (fullName === "Canadien" || fullName === "Panthers") return fullName;
       const parts = fullName.trim().split(" ");
       return parts[parts.length - 1];
     }
@@ -550,10 +587,30 @@
         if (btn) btn.innerText = "🔄 Actualiser";
       }
     }
+    
+    // Extrait tous les noms uniques des participants pour créer les filtres
+    function getAllParticipants() {
+      const names = new Set();
+      bets.forEach(bet => {
+        if (bet.type === 'H2H' || bet.type === 'OU') {
+          if (bet.p1 && bet.p1.name) names.add(bet.p1.name);
+          if (bet.p2 && bet.p2.name) names.add(bet.p2.name);
+        } else if (bet.type === 'MULTI') {
+          bet.participants.forEach(p => names.add(p.name));
+        }
+      });
+      return Array.from(names).sort(); // Trie par ordre alphabétique
+    }
+
+    function setFilter(name) {
+      currentFilter = name;
+      renderApp(); // Re-rebdre l'application pour appliquer le filtre visuel
+    }
 
     function renderApp() {
       const userBalances = {};
 
+      // Initialisation des balances pour TOUS les utilisateurs, indépendamment du filtre
       bets.forEach(b => {
         if (b.p1 && b.p1.name) userBalances[b.p1.name] = 0;
         if (b.p2 && b.p2.name) userBalances[b.p2.name] = 0;
@@ -564,26 +621,85 @@
 
       const betsListEl = document.getElementById("bets-list");
       betsListEl.innerHTML = "";
+      
+      // Génération des boutons de filtre (une seule fois ou à chaque render pour simplifier l'état active)
+      const filtersContainer = document.getElementById("filters-container");
+      filtersContainer.innerHTML = "";
+      
+      const participants = ['Tous', ...getAllParticipants()];
+      participants.forEach(name => {
+        const btn = document.createElement('button');
+        btn.className = `filter-btn ${currentFilter === name ? 'active' : ''}`;
+        btn.innerText = name;
+        btn.onclick = () => setFilter(name);
+        filtersContainer.appendChild(btn);
+      });
 
       bets.forEach(bet => {
+        // --- ÉTAPE 1 : CALCULS (Toujours effectués pour le bilan global) ---
+        let p1Winning = false;
+        let p2Winning = false;
+        let winnerNameMulti = null;
+        let maxPointsMulti = -1;
+        let statsListMulti = [];
+        let totalPotMulti = 0;
+
+        if (bet.type === "H2H") {
+          const st1 = playerStats[bet.p1.playerId] || { points: 0, gp: 0 };
+          const st2 = playerStats[bet.p2.playerId] || { points: 0, gp: 0 };
+          p1Winning = st1.points > st2.points;
+          p2Winning = st2.points > st1.points;
+
+          if (p1Winning) { userBalances[bet.p1.name] += bet.stake; userBalances[bet.p2.name] -= bet.stake; }
+          else if (p2Winning) { userBalances[bet.p2.name] += bet.stake; userBalances[bet.p1.name] -= bet.stake; }
+        } else if (bet.type === "OU") {
+          const st = playerStats[bet.playerId] || { points: 0, gp: 0 };
+          p1Winning = st.points > bet.target;
+          p2Winning = st.points <= bet.target;
+
+          if (p1Winning) { userBalances[bet.p1.name] += bet.stake; userBalances[bet.p2.name] -= bet.stake; }
+          else if (p2Winning) { userBalances[bet.p2.name] += bet.stake; userBalances[bet.p1.name] -= bet.stake; }
+        } else if (bet.type === "MULTI") {
+          statsListMulti = bet.participants.map(p => {
+            const st = playerStats[p.playerId] || { points: 0, gp: 0 };
+            if (st.points > maxPointsMulti) {
+              maxPointsMulti = st.points;
+              winnerNameMulti = p.name;
+            }
+            return { ...p, stats: st };
+          });
+          totalPotMulti = bet.stakePerPerson * bet.participants.length;
+          bet.participants.forEach(p => {
+            if (p.name === winnerNameMulti && maxPointsMulti > 0) {
+              userBalances[p.name] += (totalPotMulti - bet.stakePerPerson);
+            } else {
+              userBalances[p.name] -= bet.stakePerPerson;
+            }
+          });
+        }
+
+        // --- ÉTAPE 2 : FILTRAGE VISUEL ---
+        if (currentFilter !== 'Tous') {
+          let involved = false;
+          if (bet.type === 'H2H' || bet.type === 'OU') {
+            if (bet.p1.name === currentFilter || bet.p2.name === currentFilter) involved = true;
+          } else if (bet.type === 'MULTI') {
+            if (bet.participants.some(p => p.name === currentFilter)) involved = true;
+          }
+          if (!involved) return; // Passe au pari suivant si la personne n'est pas concernée
+        }
+
+        // --- ÉTAPE 3 : RENDU HTML (Seulement si non filtré) ---
         let cardHTML = "";
 
         if (bet.type === "H2H") {
           const st1 = playerStats[bet.p1.playerId] || { points: 0, gp: 0 };
           const st2 = playerStats[bet.p2.playerId] || { points: 0, gp: 0 };
-
-          let p1Winning = st1.points > st2.points;
-          let p2Winning = st2.points > st1.points;
-
-          if (p1Winning) { userBalances[bet.p1.name] += bet.stake; userBalances[bet.p2.name] -= bet.stake; }
-          else if (p2Winning) { userBalances[bet.p2.name] += bet.stake; userBalances[bet.p1.name] -= bet.stake; }
-
           const p1LastName = getLastName(bet.p1.player);
           const p2LastName = getLastName(bet.p2.player);
           const categoryLabel = bet.category || "Points";
           const unitLabel = bet.unit || "pts";
           const betTitle = bet.title || `${p1LastName} vs ${p2LastName} - ${categoryLabel}`;
-
           const p1StatText = unitLabel === "Ronde" ? `Ronde ${st1.points}` : `${st1.points} <span style="font-size: 0.9rem; font-weight: 700;">${unitLabel}</span>`;
           const p2StatText = unitLabel === "Ronde" ? `Ronde ${st2.points}` : `${st2.points} <span style="font-size: 0.9rem; font-weight: 700;">${unitLabel}</span>`;
 
@@ -602,9 +718,7 @@
                   <div class="stat-number">${p1StatText}</div>
                   <div class="stat-detail">${st1.gp} GP</div>
                 </div>
-                
                 <div class="vs-divider">VS</div>
-                
                 <div class="side-box side-red ${p2Winning ? 'winning' : ''}">
                   ${p2Winning ? '<div class="win-badge">WIN</div>' : ''}
                   <div class="participant-name">${bet.p2.name}</div>
@@ -616,16 +730,8 @@
               </div>
             </div>
           `;
-
         } else if (bet.type === "OU") {
           const st = playerStats[bet.playerId] || { points: 0, gp: 0 };
-
-          let p1Winning = st.points > bet.target;
-          let p2Winning = st.points <= bet.target;
-
-          if (p1Winning) { userBalances[bet.p1.name] += bet.stake; userBalances[bet.p2.name] -= bet.stake; }
-          else if (p2Winning) { userBalances[bet.p2.name] += bet.stake; userBalances[bet.p1.name] -= bet.stake; }
-
           const betTitle = `${bet.playerName} - Over/Under ${bet.targetDisplay}pts`;
 
           cardHTML = `
@@ -641,12 +747,10 @@
                   <div class="selection-text">${bet.p1.selection}</div>
                   <div class="stat-number-target">${bet.targetDisplay} <span style="font-size: 0.8rem; font-weight: 700;">pts</span></div>
                 </div>
-                
                 <div class="vs-divider">
                   <div class="stat-number" style="font-size:1.4rem;">${st.points} <span style="font-size: 0.9rem; font-weight: 700;">pts</span></div>
                   <div class="stat-detail">${st.gp} GP</div>
                 </div>
-                
                 <div class="side-box side-red ${p2Winning ? 'winning' : ''}">
                   ${p2Winning ? '<div class="win-badge">WIN</div>' : ''}
                   <div class="participant-name">${bet.p2.name}</div>
@@ -656,34 +760,17 @@
               </div>
             </div>
           `;
-
         } else if (bet.type === "MULTI") {
-          let maxPoints = -1;
-          let winnerName = null;
-          let winnerPlayerId = null;
-
-          const statsList = bet.participants.map(p => {
-            const st = playerStats[p.playerId] || { points: 0, gp: 0 };
-            if (st.points > maxPoints) {
-              maxPoints = st.points;
-              winnerName = p.name;
-              winnerPlayerId = p.playerId;
-            }
-            return { ...p, stats: st };
-          });
-
-          const totalPot = bet.stakePerPerson * bet.participants.length;
-          bet.participants.forEach(p => {
-            if (p.name === winnerName && maxPoints > 0) {
-              userBalances[p.name] += (totalPot - bet.stakePerPerson);
-            } else {
-              userBalances[p.name] -= bet.stakePerPerson;
-            }
-          });
-
+          let winnerPlayerIdMulti = null;
           let boxesHTML = "";
-          statsList.forEach(item => {
-            const isWinner = (item.name === winnerName && maxPoints > 0);
+          
+          // Recalcule le gagnant juste pour l'affichage de l'image
+          statsListMulti.forEach(item => {
+             if (item.name === winnerNameMulti) winnerPlayerIdMulti = item.playerId;
+          });
+
+          statsListMulti.forEach(item => {
+            const isWinner = (item.name === winnerNameMulti && maxPointsMulti > 0);
             boxesHTML += `
               <div class="side-box ${isWinner ? 'winning' : ''}" style="min-height: 95px; padding: 10px 6px;">
                 ${isWinner ? '<div class="win-badge">WIN</div>' : ''}
@@ -695,10 +782,10 @@
             `;
           });
 
-          if (winnerPlayerId) {
+          if (winnerPlayerIdMulti) {
             boxesHTML += `
               <div class="side-box" style="min-height: 95px; padding: 0; border: none; background: transparent; box-shadow: none; display: flex; align-items: center; justify-content: center; overflow: hidden;">
-                <img src="https://assets.nhle.com/mugs/nhl/latest/${winnerPlayerId}.png" alt="Meneur actuel" style="height: 95px; width: auto; object-fit: contain; filter: drop-shadow(0px 2px 4px rgba(0,0,0,0.15));" />
+                <img src="https://assets.nhle.com/mugs/nhl/latest/${winnerPlayerIdMulti}.png" alt="Meneur actuel" style="height: 95px; width: auto; object-fit: contain; filter: drop-shadow(0px 2px 4px rgba(0,0,0,0.15));" />
               </div>
             `;
           }
@@ -707,7 +794,7 @@
             <div class="bet-card">
               <div class="bet-header">
                 <span class="bet-title">${bet.title}</span>
-                <span class="bet-stake">${totalPot} $ (Pot)</span>
+                <span class="bet-stake">${totalPotMulti} $ (Pot)</span>
               </div>
               <div class="multi-grid">
                 ${boxesHTML}
@@ -719,6 +806,7 @@
         betsListEl.innerHTML += cardHTML;
       });
 
+      // --- ÉTAPE 4 : RENDU DU BILAN GLOBAL (Inchangé) ---
       const leaderboardEl = document.getElementById("leaderboard");
       leaderboardEl.innerHTML = "";
       Object.keys(userBalances).forEach(user => {
