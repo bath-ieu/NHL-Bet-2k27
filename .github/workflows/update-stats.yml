@@ -2,7 +2,6 @@ name: Auto Update NHL Stats
 
 on:
   schedule:
-    # S'exécute automatiquement à chaque heure
     - cron: '0 * * * *'
   workflow_dispatch:
 
@@ -26,12 +25,12 @@ jobs:
           import urllib.request, json
 
           player_ids = [
-              8482671, 8482083, 8477956, 8475184, 8480018, 
-              8483457, 8483515, 8484140, 8482088, 8481559, 
+              8482671, 8482142, 8477956, 8475184, 8480018, 
+              8483457, 8483515, 8484387, 8482109, 8481559, 
               8479318, 8476468, 8480893, 8484230, 8486067, 
-              8480843, 8478048, 8482093, 8478550, 8479314, 
-              8484157, 8480829, 8483492, 8477493, 8484972, 
-              8475810, 8479425, 8484803, 8479333, 8481522, 
+              8480843, 8478048, 8482116, 8478550, 8479314, 
+              8484153, 8480801, 8483445, 8477493, 8475158, 
+              8475810, 8479425, 8484873, 8479410, 8481524, 
               8480027, 8478427
           ]
           stats = {}
@@ -88,6 +87,6 @@ jobs:
       - name: Commit and push changes
         run: |
           git config user.name "github-actions[bot]"
-          git config user.email "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
           git add stats.json
           git diff --quiet && git diff --staged --quiet || (git commit -m "Auto-update NHL stats" && git push)
