@@ -366,6 +366,30 @@
       color: var(--text-dark);
       white-space: nowrap;
     }
+
+    /* MESSAGE ERREUR ALAIN */
+    .error-alain-container {
+      background: var(--card-bg);
+      backdrop-filter: blur(8px);
+      border-radius: 20px;
+      padding: 40px 20px;
+      text-align: center;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.04);
+      border: 1px solid var(--border-color);
+      margin-top: 20px;
+    }
+    .error-alain-title {
+      font-size: 2.2rem;
+      font-weight: 900;
+      color: var(--loss-red);
+      margin-bottom: 10px;
+      letter-spacing: -0.5px;
+    }
+    .error-alain-subtitle {
+      font-size: 0.95rem;
+      font-weight: 600;
+      color: var(--text-muted);
+    }
   </style>
 </head>
 <body>
@@ -668,6 +692,7 @@
           bet.participants.forEach(p => names.add(p.name));
         }
       });
+      names.add('Alain'); // Ajout forcé d'Alain dans les participants/filtres
       return Array.from(names).sort();
     }
 
@@ -702,195 +727,205 @@
         filtersContainer.appendChild(btn);
       });
 
-      bets.forEach(bet => {
-        let p1Winning = false;
-        let p2Winning = false;
-        let winnerNameMulti = null;
-        let maxPointsMulti = -1;
-        let statsListMulti = [];
-        let totalPotMulti = 0;
+      // Si le filtre sélectionné est Alain, on affiche le message d'erreur spécifique
+      if (currentFilter === 'Alain') {
+        betsListEl.innerHTML = `
+          <div class="error-alain-container">
+            <div class="error-alain-title">ERREUR 42069</div>
+            <div class="error-alain-subtitle">J'aime trop trop Sherbrooke pour faire des bets avec vous</div>
+          </div>
+        `;
+      } else {
+        bets.forEach(bet => {
+          let p1Winning = false;
+          let p2Winning = false;
+          let winnerNameMulti = null;
+          let maxPointsMulti = -1;
+          let statsListMulti = [];
+          let totalPotMulti = 0;
 
-        if (bet.type === "H2H") {
-          const st1 = getPlayerStat(bet.p1.playerId);
-          const st2 = getPlayerStat(bet.p2.playerId);
-          p1Winning = st1.points > st2.points;
-          p2Winning = st2.points > st1.points;
+          if (bet.type === "H2H") {
+            const st1 = getPlayerStat(bet.p1.playerId);
+            const st2 = getPlayerStat(bet.p2.playerId);
+            p1Winning = st1.points > st2.points;
+            p2Winning = st2.points > st1.points;
 
-          if (p1Winning) { userBalances[bet.p1.name] += bet.stake; userBalances[bet.p2.name] -= bet.stake; }
-          else if (p2Winning) { userBalances[bet.p2.name] += bet.stake; userBalances[bet.p1.name] -= bet.stake; }
-        } else if (bet.type === "OU") {
-          const st = getPlayerStat(bet.playerId);
-          p1Winning = st.points > bet.target;
-          p2Winning = st.points <= bet.target;
+            if (p1Winning) { userBalances[bet.p1.name] += bet.stake; userBalances[bet.p2.name] -= bet.stake; }
+            else if (p2Winning) { userBalances[bet.p2.name] += bet.stake; userBalances[bet.p1.name] -= bet.stake; }
+          } else if (bet.type === "OU") {
+            const st = getPlayerStat(bet.playerId);
+            p1Winning = st.points > bet.target;
+            p2Winning = st.points <= bet.target;
 
-          if (p1Winning) { userBalances[bet.p1.name] += bet.stake; userBalances[bet.p2.name] -= bet.stake; }
-          else if (p2Winning) { userBalances[bet.p2.name] += bet.stake; userBalances[bet.p1.name] -= bet.stake; }
-        } else if (bet.type === "MULTI") {
-          statsListMulti = bet.participants.map(p => {
-            const st = getPlayerStat(p.playerId);
-            if (st.points > maxPointsMulti) {
-              maxPointsMulti = st.points;
-              winnerNameMulti = p.name;
-            }
-            return { ...p, stats: st };
-          });
-          totalPotMulti = bet.stakePerPerson * bet.participants.length;
-          bet.participants.forEach(p => {
-            if (p.name === winnerNameMulti && maxPointsMulti > 0) {
-              userBalances[p.name] += (totalPotMulti - bet.stakePerPerson);
-            } else {
-              userBalances[p.name] -= bet.stakePerPerson;
-            }
-          });
-        }
-
-        if (currentFilter !== 'Tous') {
-          let involved = false;
-          if (bet.type === 'H2H' || bet.type === 'OU') {
-            if (bet.p1.name === currentFilter || bet.p2.name === currentFilter) involved = true;
-          } else if (bet.type === 'MULTI') {
-            if (bet.participants.some(p => p.name === currentFilter)) involved = true;
-          }
-          if (!involved) return;
-        }
-
-        let cardHTML = "";
-
-        if (bet.type === "H2H") {
-          const st1 = getPlayerStat(bet.p1.playerId);
-          const st2 = getPlayerStat(bet.p2.playerId);
-          const p1LastName = getLastName(bet.p1.player);
-          const p2LastName = getLastName(bet.p2.player);
-          const categoryLabel = bet.category || "Points";
-          const unitLabel = bet.unit || "pts";
-          const betTitle = bet.title || `${p1LastName} vs ${p2LastName} - ${categoryLabel}`;
-          const p1StatText = unitLabel === "Ronde" ? `Ronde ${st1.points}` : `${st1.points} <span style="font-size: 0.9rem; font-weight: 700;">${unitLabel}</span>`;
-          const p2StatText = unitLabel === "Ronde" ? `Ronde ${st2.points}` : `${st2.points} <span style="font-size: 0.9rem; font-weight: 700;">${unitLabel}</span>`;
-
-          cardHTML = `
-            <div class="bet-card">
-              <div class="bet-header">
-                <span class="bet-title">${betTitle}</span>
-                <span class="bet-stake">${bet.stake} $</span>
-              </div>
-              <div class="bet-body">
-                <div class="side-box side-blue ${p1Winning ? 'winning' : ''}">
-                  ${p1Winning ? '<div class="win-badge">WIN</div>' : ''}
-                  <div class="participant-name">${bet.p1.name}</div>
-                  ${bet.p1.logo ? `<img src="${bet.p1.logo}" alt="Logo" class="team-logo-img" />` : ''}
-                  <div class="selection-text">${getShortName(bet.p1.player)}</div>
-                  <div class="stat-number">${p1StatText}</div>
-                  <div class="stat-detail">${st1.gp} GP</div>
-                </div>
-                <div class="vs-divider">VS</div>
-                <div class="side-box side-red ${p2Winning ? 'winning' : ''}">
-                  ${p2Winning ? '<div class="win-badge">WIN</div>' : ''}
-                  <div class="participant-name">${bet.p2.name}</div>
-                  ${bet.p2.logo ? `<img src="${bet.p2.logo}" alt="Logo" class="team-logo-img" />` : ''}
-                  <div class="selection-text">${getShortName(bet.p2.player)}</div>
-                  <div class="stat-number">${p2StatText}</div>
-                  <div class="stat-detail">${st2.gp} GP</div>
-                </div>
-              </div>
-            </div>
-          `;
-        } else if (bet.type === "OU") {
-          const st = getPlayerStat(bet.playerId);
-          const betTitle = `${bet.playerName} - Over/Under ${bet.targetDisplay}pts`;
-
-          // Calculs de la barre de progression
-          const isOver = st.points > bet.target;
-          const targetMarkerPercent = 80; // La cible se situe à 80% de la largeur totale
-          let fillPercent = 0;
-
-          if (isOver) {
-            fillPercent = 100;
-          } else {
-            fillPercent = Math.min((st.points / bet.target) * targetMarkerPercent, targetMarkerPercent);
+            if (p1Winning) { userBalances[bet.p1.name] += bet.stake; userBalances[bet.p2.name] -= bet.stake; }
+            else if (p2Winning) { userBalances[bet.p2.name] += bet.stake; userBalances[bet.p1.name] -= bet.stake; }
+          } else if (bet.type === "MULTI") {
+            statsListMulti = bet.participants.map(p => {
+              const st = getPlayerStat(p.playerId);
+              if (st.points > maxPointsMulti) {
+                maxPointsMulti = st.points;
+                winnerNameMulti = p.name;
+              }
+              return { ...p, stats: st };
+            });
+            totalPotMulti = bet.stakePerPerson * bet.participants.length;
+            bet.participants.forEach(p => {
+              if (p.name === winnerNameMulti && maxPointsMulti > 0) {
+                userBalances[p.name] += (totalPotMulti - bet.stakePerPerson);
+              } else {
+                userBalances[p.name] -= bet.stakePerPerson;
+              }
+            });
           }
 
-          const fillClass = isOver ? 'over-completed' : 'in-progress';
+          if (currentFilter !== 'Tous') {
+            let involved = false;
+            if (bet.type === 'H2H' || bet.type === 'OU') {
+              if (bet.p1.name === currentFilter || bet.p2.name === currentFilter) involved = true;
+            } else if (bet.type === 'MULTI') {
+              if (bet.participants.some(p => p.name === currentFilter)) involved = true;
+            }
+            if (!involved) return;
+          }
 
-          cardHTML = `
-            <div class="bet-card">
-              <div class="bet-header">
-                <span class="bet-title">${betTitle}</span>
-                <span class="bet-stake">${bet.stake} $</span>
-              </div>
-              <div class="bet-body">
-                <div class="side-box side-blue ${p1Winning ? 'winning' : ''}">
-                  ${p1Winning ? '<div class="win-badge">WIN</div>' : ''}
-                  <div class="participant-name">${bet.p1.name}</div>
-                  <div class="selection-text">${bet.p1.selection}</div>
-                  <div class="stat-number-target">${bet.targetDisplay} <span style="font-size: 0.8rem; font-weight: 700;">pts</span></div>
-                </div>
-                <div class="vs-divider">
-                  <div class="stat-number" style="font-size:1.4rem;">${st.points} <span style="font-size: 0.9rem; font-weight: 700;">pts</span></div>
-                  <div class="stat-detail">${st.gp} GP</div>
-                </div>
-                <div class="side-box side-red ${p2Winning ? 'winning' : ''}">
-                  ${p2Winning ? '<div class="win-badge">WIN</div>' : ''}
-                  <div class="participant-name">${bet.p2.name}</div>
-                  <div class="selection-text">${bet.p2.selection}</div>
-                  <div class="stat-number-target">${bet.targetDisplay} <span style="font-size: 0.8rem; font-weight: 700;">pts</span></div>
-                </div>
-              </div>
+          let cardHTML = "";
 
-              <!-- Barre de progression Over/Under -->
-              <div class="progress-container">
-                <div class="progress-bar-wrapper">
-                  <div class="progress-bar-fill ${fillClass}" style="width: ${fillPercent}%;"></div>
-                  <div class="progress-marker" style="left: ${targetMarkerPercent}%;">
-                    <div class="progress-marker-label">${bet.targetDisplay}</div>
+          if (bet.type === "H2H") {
+            const st1 = getPlayerStat(bet.p1.playerId);
+            const st2 = getPlayerStat(bet.p2.playerId);
+            const p1LastName = getLastName(bet.p1.player);
+            const p2LastName = getLastName(bet.p2.player);
+            const categoryLabel = bet.category || "Points";
+            const unitLabel = bet.unit || "pts";
+            const betTitle = bet.title || `${p1LastName} vs ${p2LastName} - ${categoryLabel}`;
+            const p1StatText = unitLabel === "Ronde" ? `Ronde ${st1.points}` : `${st1.points} <span style="font-size: 0.9rem; font-weight: 700;">${unitLabel}</span>`;
+            const p2StatText = unitLabel === "Ronde" ? `Ronde ${st2.points}` : `${st2.points} <span style="font-size: 0.9rem; font-weight: 700;">${unitLabel}</span>`;
+
+            cardHTML = `
+              <div class="bet-card">
+                <div class="bet-header">
+                  <span class="bet-title">${betTitle}</span>
+                  <span class="bet-stake">${bet.stake} $</span>
+                </div>
+                <div class="bet-body">
+                  <div class="side-box side-blue ${p1Winning ? 'winning' : ''}">
+                    ${p1Winning ? '<div class="win-badge">WIN</div>' : ''}
+                    <div class="participant-name">${bet.p1.name}</div>
+                    ${bet.p1.logo ? `<img src="${bet.p1.logo}" alt="Logo" class="team-logo-img" />` : ''}
+                    <div class="selection-text">${getShortName(bet.p1.player)}</div>
+                    <div class="stat-number">${p1StatText}</div>
+                    <div class="stat-detail">${st1.gp} GP</div>
+                  </div>
+                  <div class="vs-divider">VS</div>
+                  <div class="side-box side-red ${p2Winning ? 'winning' : ''}">
+                    ${p2Winning ? '<div class="win-badge">WIN</div>' : ''}
+                    <div class="participant-name">${bet.p2.name}</div>
+                    ${bet.p2.logo ? `<img src="${bet.p2.logo}" alt="Logo" class="team-logo-img" />` : ''}
+                    <div class="selection-text">${getShortName(bet.p2.player)}</div>
+                    <div class="stat-number">${p2StatText}</div>
+                    <div class="stat-detail">${st2.gp} GP</div>
                   </div>
                 </div>
               </div>
-            </div>
-          `;
-        } else if (bet.type === "MULTI") {
-          let winnerPlayerIdMulti = null;
-          let boxesHTML = "";
-          
-          statsListMulti.forEach(item => {
-             if (item.name === winnerNameMulti) winnerPlayerIdMulti = item.playerId;
-          });
+            `;
+          } else if (bet.type === "OU") {
+            const st = getPlayerStat(bet.playerId);
+            const betTitle = `${bet.playerName} - Over/Under ${bet.targetDisplay}pts`;
 
-          statsListMulti.forEach(item => {
-            const isWinner = (item.name === winnerNameMulti && maxPointsMulti > 0);
-            boxesHTML += `
-              <div class="side-box ${isWinner ? 'winning' : ''}" style="min-height: 95px; padding: 10px 6px;">
-                ${isWinner ? '<div class="win-badge">WIN</div>' : ''}
-                <div class="participant-name" style="font-size: 0.95rem;">${item.name}</div>
-                <div class="selection-text" style="font-size: 0.68rem; margin-bottom: 4px;">${getShortName(item.player)}</div>
-                <div class="stat-number" style="font-size: 1.3rem;">${item.stats.points} <span style="font-size: 0.75rem;">pts</span></div>
-                <div class="stat-detail" style="font-size: 0.65rem;">${item.stats.gp} GP</div>
+            // Calculs de la barre de progression (Cible positionnée à 90%)
+            const isOver = st.points > bet.target;
+            const targetMarkerPercent = 90; 
+            let fillPercent = 0;
+
+            if (isOver) {
+              fillPercent = 100;
+            } else {
+              fillPercent = Math.min((st.points / bet.target) * targetMarkerPercent, targetMarkerPercent);
+            }
+
+            const fillClass = isOver ? 'over-completed' : 'in-progress';
+
+            cardHTML = `
+              <div class="bet-card">
+                <div class="bet-header">
+                  <span class="bet-title">${betTitle}</span>
+                  <span class="bet-stake">${bet.stake} $</span>
+                </div>
+                <div class="bet-body">
+                  <div class="side-box side-blue ${p1Winning ? 'winning' : ''}">
+                    ${p1Winning ? '<div class="win-badge">WIN</div>' : ''}
+                    <div class="participant-name">${bet.p1.name}</div>
+                    <div class="selection-text">${bet.p1.selection}</div>
+                    <div class="stat-number-target">${bet.targetDisplay} <span style="font-size: 0.8rem; font-weight: 700;">pts</span></div>
+                  </div>
+                  <div class="vs-divider">
+                    <div class="stat-number" style="font-size:1.4rem;">${st.points} <span style="font-size: 0.9rem; font-weight: 700;">pts</span></div>
+                    <div class="stat-detail">${st.gp} GP</div>
+                  </div>
+                  <div class="side-box side-red ${p2Winning ? 'winning' : ''}">
+                    ${p2Winning ? '<div class="win-badge">WIN</div>' : ''}
+                    <div class="participant-name">${bet.p2.name}</div>
+                    <div class="selection-text">${bet.p2.selection}</div>
+                    <div class="stat-number-target">${bet.targetDisplay} <span style="font-size: 0.8rem; font-weight: 700;">pts</span></div>
+                  </div>
+                </div>
+
+                <!-- Barre de progression Over/Under -->
+                <div class="progress-container">
+                  <div class="progress-bar-wrapper">
+                    <div class="progress-bar-fill ${fillClass}" style="width: ${fillPercent}%;"></div>
+                    <div class="progress-marker" style="left: ${targetMarkerPercent}%;">
+                      <div class="progress-marker-label">${bet.targetDisplay}</div>
+                    </div>
+                  </div>
+                </div>
               </div>
             `;
-          });
+          } else if (bet.type === "MULTI") {
+            let winnerPlayerIdMulti = null;
+            let boxesHTML = "";
+            
+            statsListMulti.forEach(item => {
+               if (item.name === winnerNameMulti) winnerPlayerIdMulti = item.playerId;
+            });
 
-          if (winnerPlayerIdMulti) {
-            boxesHTML += `
-              <div class="side-box" style="min-height: 95px; padding: 0; border: none; background: transparent; box-shadow: none; display: flex; align-items: center; justify-content: center; overflow: hidden;">
-                <img src="https://assets.nhle.com/mugs/nhl/latest/${winnerPlayerIdMulti}.png" alt="Meneur actuel" style="height: 95px; width: auto; object-fit: contain; filter: drop-shadow(0px 2px 4px rgba(0,0,0,0.15));" />
+            statsListMulti.forEach(item => {
+              const isWinner = (item.name === winnerNameMulti && maxPointsMulti > 0);
+              boxesHTML += `
+                <div class="side-box ${isWinner ? 'winning' : ''}" style="min-height: 95px; padding: 10px 6px;">
+                  ${isWinner ? '<div class="win-badge">WIN</div>' : ''}
+                  <div class="participant-name" style="font-size: 0.95rem;">${item.name}</div>
+                  <div class="selection-text" style="font-size: 0.68rem; margin-bottom: 4px;">${getShortName(item.player)}</div>
+                  <div class="stat-number" style="font-size: 1.3rem;">${item.stats.points} <span style="font-size: 0.75rem;">pts</span></div>
+                  <div class="stat-detail" style="font-size: 0.65rem;">${item.stats.gp} GP</div>
+                </div>
+              `;
+            });
+
+            if (winnerPlayerIdMulti) {
+              boxesHTML += `
+                <div class="side-box" style="min-height: 95px; padding: 0; border: none; background: transparent; box-shadow: none; display: flex; align-items: center; justify-content: center; overflow: hidden;">
+                  <img src="https://assets.nhle.com/mugs/nhl/latest/${winnerPlayerIdMulti}.png" alt="Meneur actuel" style="height: 95px; width: auto; object-fit: contain; filter: drop-shadow(0px 2px 4px rgba(0,0,0,0.15));" />
+                </div>
+              `;
+            }
+
+            cardHTML = `
+              <div class="bet-card">
+                <div class="bet-header">
+                  <span class="bet-title">${bet.title}</span>
+                  <span class="bet-stake">${totalPotMulti} $ (Pot)</span>
+                </div>
+                <div class="multi-grid">
+                  ${boxesHTML}
+                </div>
               </div>
             `;
           }
 
-          cardHTML = `
-            <div class="bet-card">
-              <div class="bet-header">
-                <span class="bet-title">${bet.title}</span>
-                <span class="bet-stake">${totalPotMulti} $ (Pot)</span>
-              </div>
-              <div class="multi-grid">
-                ${boxesHTML}
-              </div>
-            </div>
-          `;
-        }
-
-        betsListEl.innerHTML += cardHTML;
-      });
+          betsListEl.innerHTML += cardHTML;
+        });
+      }
 
       const leaderboardEl = document.getElementById("leaderboard");
       leaderboardEl.innerHTML = "";
