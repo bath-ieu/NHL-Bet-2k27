@@ -184,6 +184,7 @@
       font-size: 0.9rem;
     }
 
+    /* Grille 2 joueurs */
     .bet-body {
       display: grid;
       grid-template-columns: 1fr auto 1fr;
@@ -191,9 +192,16 @@
       align-items: center;
     }
 
+    /* Grille multi-joueurs (ex: 5 joueurs) */
+    .multi-body {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(95px, 1fr));
+      gap: 10px;
+    }
+
     .side-box {
       border-radius: 16px;
-      padding: 14px 10px;
+      padding: 14px 8px;
       text-align: center;
       display: flex;
       flex-direction: column;
@@ -201,6 +209,8 @@
       min-height: 110px;
       position: relative;
       transition: all 0.2s ease;
+      background: var(--blue-bg);
+      border: 2px solid var(--border-color);
     }
 
     .side-blue {
@@ -234,13 +244,13 @@
     }
 
     .participant-name {
-      font-size: 1.1rem;
+      font-size: 1.05rem;
       font-weight: 800;
       color: var(--text-dark);
       margin-bottom: 2px;
     }
     .selection-text {
-      font-size: 0.95rem;
+      font-size: 0.85rem;
       font-weight: 800;
       color: var(--text-muted);
       text-transform: uppercase;
@@ -248,7 +258,7 @@
       line-height: 1.2;
     }
     .stat-number {
-      font-size: 1.8rem;
+      font-size: 1.6rem;
       font-weight: 900;
       color: var(--text-dark);
       line-height: 1;
@@ -420,6 +430,19 @@
         unit: "v.",
         p1: { name: "Math", player: "Lukas Dostal", playerId: "8480843" },
         p2: { name: "Ben", player: "Igor Shesterkin", playerId: "8478048" }
+      },
+      {
+        id: "bet-13",
+        title: "Round 5 Fight",
+        stake: 5,
+        type: "MULTI",
+        players: [
+          { name: "Phil", player: "Tim Stützle", playerId: "8482116" },
+          { name: "Reg", player: "Artemi Panarin", playerId: "8478550" },
+          { name: "Math", player: "Matthew Tkachuk", playerId: "8479314" },
+          { name: "Will", player: "Leo Carlsson", playerId: "8484152" },
+          { name: "Gab", player: "Cutter Gauthier", playerId: "8483439" }
+        ]
       }
     ];
 
@@ -460,8 +483,12 @@
       const userBalances = {};
 
       bets.forEach(b => {
-        if (b.p1 && b.p1.name) userBalances[b.p1.name] = 0;
-        if (b.p2 && b.p2.name) userBalances[b.p2.name] = 0;
+        if (b.type === "MULTI") {
+          b.players.forEach(p => { userBalances[p.name] = 0; });
+        } else {
+          if (b.p1 && b.p1.name) userBalances[b.p1.name] = 0;
+          if (b.p2 && b.p2.name) userBalances[b.p2.name] = 0;
+        }
       });
 
       const betsListEl = document.getElementById("bets-list");
@@ -497,7 +524,7 @@
                   ${p1Winning ? '<div class="win-badge">GAGNE</div>' : ''}
                   <div class="participant-name">${bet.p1.name}</div>
                   <div class="selection-text">${getShortName(bet.p1.player)}</div>
-                  <div class="stat-number">${st1.points} <span style="font-size: 0.9rem; font-weight: 700;">${unitLabel}</span></div>
+                  <div class="stat-number">${st1.points} <span style="font-size: 0.85rem; font-weight: 700;">${unitLabel}</span></div>
                   <div class="stat-detail">${st1.gp} GP</div>
                 </div>
                 
@@ -507,7 +534,7 @@
                   ${p2Winning ? '<div class="win-badge">GAGNE</div>' : ''}
                   <div class="participant-name">${bet.p2.name}</div>
                   <div class="selection-text">${getShortName(bet.p2.player)}</div>
-                  <div class="stat-number">${st2.points} <span style="font-size: 0.9rem; font-weight: 700;">${unitLabel}</span></div>
+                  <div class="stat-number">${st2.points} <span style="font-size: 0.85rem; font-weight: 700;">${unitLabel}</span></div>
                   <div class="stat-detail">${st2.gp} GP</div>
                 </div>
               </div>
@@ -540,7 +567,7 @@
                 </div>
                 
                 <div class="vs-divider">
-                  <div class="stat-number" style="font-size:1.4rem;">${st.points} <span style="font-size: 0.9rem; font-weight: 700;">pts</span></div>
+                  <div class="stat-number" style="font-size:1.4rem;">${st.points} <span style="font-size: 0.85rem; font-weight: 700;">pts</span></div>
                   <div class="stat-detail">${st.gp} GP</div>
                 </div>
                 
@@ -550,6 +577,55 @@
                   <div class="selection-text">${bet.p2.selection}</div>
                   <div class="stat-number-target">${bet.targetDisplay} <span style="font-size: 0.8rem; font-weight: 700;">pts</span></div>
                 </div>
+              </div>
+            </div>
+          `;
+
+        } else if (bet.type === "MULTI") {
+          let maxPts = -1;
+          bet.players.forEach(p => {
+            const st = playerStats[p.playerId] || { points: 0, gp: 0 };
+            if (st.points > maxPts) maxPts = st.points;
+          });
+
+          const winners = bet.players.filter(p => {
+            const st = playerStats[p.playerId] || { points: 0, gp: 0 };
+            return st.points === maxPts && maxPts > -1;
+          });
+
+          const totalPot = bet.players.length * bet.stake;
+          const payoutPerWinner = totalPot / winners.length;
+
+          let boxesHTML = "";
+          bet.players.forEach(p => {
+            const st = playerStats[p.playerId] || { points: 0, gp: 0 };
+            const isWinning = (st.points === maxPts && maxPts >= 0);
+
+            if (isWinning) {
+              userBalances[p.name] += (payoutPerWinner - bet.stake);
+            } else {
+              userBalances[p.name] -= bet.stake;
+            }
+
+            boxesHTML += `
+              <div class="side-box ${isWinning ? 'winning' : ''}">
+                ${isWinning ? '<div class="win-badge">1ER</div>' : ''}
+                <div class="participant-name">${p.name}</div>
+                <div class="selection-text">${getShortName(p.player)}</div>
+                <div class="stat-number" style="font-size: 1.4rem;">${st.points} <span style="font-size: 0.8rem; font-weight: 700;">pts</span></div>
+                <div class="stat-detail">${st.gp} GP</div>
+              </div>
+            `;
+          });
+
+          cardHTML = `
+            <div class="bet-card">
+              <div class="bet-header">
+                <span class="bet-title">${bet.title}</span>
+                <span class="bet-stake">${bet.stake} $ / pers.</span>
+              </div>
+              <div class="multi-body">
+                ${boxesHTML}
               </div>
             </div>
           `;
