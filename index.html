@@ -692,8 +692,9 @@
           bet.participants.forEach(p => names.add(p.name));
         }
       });
-      names.add('Alain'); // Ajout forcé d'Alain dans les participants/filtres
-      return Array.from(names).sort();
+      const sortedNames = Array.from(names).sort();
+      sortedNames.push('Alain'); // On place Alain à la fin de la liste triée
+      return sortedNames;
     }
 
     function setFilter(name) {
