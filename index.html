@@ -269,7 +269,6 @@
       box-shadow: 0 2px 4px rgba(0,0,0,0.15);
     }
 
-    /* BADGE BLESSURE / INACTIF */
     .injury-badge {
       background-color: var(--nhl-red);
       color: white;
@@ -562,6 +561,16 @@
     const playerStats = {};
     let currentFilter = 'Tous';
 
+    function getPlayerStat(pid) {
+      const st = playerStats[pid];
+      if (!st) return { points: 0, gp: 0, injured: false };
+      return {
+        points: (typeof st.points === 'number' && !isNaN(st.points)) ? st.points : 0,
+        gp: (typeof st.gp === 'number' && !isNaN(st.gp)) ? st.gp : 0,
+        injured: !!st.injured
+      };
+    }
+
     function getLastName(fullName) {
       if (!fullName) return "";
       if (fullName === "Canadien" || fullName === "Panthers") return fullName;
@@ -648,15 +657,15 @@
         let totalPotMulti = 0;
 
         if (bet.type === "H2H") {
-          const st1 = playerStats[bet.p1.playerId] || { points: 0, gp: 0, injured: false };
-          const st2 = playerStats[bet.p2.playerId] || { points: 0, gp: 0, injured: false };
+          const st1 = getPlayerStat(bet.p1.playerId);
+          const st2 = getPlayerStat(bet.p2.playerId);
           p1Winning = st1.points > st2.points;
           p2Winning = st2.points > st1.points;
 
           if (p1Winning) { userBalances[bet.p1.name] += bet.stake; userBalances[bet.p2.name] -= bet.stake; }
           else if (p2Winning) { userBalances[bet.p2.name] += bet.stake; userBalances[bet.p1.name] -= bet.stake; }
         } else if (bet.type === "OU") {
-          const st = playerStats[bet.playerId] || { points: 0, gp: 0, injured: false };
+          const st = getPlayerStat(bet.playerId);
           p1Winning = st.points > bet.target;
           p2Winning = st.points <= bet.target;
 
@@ -664,7 +673,7 @@
           else if (p2Winning) { userBalances[bet.p2.name] += bet.stake; userBalances[bet.p1.name] -= bet.stake; }
         } else if (bet.type === "MULTI") {
           statsListMulti = bet.participants.map(p => {
-            const st = playerStats[p.playerId] || { points: 0, gp: 0, injured: false };
+            const st = getPlayerStat(p.playerId);
             if (st.points > maxPointsMulti) {
               maxPointsMulti = st.points;
               winnerNameMulti = p.name;
@@ -694,8 +703,8 @@
         let cardHTML = "";
 
         if (bet.type === "H2H") {
-          const st1 = playerStats[bet.p1.playerId] || { points: 0, gp: 0, injured: false };
-          const st2 = playerStats[bet.p2.playerId] || { points: 0, gp: 0, injured: false };
+          const st1 = getPlayerStat(bet.p1.playerId);
+          const st2 = getPlayerStat(bet.p2.playerId);
           const p1LastName = getLastName(bet.p1.player);
           const p2LastName = getLastName(bet.p2.player);
           const categoryLabel = bet.category || "Points";
@@ -735,7 +744,7 @@
             </div>
           `;
         } else if (bet.type === "OU") {
-          const st = playerStats[bet.playerId] || { points: 0, gp: 0, injured: false };
+          const st = getPlayerStat(bet.playerId);
           const betTitle = `${bet.playerName} - Over/Under ${bet.targetDisplay}pts`;
           const injBadge = st.injured ? '<span class="injury-badge">🩹 IR</span>' : '';
 
