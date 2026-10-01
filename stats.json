@@ -126,5 +126,21 @@
   "8478427": {
     "points": 0,
     "gp": 1
+  },
+  "MTL": {
+    "points": 2,
+    "gp": 1
+  },
+  "FLA": {
+    "points": 2,
+    "gp": 1
+  },
+  "MTL_PLAYOFF": {
+    "points": 0,
+    "gp": 0
+  },
+  "FLA_PLAYOFF": {
+    "points": 0,
+    "gp": 0
   }
 }
