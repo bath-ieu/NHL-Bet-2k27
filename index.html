@@ -649,17 +649,50 @@
 
     function getPlayerStat(pid) {
       const st = playerStats[pid];
-      if (!st) return { points: 0, gp: 0 };
+      if (!st) return { points: 0, gp: 0, position: "F", history: [] };
       return {
         points: (typeof st.points === 'number' && !isNaN(st.points)) ? st.points : 0,
-        gp: (typeof st.gp === 'number' && !isNaN(st.gp)) ? st.gp : 0
+        gp: (typeof st.gp === 'number' && !isNaN(st.gp)) ? st.gp : 0,
+        position: st.position || "F",
+        history: st.history || []
       };
     }
 
-    // Fonction de calcul de la projection avec "pts" à la fin
-    function getProjectionText(points, gp) {
-      if (!gp || gp === 0) return "";
-      const projected = Math.round((points / gp) * 82);
+    // Fonction de projection intelligente (prenant en compte GP, position et historique des 3 dernières saisons)
+    function getAdvancedProjectionText(st) {
+      if (!st || isNaN(st.gp) || st.gp === 0) return "";
+      const gp = st.gp;
+      const pts = st.points;
+      const pos = st.position;
+
+      // Baseline par défaut selon la position si aucun historique
+      let baselinePpg = (pos === "D") ? (35 / 82) : (60 / 82);
+
+      // Calcul de la moyenne historique sur les 3 dernières saisons si dispo
+      if (st.history && st.history.length > 0) {
+        let totalHistPts = 0;
+        let totalHistGp = 0;
+        st.history.forEach(season => {
+          totalHistPts += (season.points || 0);
+          totalHistGp += (season.gamesPlayed || 0);
+        });
+        if (totalHistGp > 0) {
+          baselinePpg = totalHistPts / totalHistGp;
+        }
+      }
+
+      let currentPpg = pts / gp;
+
+      // Pondération dynamique selon le nombre de matchs joués
+      let weightCurrent = 0;
+      if (gp < 10) weightCurrent = 0.20;
+      else if (gp < 30) weightCurrent = 0.50;
+      else if (gp < 50) weightCurrent = 0.70;
+      else weightCurrent = 0.90;
+
+      const blendedPpg = (currentPpg * weightCurrent) + (baselinePpg * (1 - weightCurrent));
+      const projected = Math.round(blendedPpg * 82);
+      
       return `Proj: ~${projected} pts`;
     }
 
@@ -815,8 +848,8 @@
             const p1StatText = unitLabel === "Ronde" ? `Ronde ${st1.points}` : `${st1.points} <span style="font-size: 0.9rem; font-weight: 700;">${unitLabel}</span>`;
             const p2StatText = unitLabel === "Ronde" ? `Ronde ${st2.points}` : `${st2.points} <span style="font-size: 0.9rem; font-weight: 700;">${unitLabel}</span>`;
 
-            const showProj1 = bet.category !== "Playoff" && bet.category !== "Victoires" && !isNaN(st1.gp) && st1.gp > 0;
-            const showProj2 = bet.category !== "Playoff" && bet.category !== "Victoires" && !isNaN(st2.gp) && st2.gp > 0;
+            const showProj1 = bet.category !== "Playoff" && bet.category !== "Victoires" && st1.gp > 0;
+            const showProj2 = bet.category !== "Playoff" && bet.category !== "Victoires" && st2.gp > 0;
 
             cardHTML = `
               <div class="bet-card">
@@ -832,7 +865,7 @@
                     <div class="selection-text">${getShortName(bet.p1.player)}</div>
                     <div class="stat-number">${p1StatText}</div>
                     <div class="stat-detail">${st1.gp} GP</div>
-                    ${showProj1 ? `<div class="stat-projection">${getProjectionText(st1.points, st1.gp)}</div>` : ''}
+                    ${showProj1 ? `<div class="stat-projection">${getAdvancedProjectionText(st1)}</div>` : ''}
                   </div>
                   <div class="vs-divider">VS</div>
                   <div class="side-box side-red ${p2Winning ? 'winning' : ''}">
@@ -842,7 +875,7 @@
                     <div class="selection-text">${getShortName(bet.p2.player)}</div>
                     <div class="stat-number">${p2StatText}</div>
                     <div class="stat-detail">${st2.gp} GP</div>
-                    ${showProj2 ? `<div class="stat-projection">${getProjectionText(st2.points, st2.gp)}</div>` : ''}
+                    ${showProj2 ? `<div class="stat-projection">${getAdvancedProjectionText(st2)}</div>` : ''}
                   </div>
                 </div>
               </div>
@@ -862,7 +895,7 @@
             }
 
             const fillClass = isOver ? 'over-completed' : 'in-progress';
-            const showProj = !isNaN(st.gp) && st.gp > 0;
+            const showProj = st.gp > 0;
 
             cardHTML = `
               <div class="bet-card">
@@ -880,7 +913,7 @@
                   <div class="vs-divider">
                     <div class="stat-number" style="font-size:1.4rem;">${st.points} <span style="font-size: 0.9rem; font-weight: 700;">pts</span></div>
                     <div class="stat-detail">${st.gp} GP</div>
-                    ${showProj ? `<div class="stat-projection">${getProjectionText(st.points, st.gp)}</div>` : ''}
+                    ${showProj ? `<div class="stat-projection">${getAdvancedProjectionText(st)}</div>` : ''}
                   </div>
                   <div class="side-box side-red ${p2Winning ? 'winning' : ''}">
                     ${p2Winning ? '<div class="win-badge">WIN</div>' : ''}
@@ -911,7 +944,7 @@
 
             statsListMulti.forEach(item => {
               const isWinner = (item.name === winnerNameMulti && maxPointsMulti > 0);
-              const showProj = !isNaN(item.stats.gp) && item.stats.gp > 0;
+              const showProj = item.stats.gp > 0;
               boxesHTML += `
                 <div class="side-box ${isWinner ? 'winning' : ''}" style="min-height: 95px; padding: 10px 6px;">
                   ${isWinner ? '<div class="win-badge">WIN</div>' : ''}
@@ -919,7 +952,7 @@
                   <div class="selection-text" style="font-size: 0.68rem; margin-bottom: 4px;">${getShortName(item.player)}</div>
                   <div class="stat-number" style="font-size: 1.3rem;">${item.stats.points} <span style="font-size: 0.75rem;">pts</span></div>
                   <div class="stat-detail" style="font-size: 0.65rem;">${item.stats.gp} GP</div>
-                  ${showProj ? `<div class="stat-projection" style="font-size: 0.58rem;">${getProjectionText(item.stats.points, item.stats.gp)}</div>` : ''}
+                  ${showProj ? `<div class="stat-projection" style="font-size: 0.58rem;">${getAdvancedProjectionText(item.stats)}</div>` : ''}
                 </div>
               `;
             });
