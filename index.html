@@ -584,20 +584,20 @@
           `;
 
         } else if (bet.type === "MULTI") {
-          // Calcul du gagnant multi-joueurs (plus grand nombre de points)
           let maxPoints = -1;
           let winnerName = null;
+          let winnerPlayerId = null;
 
           const statsList = bet.participants.map(p => {
             const st = playerStats[p.playerId] || { points: 0, gp: 0 };
             if (st.points > maxPoints) {
               maxPoints = st.points;
               winnerName = p.name;
+              winnerPlayerId = p.playerId;
             }
             return { ...p, stats: st };
           });
 
-          // Attribution des gains/pertes (5$par personne, le gagnant remporte tout le pot = 35$)
           const totalPot = bet.stakePerPerson * bet.participants.length;
           bet.participants.forEach(p => {
             if (p.name === winnerName && maxPoints > 0) {
@@ -620,6 +620,15 @@
               </div>
             `;
           });
+
+          // 8e case : Photo (headshot officiel LNH) du meneur actuel sans contour
+          if (winnerPlayerId) {
+            boxesHTML += `
+              <div class="side-box" style="min-height: 95px; padding: 0; border: none; background: transparent; box-shadow: none; display: flex; align-items: center; justify-content: center; overflow: hidden;">
+                <img src="https://assets.nhle.com/mugs/nhl/latest/${winnerPlayerId}.png" alt="Meneur actuel" style="height: 95px; width: auto; object-fit: contain; filter: drop-shadow(0px 2px 4px rgba(0,0,0,0.15));" />
+              </div>
+            `;
+          }
 
           cardHTML = `
             <div class="bet-card">
