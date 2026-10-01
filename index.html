@@ -184,7 +184,6 @@
       font-size: 0.9rem;
     }
 
-    /* Grille H2H (1v1) */
     .bet-body {
       display: grid;
       grid-template-columns: 1fr auto 1fr;
@@ -192,7 +191,6 @@
       align-items: center;
     }
 
-    /* Grille Multi-Joueurs (Round 5 Fight) */
     .multi-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(110px, 1fr));
@@ -433,6 +431,49 @@
         p2: { name: "Ben", player: "Igor Shesterkin", playerId: "8478048" }
       },
       {
+        id: "bet-14",
+        stake: 5,
+        type: "H2H",
+        p1: { name: "Ben", player: "Sam O'Reilly", playerId: "8484972" },
+        p2: { name: "Will", player: "Bryan Rust", playerId: "8475810" }
+      },
+      {
+        id: "bet-15",
+        stake: 5,
+        type: "H2H",
+        p1: { name: "Ben", player: "Filip Hronek", playerId: "8479425" },
+        p2: { name: "Math", player: "Cole Hutson", playerId: "8484803" }
+      },
+      {
+        id: "bet-16",
+        stake: 5,
+        type: "H2H",
+        p1: { name: "Sim", player: "Mikhail Sergachev", playerId: "8479333" },
+        p2: { name: "Will", player: "Bowen Byram", playerId: "8481522" }
+      },
+      {
+        id: "bet-17",
+        playerName: "Jason Robertson",
+        stake: 5,
+        type: "OU",
+        target: 94.5,
+        targetDisplay: "94,5",
+        playerId: "8480027",
+        p1: { name: "Phil", selection: "OVER ▲" },
+        p2: { name: "Will", selection: "UNDER ▼" }
+      },
+      {
+        id: "bet-18",
+        playerName: "Sebastian Aho",
+        stake: 5,
+        type: "OU",
+        target: 83.5,
+        targetDisplay: "83,5",
+        playerId: "8478427",
+        p1: { name: "Phil", selection: "OVER ▲" },
+        p2: { name: "Math", selection: "UNDER ▼" }
+      },
+      {
         id: "bet-13",
         title: "Round 5 Fight",
         stakePerPerson: 5,
@@ -621,7 +662,6 @@
             `;
           });
 
-          // 8e case : Photo (headshot officiel LNH) du meneur actuel sans contour
           if (winnerPlayerId) {
             boxesHTML += `
               <div class="side-box" style="min-height: 95px; padding: 0; border: none; background: transparent; box-shadow: none; display: flex; align-items: center; justify-content: center; overflow: hidden;">
