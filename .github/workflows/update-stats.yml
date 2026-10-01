@@ -36,7 +36,9 @@ jobs:
           stats = {}
           player_teams = {}
 
-          # 1. Fetch Statistiques des Joueurs + Équipe actuelle
+          CURRENT_SEASON = 20262027
+
+          # 1. Fetch Statistiques des Joueurs (Saison 2026-27 uniquement)
           for pid in player_ids:
               url = f'https://api-web.nhle.com/v1/player/{pid}/landing'
               req = urllib.request.Request(url, headers={'User-Agent': 'Mozilla/5.0'})
@@ -48,22 +50,30 @@ jobs:
                       if team_abbrev:
                           player_teams[pid] = team_abbrev
 
-                      if 'featuredStats' in data and 'regularSeason' in data['featuredStats'] and 'subSeason' in data['featuredStats']['regularSeason']:
-                          sub = data['featuredStats']['regularSeason']['subSeason']
-                          pts = sub.get('points', sub.get('wins', 0))
-                          gp = sub.get('gamesPlayed', 0)
-                      elif 'seasonTotals' in data:
-                          reg = [s for s in data['seasonTotals'] if s.get('gameTypeId') == 2]
-                          if reg:
-                              last = reg[-1]
-                              pts = last.get('points', last.get('wins', 0))
-                              gp = last.get('gamesPlayed', 0)
+                      # Recherche stricte dans la saison 2026-27
+                      reg_2026 = [s for s in data.get('seasonTotals', []) if s.get('gameTypeId') == 2 and s.get('season') == CURRENT_SEASON]
+
+                      if reg_2026:
+                          last_stat = reg_2026[-1]
+                          pts = last_stat.get('points', last_stat.get('wins', 0)) or 0
+                          gp = last_stat.get('gamesPlayed', 0) or 0
+                      elif 'featuredStats' in data and 'regularSeason' in data['featuredStats']:
+                          reg_feat = data['featuredStats']['regularSeason']
+                          if reg_feat.get('season') == CURRENT_SEASON and 'subSeason' in reg_feat:
+                              sub = reg_feat['subSeason']
+                              pts = sub.get('points', sub.get('wins', 0)) or 0
+                              gp = sub.get('gamesPlayed', 0) or 0
+                          else:
+                              pts, gp = 0, 0
+                      else:
+                          pts, gp = 0, 0
+
                       stats[str(pid)] = {'points': pts, 'gp': gp, 'injured': False}
               except Exception as e:
                   print(f'Error for {pid}: {e}')
                   stats[str(pid)] = {'points': 0, 'gp': 0, 'injured': False}
 
-          # 2. Vérification des Alignements Actifs (Méthode 3)
+          # 2. Vérification des Alignements Actifs pour détection de blessure/absence
           unique_teams = set(player_teams.values())
           active_roster_pids = set()
 
@@ -79,7 +89,6 @@ jobs:
               except Exception as e:
                   print(f'Error fetching roster for {team}: {e}')
 
-          # Marquage des joueurs absents/blessés
           for pid in player_ids:
               if pid in player_teams and pid not in active_roster_pids:
                   stats[str(pid)]['injured'] = True
@@ -116,4 +125,4 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
           git add stats.json
-          git diff --quiet && git diff --staged --quiet || (git commit -m "Auto-update NHL stats with injury detection" && git push)
+          git diff --quiet && git diff --staged --quiet || (git commit -m "Enforce 2026-27 season stats filter" && git push)
