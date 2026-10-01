@@ -256,6 +256,13 @@
       margin-bottom: 6px;
       line-height: 1.2;
     }
+    .team-logo-img {
+      height: 32px;
+      width: auto;
+      margin: 0 auto 6px auto;
+      display: block;
+      filter: drop-shadow(0 2px 3px rgba(0,0,0,0.12));
+    }
     .stat-number {
       font-size: 1.8rem;
       font-weight: 900;
@@ -474,6 +481,26 @@
         p2: { name: "Math", selection: "UNDER ▼" }
       },
       {
+        id: "bet-19",
+        title: "Canadien vs Panthers - Saison Régulière",
+        stake: 5,
+        type: "H2H",
+        category: "Points",
+        unit: "pts",
+        p1: { name: "Phil", player: "Canadien", playerId: "MTL", logo: "https://assets.nhle.com/logos/nhl/svg/MTL.svg" },
+        p2: { name: "Will", player: "Panthers", playerId: "FLA", logo: "https://assets.nhle.com/logos/nhl/svg/FLA.svg" }
+      },
+      {
+        id: "bet-20",
+        title: "Canadien vs Panthers - Séries Éliminatoires",
+        stake: 5,
+        type: "H2H",
+        category: "Séries",
+        unit: "v.",
+        p1: { name: "Phil", player: "Canadien", playerId: "MTL_PLAYOFF", logo: "https://assets.nhle.com/logos/nhl/svg/MTL.svg" },
+        p2: { name: "Will", player: "Panthers", playerId: "FLA_PLAYOFF", logo: "https://assets.nhle.com/logos/nhl/svg/FLA.svg" }
+      },
+      {
         id: "bet-13",
         title: "Round 5 Fight",
         stakePerPerson: 5,
@@ -500,6 +527,7 @@
 
     function getShortName(fullName) {
       if (!fullName) return "";
+      if (fullName === "Canadien" || fullName === "Panthers") return fullName;
       const parts = fullName.trim().split(" ");
       if (parts.length === 1) return parts[0];
       return `${parts[0].charAt(0)}. ${parts.slice(1).join(" ")}`;
@@ -554,7 +582,7 @@
           const p2LastName = getLastName(bet.p2.player);
           const categoryLabel = bet.category || "Points";
           const unitLabel = bet.unit || "pts";
-          const betTitle = `${p1LastName} vs ${p2LastName} - ${categoryLabel}`;
+          const betTitle = bet.title || `${p1LastName} vs ${p2LastName} - ${categoryLabel}`;
 
           cardHTML = `
             <div class="bet-card">
@@ -566,6 +594,7 @@
                 <div class="side-box side-blue ${p1Winning ? 'winning' : ''}">
                   ${p1Winning ? '<div class="win-badge">GAGNE</div>' : ''}
                   <div class="participant-name">${bet.p1.name}</div>
+                  ${bet.p1.logo ? `<img src="${bet.p1.logo}" alt="Logo" class="team-logo-img" />` : ''}
                   <div class="selection-text">${getShortName(bet.p1.player)}</div>
                   <div class="stat-number">${st1.points} <span style="font-size: 0.9rem; font-weight: 700;">${unitLabel}</span></div>
                   <div class="stat-detail">${st1.gp} GP</div>
@@ -576,6 +605,7 @@
                 <div class="side-box side-red ${p2Winning ? 'winning' : ''}">
                   ${p2Winning ? '<div class="win-badge">GAGNE</div>' : ''}
                   <div class="participant-name">${bet.p2.name}</div>
+                  ${bet.p2.logo ? `<img src="${bet.p2.logo}" alt="Logo" class="team-logo-img" />` : ''}
                   <div class="selection-text">${getShortName(bet.p2.player)}</div>
                   <div class="stat-number">${st2.points} <span style="font-size: 0.9rem; font-weight: 700;">${unitLabel}</span></div>
                   <div class="stat-detail">${st2.gp} GP</div>
