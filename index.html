@@ -220,10 +220,10 @@
       border: 2px solid var(--red-border);
     }
 
+    /* Style du gagnant : conserve la couleur de fond d'origine */
     .side-box.winning {
       border-color: var(--win-green) !important;
       box-shadow: 0 0 10px rgba(22, 163, 74, 0.2);
-      background: #F0FDF4;
     }
 
     .win-badge {
@@ -338,7 +338,7 @@
         target: 99.5,
         targetDisplay: "99,5",
         playerId: "8477956",
-        p1: { name: "Simon", selection: "OVER ▲" },
+        p1: { name: "Sim", selection: "OVER ▲" },
         p2: { name: "Gab", selection: "UNDER ▼" }
       },
       {
@@ -350,7 +350,7 @@
         targetDisplay: "64,5",
         playerId: "8475184",
         p1: { name: "Math", selection: "OVER ▲" },
-        p2: { name: "Simon", selection: "UNDER ▼" }
+        p2: { name: "Sim", selection: "UNDER ▼" }
       },
       {
         id: "bet-4",
@@ -595,7 +595,7 @@
               </div>
               <div class="bet-body">
                 <div class="side-box side-blue ${p1Winning ? 'winning' : ''}">
-                  ${p1Winning ? '<div class="win-badge">GAGNE</div>' : ''}
+                  ${p1Winning ? '<div class="win-badge">WIN</div>' : ''}
                   <div class="participant-name">${bet.p1.name}</div>
                   ${bet.p1.logo ? `<img src="${bet.p1.logo}" alt="Logo" class="team-logo-img" />` : ''}
                   <div class="selection-text">${getShortName(bet.p1.player)}</div>
@@ -606,7 +606,7 @@
                 <div class="vs-divider">VS</div>
                 
                 <div class="side-box side-red ${p2Winning ? 'winning' : ''}">
-                  ${p2Winning ? '<div class="win-badge">GAGNE</div>' : ''}
+                  ${p2Winning ? '<div class="win-badge">WIN</div>' : ''}
                   <div class="participant-name">${bet.p2.name}</div>
                   ${bet.p2.logo ? `<img src="${bet.p2.logo}" alt="Logo" class="team-logo-img" />` : ''}
                   <div class="selection-text">${getShortName(bet.p2.player)}</div>
@@ -636,7 +636,7 @@
               </div>
               <div class="bet-body">
                 <div class="side-box side-blue ${p1Winning ? 'winning' : ''}">
-                  ${p1Winning ? '<div class="win-badge">GAGNE</div>' : ''}
+                  ${p1Winning ? '<div class="win-badge">WIN</div>' : ''}
                   <div class="participant-name">${bet.p1.name}</div>
                   <div class="selection-text">${bet.p1.selection}</div>
                   <div class="stat-number-target">${bet.targetDisplay} <span style="font-size: 0.8rem; font-weight: 700;">pts</span></div>
@@ -648,7 +648,7 @@
                 </div>
                 
                 <div class="side-box side-red ${p2Winning ? 'winning' : ''}">
-                  ${p2Winning ? '<div class="win-badge">GAGNE</div>' : ''}
+                  ${p2Winning ? '<div class="win-badge">WIN</div>' : ''}
                   <div class="participant-name">${bet.p2.name}</div>
                   <div class="selection-text">${bet.p2.selection}</div>
                   <div class="stat-number-target">${bet.targetDisplay} <span style="font-size: 0.8rem; font-weight: 700;">pts</span></div>
@@ -686,7 +686,7 @@
             const isWinner = (item.name === winnerName && maxPoints > 0);
             boxesHTML += `
               <div class="side-box ${isWinner ? 'winning' : ''}" style="min-height: 95px; padding: 10px 6px;">
-                ${isWinner ? '<div class="win-badge">GAGNE</div>' : ''}
+                ${isWinner ? '<div class="win-badge">WIN</div>' : ''}
                 <div class="participant-name" style="font-size: 0.95rem;">${item.name}</div>
                 <div class="selection-text" style="font-size: 0.68rem; margin-bottom: 4px;">${getShortName(item.player)}</div>
                 <div class="stat-number" style="font-size: 1.3rem;">${item.stats.points} <span style="font-size: 0.75rem;">pts</span></div>
