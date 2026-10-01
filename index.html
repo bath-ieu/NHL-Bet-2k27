@@ -310,9 +310,9 @@
       text-align: center;
     }
     .stat-projection {
-      font-size: 0.68rem;
-      font-weight: 700;
-      color: var(--nhl-blue);
+      font-size: 0.62rem;
+      font-weight: 600;
+      color: var(--text-muted);
       margin-top: 2px;
       text-align: center;
     }
@@ -656,11 +656,11 @@
       };
     }
 
-    // Fonction de calcul de la projection (basée sur une saison de 82 matchs)
+    // Fonction de calcul de la projection avec "pts" à la fin
     function getProjectionText(points, gp) {
       if (!gp || gp === 0) return "";
       const projected = Math.round((points / gp) * 82);
-      return `Proj: ~${projected}`;
+      return `Proj: ~${projected} pts`;
     }
 
     function getLastName(fullName) {
@@ -815,7 +815,6 @@
             const p1StatText = unitLabel === "Ronde" ? `Ronde ${st1.points}` : `${st1.points} <span style="font-size: 0.9rem; font-weight: 700;">${unitLabel}</span>`;
             const p2StatText = unitLabel === "Ronde" ? `Ronde ${st2.points}` : `${st2.points} <span style="font-size: 0.9rem; font-weight: 700;">${unitLabel}</span>`;
 
-            // Projections (Masquées pour les équipes comme le Canadien ou Panthers en mode classique de points de saison)
             const showProj1 = bet.category !== "Playoff" && bet.category !== "Victoires" && !isNaN(st1.gp) && st1.gp > 0;
             const showProj2 = bet.category !== "Playoff" && bet.category !== "Victoires" && !isNaN(st2.gp) && st2.gp > 0;
 
@@ -920,7 +919,7 @@
                   <div class="selection-text" style="font-size: 0.68rem; margin-bottom: 4px;">${getShortName(item.player)}</div>
                   <div class="stat-number" style="font-size: 1.3rem;">${item.stats.points} <span style="font-size: 0.75rem;">pts</span></div>
                   <div class="stat-detail" style="font-size: 0.65rem;">${item.stats.gp} GP</div>
-                  ${showProj ? `<div class="stat-projection" style="font-size: 0.6rem;">${getProjectionText(item.stats.points, item.stats.gp)}</div>` : ''}
+                  ${showProj ? `<div class="stat-projection" style="font-size: 0.58rem;">${getProjectionText(item.stats.points, item.stats.gp)}</div>` : ''}
                 </div>
               `;
             });
