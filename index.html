@@ -113,33 +113,52 @@
       background: rgba(235, 242, 247, 0.85);
       border-radius: 12px;
       padding: 6px;
-      text-align: center;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: space-between;
-      height: 125px;
+      position: relative;
+      height: 120px;
       border: 1px solid var(--border-color);
       overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
     .user-avatar {
-      width: 100%;
-      height: 85px;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      max-width: 90%;
+      max-height: 90%;
       object-fit: contain;
-      background: transparent;
-      border: none;
-      display: block;
+      z-index: 1;
+      pointer-events: none;
     }
-    .user-info-row {
+    .user-info-top {
+      position: absolute;
+      top: 6px;
+      left: 8px;
+      right: 8px;
       display: flex;
       justify-content: space-between;
       align-items: center;
-      width: 100%;
-      padding: 0 2px;
-      margin-top: 2px;
+      z-index: 2;
     }
-    .user-name { font-size: 0.8rem; font-weight: 700; color: var(--text-dark); }
-    .user-balance { font-size: 0.95rem; font-weight: 900; }
+    .user-name {
+      font-size: 0.8rem;
+      font-weight: 800;
+      color: var(--text-dark);
+      background: rgba(255, 255, 255, 0.75);
+      padding: 1px 5px;
+      border-radius: 6px;
+      backdrop-filter: blur(2px);
+    }
+    .user-balance {
+      font-size: 0.9rem;
+      font-weight: 900;
+      background: rgba(255, 255, 255, 0.75);
+      padding: 1px 5px;
+      border-radius: 6px;
+      backdrop-filter: blur(2px);
+    }
     .positive { color: var(--win-green); }
     .negative { color: var(--loss-red); }
     .neutral { color: var(--text-muted); }
@@ -591,7 +610,7 @@
         id: "bet-15",
         stake: 5,
         type: "H2H",
-        p1: { name: "Ben", player: "Filip Hronek", playerId: "8479425" },
+        p1: { name: "Sim", player: "Filip Hronek", playerId: "8479425" },
         p2: { name: "Math", player: "Cole Hutson", playerId: "8484873" }
       },
       {
@@ -682,7 +701,7 @@
     }
 
     function getAdvancedProjectionText(st) {
-      if (!st || isNaN(st.gp) || st.gp === 0) return "";
+      if (!st || isNaN(st.gp) || st.gp < 10) return ""; // Ne s'affiche pas en bas de 10 GP
       const gp = st.gp;
       const pts = st.points;
       const pos = st.position;
@@ -703,8 +722,7 @@
 
       let currentPpg = pts / gp;
       let weightCurrent = 0;
-      if (gp < 10) weightCurrent = 0.20;
-      else if (gp < 30) weightCurrent = 0.50;
+      if (gp < 30) weightCurrent = 0.50;
       else if (gp < 50) weightCurrent = 0.70;
       else weightCurrent = 0.90;
 
@@ -866,8 +884,8 @@
             const p1StatText = unitLabel === "Ronde" ? `Ronde ${st1.points}` : `${st1.points} <span style="font-size: 0.9rem; font-weight: 700;">${unitLabel}</span>`;
             const p2StatText = unitLabel === "Ronde" ? `Ronde ${st2.points}` : `${st2.points} <span style="font-size: 0.9rem; font-weight: 700;">${unitLabel}</span>`;
 
-            const showProj1 = bet.category !== "Playoff" && bet.category !== "Victoires" && st1.gp > 0;
-            const showProj2 = bet.category !== "Playoff" && bet.category !== "Victoires" && st2.gp > 0;
+            const showProj1 = bet.category !== "Playoff" && bet.category !== "Victoires" && st1.gp >= 10;
+            const showProj2 = bet.category !== "Playoff" && bet.category !== "Victoires" && st2.gp >= 10;
 
             cardHTML = `
               <div class="bet-card">
@@ -913,7 +931,7 @@
             }
 
             const fillClass = isOver ? 'over-completed' : 'in-progress';
-            const showProj = st.gp > 0;
+            const showProj = st.gp >= 10;
 
             cardHTML = `
               <div class="bet-card">
@@ -962,7 +980,7 @@
 
             statsListMulti.forEach(item => {
               const isWinner = (item.name === winnerNameMulti && maxPointsMulti > 0);
-              const showProj = item.stats.gp > 0;
+              const showProj = item.stats.gp >= 10;
               boxesHTML += `
                 <div class="side-box ${isWinner ? 'winning' : ''}" style="min-height: 95px; padding: 10px 6px;">
                   ${isWinner ? '<div class="win-badge">WIN</div>' : ''}
@@ -1011,7 +1029,7 @@
         leaderboardEl.innerHTML += `
           <div class="user-pill">
             <img src="photos/${avatarFileName}.png" alt="${user}" class="user-avatar" onerror="this.style.display='none'" />
-            <div class="user-info-row">
+            <div class="user-info-top">
               <div class="user-name">${user}</div>
               <div class="user-balance ${colorClass}">${formattedBal}</div>
             </div>
