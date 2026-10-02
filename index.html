@@ -114,9 +114,22 @@
       border-radius: 12px;
       padding: 10px 6px;
       text-align: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 4px;
+    }
+    .user-avatar {
+      width: 38px;
+      height: 38px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 1.5px solid var(--border-color);
+      margin-bottom: 2px;
+      background-color: #cbd5e1;
     }
     .user-name { font-size: 0.85rem; font-weight: 700; color: var(--text-dark); }
-    .user-balance { font-size: 1.1rem; font-weight: 900; margin-top: 2px; }
+    .user-balance { font-size: 1.1rem; font-weight: 900; }
     .positive { color: var(--win-green); }
     .negative { color: var(--loss-red); }
     .neutral { color: var(--text-muted); }
@@ -658,17 +671,14 @@
       };
     }
 
-    // Fonction de projection intelligente (prenant en compte GP, position et historique des 3 dernières saisons)
     function getAdvancedProjectionText(st) {
       if (!st || isNaN(st.gp) || st.gp === 0) return "";
       const gp = st.gp;
       const pts = st.points;
       const pos = st.position;
 
-      // Baseline par défaut selon la position si aucun historique
       let baselinePpg = (pos === "D") ? (35 / 82) : (60 / 82);
 
-      // Calcul de la moyenne historique sur les 3 dernières saisons si dispo
       if (st.history && st.history.length > 0) {
         let totalHistPts = 0;
         let totalHistGp = 0;
@@ -682,8 +692,6 @@
       }
 
       let currentPpg = pts / gp;
-
-      // Pondération dynamique selon le nombre de matchs joués
       let weightCurrent = 0;
       if (gp < 10) weightCurrent = 0.20;
       else if (gp < 30) weightCurrent = 0.50;
@@ -988,9 +996,11 @@
         const bal = userBalances[user];
         const colorClass = bal > 0 ? "positive" : (bal < 0 ? "negative" : "neutral");
         const formattedBal = bal > 0 ? `+${bal}$` : `${bal}$`;
+        const avatarFileName = user.toLowerCase();
 
         leaderboardEl.innerHTML += `
           <div class="user-pill">
+            <img src="photos/${avatarFileName}.png" alt="${user}" class="user-avatar" onerror="this.src='https://via.placeholder.com/38?text=${user.charAt(0)}'" />
             <div class="user-name">${user}</div>
             <div class="user-balance ${colorClass}">${formattedBal}</div>
           </div>
