@@ -14,6 +14,7 @@
       
       --blue-border: #1E40AF;
       --blue-bg: #EFF6FF;
+      --blue-text: #2563EB;
       
       --red-border: #BE123C;
       --red-bg: #FFF1F2;
@@ -162,6 +163,7 @@
     .positive { color: var(--win-green); }
     .negative { color: var(--loss-red); }
     .neutral { color: var(--text-muted); }
+    .infinite-blue { color: var(--blue-text); }
 
     .section-header {
       display: flex;
@@ -701,7 +703,7 @@
     }
 
     function getAdvancedProjectionText(st) {
-      if (!st || isNaN(st.gp) || st.gp < 10) return ""; // Ne s'affiche pas en bas de 10 GP
+      if (!st || isNaN(st.gp) || st.gp < 10) return "";
       const gp = st.gp;
       const pts = st.points;
       const pos = st.position;
@@ -776,7 +778,7 @@
         }
       });
       const sortedNames = Array.from(names).sort();
-      sortedNames.push('Alain');
+      if (!sortedNames.includes('Alain')) sortedNames.push('Alain');
       return sortedNames;
     }
 
@@ -795,6 +797,9 @@
           b.participants.forEach(p => userBalances[p.name] = 0);
         }
       });
+
+      // Assurer qu'Alain est présent dans les soldes
+      userBalances['Alain'] = 'INF';
 
       const betsListEl = document.getElementById("bets-list");
       betsListEl.innerHTML = "";
@@ -1022,8 +1027,17 @@
       leaderboardEl.innerHTML = "";
       Object.keys(userBalances).forEach(user => {
         const bal = userBalances[user];
-        const colorClass = bal > 0 ? "positive" : (bal < 0 ? "negative" : "neutral");
-        const formattedBal = bal > 0 ? `+${bal}$` : `${bal}$`;
+        let colorClass = "";
+        let formattedBal = "";
+
+        if (bal === 'INF') {
+          colorClass = "infinite-blue";
+          formattedBal = "∞$";
+        } else {
+          colorClass = bal > 0 ? "positive" : (bal < 0 ? "negative" : "neutral");
+          formattedBal = bal > 0 ? `+${bal}$` : `${bal}$`;
+        }
+
         const avatarFileName = user.toLowerCase();
 
         leaderboardEl.innerHTML += `
