@@ -297,12 +297,34 @@
       box-shadow: 0 0 10px rgba(22, 163, 74, 0.2);
     }
 
+    .side-box.split-winning {
+      border-color: var(--blue-border) !important;
+      box-shadow: 0 0 10px rgba(37, 99, 235, 0.2);
+      background: var(--blue-bg);
+    }
+
     .win-badge {
       position: absolute;
       top: -11px;
       left: 50%;
       transform: translateX(-50%);
       background: var(--win-green);
+      color: white;
+      font-size: 0.65rem;
+      font-weight: 900;
+      padding: 2px 8px;
+      border-radius: 10px;
+      letter-spacing: 0.5px;
+      white-space: nowrap;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.15);
+    }
+
+    .split-badge {
+      position: absolute;
+      top: -11px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: var(--blue-border);
       color: white;
       font-size: 0.65rem;
       font-weight: 900;
@@ -798,7 +820,6 @@
         }
       });
 
-      // Assurer qu'Alain est présent dans les soldes
       userBalances['Alain'] = 'INF';
 
       const betsListEl = document.getElementById("bets-list");
@@ -827,7 +848,6 @@
         bets.forEach(bet => {
           let p1Winning = false;
           let p2Winning = false;
-          let winnerNameMulti = null;
           let maxPointsMulti = -1;
           let statsListMulti = [];
           let totalPotMulti = 0;
@@ -852,14 +872,22 @@
               const st = getPlayerStat(p.playerId);
               if (st.points > maxPointsMulti) {
                 maxPointsMulti = st.points;
-                winnerNameMulti = p.name;
               }
               return { ...p, stats: st };
             });
+
+            // Trouver les gagnants (gérer les égalités multiples)
+            const winners = statsListMulti.filter(item => item.stats.points === maxPointsMulti && maxPointsMulti > 0);
+            
             totalPotMulti = bet.stakePerPerson * bet.participants.length;
+            
             bet.participants.forEach(p => {
-              if (p.name === winnerNameMulti && maxPointsMulti > 0) {
+              const isWinner = winners.some(w => w.name === p.name);
+              if (isWinner && winners.length === 1) {
                 userBalances[p.name] += (totalPotMulti - bet.stakePerPerson);
+              } else if (isWinner && winners.length > 1) {
+                // Égalité (Split Pot) : pas de gain/perte net simulé ou partage égal
+                // Garder 0 ou ajuster selon la logique voulue, ici on ne touche pas au solde en cas de split
               } else {
                 userBalances[p.name] -= bet.stakePerPerson;
               }
@@ -976,19 +1004,30 @@
               </div>
             `;
           } else if (bet.type === "MULTI") {
-            let winnerPlayerIdMulti = null;
+            const winners = statsListMulti.filter(item => item.stats.points === maxPointsMulti && maxPointsMulti > 0);
+            const isSplit = winners.length > 1;
             let boxesHTML = "";
-            
-            statsListMulti.forEach(item => {
-               if (item.name === winnerNameMulti) winnerPlayerIdMulti = item.playerId;
-            });
 
             statsListMulti.forEach(item => {
-              const isWinner = (item.name === winnerNameMulti && maxPointsMulti > 0);
+              const isWinner = (item.stats.points === maxPointsMulti && maxPointsMulti > 0);
+              const isThisWinnerSingle = isWinner && !isSplit;
+              const isThisWinnerSplit = isWinner && isSplit;
+
+              let boxClass = "";
+              let badgeHTML = "";
+
+              if (isThisWinnerSingle) {
+                boxClass = "winning";
+                badgeHTML = '<div class="win-badge">WIN</div>';
+              } else if (isThisWinnerSplit) {
+                boxClass = "split-winning";
+                badgeHTML = '<div class="split-badge">SPLIT POT</div>';
+              }
+
               const showProj = item.stats.gp >= 10;
               boxesHTML += `
-                <div class="side-box ${isWinner ? 'winning' : ''}" style="min-height: 95px; padding: 10px 6px;">
-                  ${isWinner ? '<div class="win-badge">WIN</div>' : ''}
+                <div class="side-box ${boxClass}" style="min-height: 95px; padding: 10px 6px;">
+                  ${badgeHTML}
                   <div class="participant-name" style="font-size: 0.95rem;">${item.name}</div>
                   <div class="selection-text" style="font-size: 0.68rem; margin-bottom: 4px;">${getShortName(item.player)}</div>
                   <div class="stat-number" style="font-size: 1.3rem;">${item.stats.points} <span style="font-size: 0.75rem;">pts</span></div>
@@ -998,13 +1037,12 @@
               `;
             });
 
-            if (winnerPlayerIdMulti) {
-              boxesHTML += `
-                <div class="side-box" style="min-height: 95px; padding: 0; border: none; background: transparent; box-shadow: none; display: flex; align-items: center; justify-content: center; overflow: hidden;">
-                  <img src="https://assets.nhle.com/mugs/nhl/latest/${winnerPlayerIdMulti}.png" alt="Meneur actuel" style="height: 95px; width: auto; object-fit: contain; filter: drop-shadow(0px 2px 4px rgba(0,0,0,0.15));" />
-                </div>
-              `;
-            }
+            // Affichage de l'émoji 💰 à la place de l'ancienne photo
+            boxesHTML += `
+              <div class="side-box" style="min-height: 95px; padding: 0; border: none; background: transparent; box-shadow: none; display: flex; align-items: center; justify-content: center; overflow: hidden;">
+                <span style="font-size: 3.2rem; line-height: 1; filter: drop-shadow(0px 2px 4px rgba(0,0,0,0.15));">💰</span>
+              </div>
+            `;
 
             cardHTML = `
               <div class="bet-card">
