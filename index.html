@@ -90,7 +90,7 @@
       background: var(--card-bg);
       backdrop-filter: blur(8px);
       border-radius: 18px;
-      padding: 18px;
+      padding: 16px;
       margin-bottom: 20px;
       box-shadow: 0 4px 12px rgba(0, 0, 0, 0.04);
       border: 1px solid var(--border-color);
@@ -106,37 +106,40 @@
 
     .leaderboard-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
-      gap: 12px;
+      grid-template-columns: repeat(auto-fit, minmax(115px, 1fr));
+      gap: 10px;
     }
     .user-pill {
       background: rgba(235, 242, 247, 0.85);
-      border-radius: 14px;
-      padding: 8px;
+      border-radius: 12px;
+      padding: 6px;
       text-align: center;
       display: flex;
       flex-direction: column;
       align-items: center;
-      gap: 6px;
-      overflow: hidden;
+      justify-content: space-between;
+      height: 125px;
       border: 1px solid var(--border-color);
+      overflow: hidden;
     }
     .user-avatar {
       width: 100%;
-      height: 95px;
-      object-fit: cover;
-      border-radius: 10px;
-      background-color: #cbd5e1;
+      height: 85px;
+      object-fit: contain;
+      background: transparent;
+      border: none;
+      display: block;
     }
     .user-info-row {
       display: flex;
       justify-content: space-between;
       align-items: center;
       width: 100%;
-      padding: 0 4px;
+      padding: 0 2px;
+      margin-top: 2px;
     }
-    .user-name { font-size: 0.85rem; font-weight: 700; color: var(--text-dark); }
-    .user-balance { font-size: 1rem; font-weight: 900; }
+    .user-name { font-size: 0.8rem; font-weight: 700; color: var(--text-dark); }
+    .user-balance { font-size: 0.95rem; font-weight: 900; }
     .positive { color: var(--win-green); }
     .negative { color: var(--loss-red); }
     .neutral { color: var(--text-muted); }
@@ -1007,7 +1010,7 @@
 
         leaderboardEl.innerHTML += `
           <div class="user-pill">
-            <img src="photos/${avatarFileName}.png" alt="${user}" class="user-avatar" onerror="this.src='https://via.placeholder.com/100?text=${user.charAt(0)}'" />
+            <img src="photos/${avatarFileName}.png" alt="${user}" class="user-avatar" onerror="this.style.display='none'" />
             <div class="user-info-row">
               <div class="user-name">${user}</div>
               <div class="user-balance ${colorClass}">${formattedBal}</div>
