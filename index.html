@@ -876,9 +876,7 @@
               return { ...p, stats: st };
             });
 
-            // Trouver les gagnants (gérer les égalités multiples)
             const winners = statsListMulti.filter(item => item.stats.points === maxPointsMulti && maxPointsMulti > 0);
-            
             totalPotMulti = bet.stakePerPerson * bet.participants.length;
             
             bet.participants.forEach(p => {
@@ -886,8 +884,7 @@
               if (isWinner && winners.length === 1) {
                 userBalances[p.name] += (totalPotMulti - bet.stakePerPerson);
               } else if (isWinner && winners.length > 1) {
-                // Égalité (Split Pot) : pas de gain/perte net simulé ou partage égal
-                // Garder 0 ou ajuster selon la logique voulue, ici on ne touche pas au solde en cas de split
+                // Split Pot
               } else {
                 userBalances[p.name] -= bet.stakePerPerson;
               }
@@ -1006,7 +1003,12 @@
           } else if (bet.type === "MULTI") {
             const winners = statsListMulti.filter(item => item.stats.points === maxPointsMulti && maxPointsMulti > 0);
             const isSplit = winners.length > 1;
+            let winnerPlayerIdMulti = null;
             let boxesHTML = "";
+
+            if (!isSplit && winners.length === 1) {
+              winnerPlayerIdMulti = winners[0].playerId;
+            }
 
             statsListMulti.forEach(item => {
               const isWinner = (item.stats.points === maxPointsMulti && maxPointsMulti > 0);
@@ -1037,12 +1039,20 @@
               `;
             });
 
-            // Affichage de l'émoji 💰 à la place de l'ancienne photo
-            boxesHTML += `
-              <div class="side-box" style="min-height: 95px; padding: 0; border: none; background: transparent; box-shadow: none; display: flex; align-items: center; justify-content: center; overflow: hidden;">
-                <span style="font-size: 3.2rem; line-height: 1; filter: drop-shadow(0px 2px 4px rgba(0,0,0,0.15));">💰</span>
-              </div>
-            `;
+            // Si égalité (Split), on affiche l'émoji 💰, sinon on affiche la photo du meneur unique
+            if (isSplit) {
+              boxesHTML += `
+                <div class="side-box" style="min-height: 95px; padding: 0; border: none; background: transparent; box-shadow: none; display: flex; align-items: center; justify-content: center; overflow: hidden;">
+                  <span style="font-size: 3.2rem; line-height: 1; filter: drop-shadow(0px 2px 4px rgba(0,0,0,0.15));">💰</span>
+                </div>
+              `;
+            } else if (winnerPlayerIdMulti) {
+              boxesHTML += `
+                <div class="side-box" style="min-height: 95px; padding: 0; border: none; background: transparent; box-shadow: none; display: flex; align-items: center; justify-content: center; overflow: hidden;">
+                  <img src="https://assets.nhle.com/mugs/nhl/latest/${winnerPlayerIdMulti}.png" alt="Meneur actuel" style="height: 95px; width: auto; object-fit: contain; filter: drop-shadow(0px 2px 4px rgba(0,0,0,0.15));" />
+                </div>
+              `;
+            }
 
             cardHTML = `
               <div class="bet-card">
