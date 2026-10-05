@@ -139,11 +139,11 @@
     "points": 4,
     "gp": 3
   },
-  "MTL": {
-    "points": 3,
-    "gp": 2
-  },
   "FLA": {
+    "points": 4,
+    "gp": 3
+  },
+  "MTL": {
     "points": 3,
     "gp": 2
   },
