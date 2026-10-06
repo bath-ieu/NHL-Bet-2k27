@@ -1,1106 +1,558 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>NHL Side Bets 2026-27</title>
-  <style>
-    :root {
-      --bg-light: #EBF2F7;
-      --card-bg: rgba(255, 255, 255, 0.92);
-      --border-color: #D1DDE8;
-      --text-dark: #0F172A;
-      --text-muted: #64748B;
-      
-      --blue-border: #1E40AF;
-      --blue-bg: #EFF6FF;
-      --blue-text: #2563EB;
-      
-      --red-border: #BE123C;
-      --red-bg: #FFF1F2;
-      --red-badge: #E11D48;
-
-      --win-green: #16A34A;
-      --loss-red: #DC2626;
-
-      --nhl-red: #D10C27;
-      --nhl-blue: #00205B;
-    }
-
-    * { box-sizing: border-box; margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; }
-    
-    body { 
-      background-color: var(--bg-light);
-      background-image: 
-        radial-gradient(circle at 50% 30%, rgba(255, 255, 255, 0.75) 0%, rgba(215, 228, 240, 0.85) 100%),
-        url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220' viewBox='0 0 220 220'%3E%3Cfilter id='ice-grain'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23ice-grain)' opacity='0.12'/%3E%3Cg stroke='%23ffffff' stroke-width='0.75' opacity='0.85' stroke-linecap='round'%3E%3Cpath d='M8 15 L55 80 M75 10 L140 90 M130 20 L200 100 M20 120 L95 180 M110 130 L190 195 M50 170 L130 120 M135 35 L60 90 M175 150 L100 160 M30 65 L90 20 M140 75 L195 35 M10 160 L70 210 M80 200 L160 145 M15 190 L110 180 M180 30 L210 85 M40 10 L100 60 M120 105 L210 160'/%3E%3C/g%3E%3Cg stroke='%23b8d1e5' stroke-width='0.55' opacity='0.65' stroke-linecap='round'%3E%3Cpath d='M10 17 L57 82 M77 12 L142 92 M132 22 L202 102 M22 122 L97 182 M112 132 L192 197 M52 172 L132 122 M137 37 L62 92 M177 152 L102 162'/%3E%3C/g%3E%3C/svg%3E");
-      background-repeat: repeat;
-      background-attachment: fixed;
-      color: var(--text-dark); 
-      padding: 0 15px 30px 15px; 
-      max-width: 600px; 
-      margin: 0 auto; 
-    }
-
-    .top-accent-bar {
-      display: flex;
-      justify-content: space-between;
-      width: 100%;
-      height: 7px;
-      margin-bottom: 22px;
-    }
-    .bar-red {
-      width: 35%;
-      background-color: var(--nhl-red);
-      border-bottom-right-radius: 4px;
-    }
-    .bar-blue {
-      width: 28%;
-      background-color: var(--nhl-blue);
-      border-bottom-left-radius: 4px;
-    }
-
-    .main-header {
-      margin-bottom: 22px;
-    }
-    .header-content {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      padding: 0 4px;
-    }
-    .hockey-icon {
-      font-size: 2.2rem;
-      line-height: 1;
-    }
-    .header-title {
-      font-size: 1.85rem;
-      font-weight: 900;
-      color: var(--text-dark);
-      letter-spacing: -0.5px;
-    }
-    .header-title .nhl-highlight {
-      color: var(--nhl-red);
-    }
-    .header-title .dot {
-      color: var(--text-dark);
-      margin: 0 4px;
-    }
-
-    .leaderboard-card {
-      background: var(--card-bg);
-      backdrop-filter: blur(8px);
-      border-radius: 18px;
-      padding: 16px;
-      margin-bottom: 20px;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.04);
-      border: 1px solid var(--border-color);
-    }
-    .leaderboard-title {
-      font-size: 0.85rem;
-      font-weight: 800;
-      color: var(--text-muted);
-      text-transform: uppercase;
-      letter-spacing: 1px;
-      margin-bottom: 12px;
-    }
-
-    .leaderboard-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(115px, 1fr));
-      gap: 10px;
-    }
-    .user-pill {
-      background: rgba(235, 242, 247, 0.85);
-      border-radius: 12px;
-      padding: 6px;
-      position: relative;
-      height: 120px;
-      border: 1px solid var(--border-color);
-      overflow: hidden;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-    .user-avatar {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      max-width: 90%;
-      max-height: 90%;
-      object-fit: contain;
-      z-index: 1;
-      pointer-events: none;
-    }
-    .user-info-top {
-      position: absolute;
-      top: 6px;
-      left: 8px;
-      right: 8px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      z-index: 2;
-    }
-    .user-name {
-      font-size: 0.8rem;
-      font-weight: 800;
-      color: var(--text-dark);
-      background: rgba(255, 255, 255, 0.75);
-      padding: 1px 5px;
-      border-radius: 6px;
-      backdrop-filter: blur(2px);
-    }
-    .user-balance {
-      font-size: 0.9rem;
-      font-weight: 900;
-      background: rgba(255, 255, 255, 0.75);
-      padding: 1px 5px;
-      border-radius: 6px;
-      backdrop-filter: blur(2px);
-    }
-    .positive { color: var(--win-green); }
-    .negative { color: var(--loss-red); }
-    .neutral { color: var(--text-muted); }
-    .infinite-blue { color: var(--blue-text); }
-
-    .section-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 12px;
-      padding: 0 4px;
-    }
-    .section-label {
-      font-size: 0.85rem;
-      font-weight: 800;
-      color: var(--text-muted);
-      text-transform: uppercase;
-      letter-spacing: 1px;
-    }
-
-    .refresh-btn-main {
-      background: var(--card-bg);
-      color: var(--text-dark);
-      border: 1.5px solid var(--border-color);
-      padding: 8px 16px;
-      border-radius: 20px;
-      font-weight: 700;
-      font-size: 0.8rem;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      gap: 6px;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.04);
-      transition: all 0.2s;
-    }
-    .refresh-btn-main:active { transform: scale(0.96); }
-
-    .filters-container {
-      margin-bottom: 18px;
-      padding: 0 4px;
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
-    }
-    .filter-btn {
-      background: var(--card-bg);
-      color: var(--text-dark);
-      border: 1.5px solid var(--border-color);
-      padding: 7px 14px;
-      border-radius: 18px;
-      font-weight: 700;
-      font-size: 0.8rem;
-      cursor: pointer;
-      transition: all 0.2s;
-      box-shadow: 0 2px 5px rgba(0,0,0,0.03);
-    }
-    .filter-btn:hover { border-color: var(--text-muted); }
-    
-    .filter-btn.active {
-      background-color: var(--text-muted);
-      color: white;
-      border-color: var(--text-muted);
-      box-shadow: inset 0 1px 3px rgba(0,0,0,0.15);
-    }
-
-    .bets-list { display: flex; flex-direction: column; gap: 18px; }
-
-    .bet-card {
-      background: var(--card-bg);
-      backdrop-filter: blur(8px);
-      border-radius: 20px;
-      padding: 18px;
-      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.04);
-      border: 1px solid var(--border-color);
-    }
-
-    .bet-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 18px;
-    }
-    .bet-title {
-      font-weight: 800;
-      font-size: 1.05rem;
-      color: var(--text-dark);
-    }
-    .bet-stake {
-      background: var(--red-badge);
-      color: white;
-      padding: 5px 14px;
-      border-radius: 20px;
-      font-weight: 800;
-      font-size: 0.9rem;
-    }
-
-    .bet-body {
-      display: grid;
-      grid-template-columns: 1fr auto 1fr;
-      gap: 12px;
-      align-items: center;
-    }
-
-    .multi-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(110px, 1fr));
-      gap: 10px;
-    }
-
-    .side-box {
-      border-radius: 16px;
-      padding: 14px 10px;
-      text-align: center;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      min-height: 110px;
-      position: relative;
-      transition: all 0.2s ease;
-      background: #F8FAFC;
-      border: 2px solid var(--border-color);
-    }
-
-    .side-blue {
-      background: var(--blue-bg);
-      border: 2px solid var(--blue-border);
-    }
-    .side-red {
-      background: var(--red-bg);
-      border: 2px solid var(--red-border);
-    }
-
-    .side-box.winning {
-      border-color: var(--win-green) !important;
-      box-shadow: 0 0 10px rgba(22, 163, 74, 0.2);
-    }
-
-    .side-box.split-winning {
-      border-color: var(--blue-border) !important;
-      box-shadow: 0 0 10px rgba(37, 99, 235, 0.2);
-      background: var(--blue-bg);
-    }
-
-    .win-badge {
-      position: absolute;
-      top: -11px;
-      left: 50%;
-      transform: translateX(-50%);
-      background: var(--win-green);
-      color: white;
-      font-size: 0.65rem;
-      font-weight: 900;
-      padding: 2px 8px;
-      border-radius: 10px;
-      letter-spacing: 0.5px;
-      white-space: nowrap;
-      box-shadow: 0 2px 4px rgba(0,0,0,0.15);
-    }
-
-    .split-badge {
-      position: absolute;
-      top: -11px;
-      left: 50%;
-      transform: translateX(-50%);
-      background: var(--blue-border);
-      color: white;
-      font-size: 0.65rem;
-      font-weight: 900;
-      padding: 2px 8px;
-      border-radius: 10px;
-      letter-spacing: 0.5px;
-      white-space: nowrap;
-      box-shadow: 0 2px 4px rgba(0,0,0,0.15);
-    }
-
-    .participant-name {
-      font-size: 1.1rem;
-      font-weight: 800;
-      color: var(--text-dark);
-      margin-bottom: 2px;
-    }
-    .selection-text {
-      font-size: 0.8rem;
-      font-weight: 700;
-      color: var(--text-muted);
-      text-transform: uppercase;
-      margin-bottom: 6px;
-      line-height: 1.2;
-    }
-    .team-logo-img {
-      height: 36px;
-      width: auto;
-      margin: 0 auto 6px auto;
-      display: block;
-      filter: drop-shadow(0 2px 4px rgba(0,0,0,0.12));
-    }
-    .stat-number {
-      font-size: 1.8rem;
-      font-weight: 900;
-      color: var(--text-dark);
-      line-height: 1;
-    }
-    .stat-number-target {
-      font-size: 1.25rem;
-      font-weight: 900;
-      color: var(--text-dark);
-      line-height: 1;
-    }
-    .stat-detail {
-      font-size: 0.72rem;
-      font-weight: 600;
-      color: var(--text-muted);
-      margin-top: 4px;
-      text-align: center;
-    }
-    .stat-projection {
-      font-size: 0.62rem;
-      font-weight: 600;
-      color: var(--text-muted);
-      margin-top: 2px;
-      text-align: center;
-    }
-
-    .vs-divider {
-      font-weight: 800;
-      color: var(--text-dark);
-      font-size: 0.95rem;
-      text-align: center;
-      padding: 0 4px;
-    }
-
-    /* BARRE DE PROGRESSION OVER/UNDER */
-    .progress-container {
-      margin-top: 22px;
-      width: 100%;
-      padding: 0 6px;
-    }
-    .progress-bar-wrapper {
-      position: relative;
-      height: 12px;
-      background-color: #E2E8F0;
-      border: 1.5px solid #CBD5E1;
-      border-radius: 10px;
-      overflow: visible;
-      width: 100%;
-    }
-    .progress-bar-fill {
-      height: 100%;
-      border-radius: 8px;
-      transition: width 0.4s ease, background-color 0.4s ease;
-    }
-    .progress-bar-fill.in-progress {
-      background-color: var(--nhl-blue);
-    }
-    .progress-bar-fill.over-completed {
-      background-color: var(--win-green);
-    }
-    .progress-marker {
-      position: absolute;
-      top: -4px;
-      transform: translateX(-50%);
-      width: 12px;
-      height: 18px;
-      background-color: #FFFFFF;
-      border: 2px solid var(--text-dark);
-      border-radius: 6px;
-      z-index: 2;
-      box-shadow: 0 1px 3px rgba(0,0,0,0.2);
-    }
-    .progress-marker-label {
-      position: absolute;
-      top: -18px;
-      left: 50%;
-      transform: translateX(-50%);
-      font-size: 0.7rem;
-      font-weight: 900;
-      color: var(--text-dark);
-      white-space: nowrap;
-    }
-
-    /* MESSAGE ERREUR ALAIN */
-    .error-alain-container {
-      background: var(--card-bg);
-      backdrop-filter: blur(8px);
-      border-radius: 20px;
-      padding: 40px 20px;
-      text-align: center;
-      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.04);
-      border: 1px solid var(--border-color);
-      margin-top: 20px;
-    }
-    .error-alain-title {
-      font-size: 2.2rem;
-      font-weight: 900;
-      color: var(--loss-red);
-      margin-bottom: 10px;
-      letter-spacing: -0.5px;
-    }
-    .error-alain-subtitle {
-      font-size: 0.95rem;
-      font-weight: 600;
-      color: var(--text-muted);
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pool LNH - Classement Général</title>
+    <style>
+        body {
+            background-color: #121212;
+            color: #e0e0e0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 20px;
+        }
+        h1 {
+            text-align: center;
+            color: #ffffff;
+            margin-bottom: 30px;
+        }
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        .card {
+            background: #1e1e1e;
+            border-radius: 12px;
+            padding: 15px 20px;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.3);
+            border-left: 5px solid #ff7b00;
+        }
+        .rank {
+            font-size: 24px;
+            font-weight: bold;
+            color: #ff7b00;
+            width: 40px;
+            text-align: center;
+        }
+        .name {
+            font-size: 20px;
+            font-weight: 600;
+            color: #ffffff;
+            flex-grow: 1;
+            margin-left: 15px;
+        }
+        .stats {
+            display: flex;
+            gap: 20px;
+            text-align: center;
+            font-size: 14px;
+            color: #aaa;
+        }
+        .stat-box {
+            display: flex;
+            flex-direction: column;
+        }
+        .stat-value {
+            font-size: 16px;
+            font-weight: bold;
+            color: #fff;
+        }
+        .total {
+            background: #ff7b00;
+            color: #fff;
+            padding: 8px 15px;
+            border-radius: 8px;
+            font-size: 18px;
+            font-weight: bold;
+            margin-left: 20px;
+            min-width: 80px;
+            text-align: center;
+        }
+    </style>
 </head>
 <body>
-
-  <header class="main-header">
-    <div class="top-accent-bar">
-      <div class="bar-red"></div>
-      <div class="bar-blue"></div>
+    <div class="container">
+        <h1>Classement du Pool LNH</h1>
+        <div id="pool-list"></div>
     </div>
-    <div class="header-content">
-      <span class="hockey-icon">🏒</span>
-      <h1 class="header-title">
-        Side Bets <span class="nhl-highlight">NHL</span><span class="dot">·</span>2026-27
-      </h1>
-    </div>
-  </header>
 
-  <div class="leaderboard-card">
-    <div class="leaderboard-title">Bilan global (Gains / Pertes)</div>
-    <div class="leaderboard-grid" id="leaderboard"></div>
-  </div>
+    <script>
+        const poolData = [
+        {
+                "name": "Mathieu Huot",
+                "att": 31,
+                "def": 52,
+                "goaler": 20,
+                "equipe": 18,
+                "total": 121,
+                "players": [
+                        "Evan Bouchard (D)",
+                        "Leon Draisaitl (A)",
+                        "Rasmus Dahlin (D)",
+                        "Martin Necas (A)",
+                        "Jakob Chychrun (D)",
+                        "Josh Morrissey (D)",
+                        "Matthew Schaefer (D)",
+                        "Jackson LaCombe (D)",
+                        "John Carlson (D)",
+                        "Sam Reinhart (A)",
+                        "Clayton Keller (A)",
+                        "Filip Forsberg (A)",
+                        "Dylan Larkin (A)",
+                        "Beckett Sennecke (A)",
+                        "Lucas Raymond (A)",
+                        "Pavel Dorofeyev (A)",
+                        "Brock Nelson (A)",
+                        "Jesper Bratt (A)",
+                        "Porter Martone (A)",
+                        "Brandt Clarke (D)",
+                        "Nico Hischier (A)",
+                        "Andrei Vasilevski (G)",
+                        "Logan Thompson (G)",
+                        "Jesper Wallstedt (G)",
+                        "Alex Newhook (A)"
+                ],
+                "teams": [
+                        "Avalanche du Colorado",
+                        "Lightning de Tampa Bay",
+                        "Devils du New Jersey",
+                        "Sharks de San Jose"
+                ]
+        },
+        {
+                "name": "Jean-Philip Tremblay",
+                "att": 0,
+                "def": 0,
+                "goaler": 0,
+                "equipe": 0,
+                "total": 0,
+                "players": [
+                        "Cale Makar (D)",
+                        "Macklin Celebrini (A)",
+                        "Rasmus Dahlin (D)",
+                        "Nick Suzuki (A)",
+                        "Cole Caufield (A)",
+                        "Connor Bedard (A)",
+                        "Matthew Schaefer (D)",
+                        "Aleksander Barkov (A)",
+                        "Mitch Marner (A)",
+                        "Sebastian Aho (A)",
+                        "Cutter Gauthier (A)",
+                        "Leo Carlsson (A)",
+                        "Rasmus Andersson (D)",
+                        "Ivan Demidov (A)",
+                        "Juraj Slafkovsky (A)",
+                        "Matvei Michkov (A)",
+                        "Jake Walman (D)",
+                        "Trevor Zegras (A)",
+                        "Simon Nemec (D)",
+                        "Brayden Point (A)",
+                        "J.T. Miller (A)",
+                        "Andrei Vasilevski (G)",
+                        "Filip Gustavsson (G)",
+                        "Ukko-Pekka Luukkonen (G)",
+                        "Alex Newhook (A)"
+                ],
+                "teams": [
+                        "Canadiens de Montréal",
+                        "Sabres de Buffalo",
+                        "Devils du New Jersey",
+                        "Jets de Winnipeg"
+                ]
+        },
+        {
+                "name": "Nicolas St-Pierre",
+                "att": 0,
+                "def": 0,
+                "goaler": 0,
+                "equipe": 0,
+                "total": 0,
+                "players": [
+                        "Cale Makar (D)",
+                        "Quinn Hughes (D)",
+                        "David Pastrnak (A)",
+                        "Auston Matthews (A)",
+                        "William Nylander (A)",
+                        "Wyatt Johnston (A)",
+                        "Matthew Schaefer (D)",
+                        "Aleksander Barkov (A)",
+                        "Mitch Marner (A)",
+                        "Adrian Kempe (A)",
+                        "Zach Hyman (A)",
+                        "Leo Carlsson (A)",
+                        "Dylan Larkin (A)",
+                        "Gavin Mckenna (A)",
+                        "Juraj Slafkovsky (A)",
+                        "Kirill Marchenko (A)",
+                        "Jake Walman (D)",
+                        "Thomas Harley (D)",
+                        "Porter Martone (A)",
+                        "Matt Duchene (A)",
+                        "Zach Benson (A)",
+                        "Connor Hellebuyck (G)",
+                        "Jeremy Swayman (G)",
+                        "Jesper Wallstedt (G)",
+                        "Oliver Kapanen (A)"
+                ],
+                "teams": [
+                        "Stars de Dallas",
+                        "Lightning de Tampa Bay",
+                        "Islanders de New York",
+                        "Sharks de San Jose"
+                ]
+        },
+        {
+                "name": "Alondra Rima",
+                "att": 0,
+                "def": 0,
+                "goaler": 0,
+                "equipe": 0,
+                "total": 0,
+                "players": [
+                        "Connor McDavid (A)",
+                        "Macklin Celebrini (A)",
+                        "Jason Robertson (A)",
+                        "Nick Suzuki (A)",
+                        "Matthew Boldy (A)",
+                        "Artemi Panarin (A)",
+                        "Matthew Schaefer (D)",
+                        "Aleksander Barkov (A)",
+                        "Erik Karlsson (D)",
+                        "Sebastian Aho (A)",
+                        "Dylan Guenther (A)",
+                        "Logan Cooley (A)",
+                        "Evgeni Malkin (A)",
+                        "Ivan Demidov (A)",
+                        "Bo Horvat (A)",
+                        "Morgan Geekie (A)",
+                        "Brock Nelson (A)",
+                        "Thomas Harley (D)",
+                        "Simon Nemec (D)",
+                        "Ryan Nugent-Hopkins (A)",
+                        "Logan Stankoven (A)",
+                        "Jake Oettinger (G)",
+                        "Filip Gustavsson (G)",
+                        "Jakub Dobes (G)",
+                        "Alex Newhook (A)"
+                ],
+                "teams": [
+                        "Stars de Dallas",
+                        "Oilers d'Edmonton",
+                        "Islanders de New York",
+                        "Sharks de San Jose"
+                ]
+        },
+        {
+                "name": "Aya el Khazen",
+                "att": 0,
+                "def": 0,
+                "goaler": 0,
+                "equipe": 0,
+                "total": 0,
+                "players": [
+                        "Nikita Kucherov (A)",
+                        "Lane Hutson (D)",
+                        "David Pastrnak (A)",
+                        "Nick Suzuki (A)",
+                        "Cole Caufield (A)",
+                        "Sidney Crosby (A)",
+                        "Matthew Schaefer (D)",
+                        "Jackson LaCombe (D)",
+                        "John Carlson (D)",
+                        "Seth Jarvis (A)",
+                        "Clayton Keller (A)",
+                        "Brad Marchand (A)",
+                        "Rasmus Andersson (D)",
+                        "Ivan Demidov (A)",
+                        "Andrei Svechnikov (A)",
+                        "Bowen Byram (D)",
+                        "Steven Stamkos (A)",
+                        "Thomas Harley (D)",
+                        "Anton Frondell (A)",
+                        "Mike Matheson (D)",
+                        "Zach Benson (A)",
+                        "Sergei Bobrovsky (G)",
+                        "Logan Thompson (G)",
+                        "Jakub Dobes (G)",
+                        "Alex Newhook (A)"
+                ],
+                "teams": [
+                        "Canadiens de Montréal",
+                        "Lightning de Tampa Bay",
+                        "Blue Jackets de Columbus",
+                        "Rangers de New York"
+                ]
+        },
+        {
+                "name": "Alain Roy",
+                "att": 0,
+                "def": 0,
+                "goaler": 0,
+                "equipe": 0,
+                "total": 0,
+                "players": [
+                        "Cale Makar (D)",
+                        "Lane Hutson (D)",
+                        "David Pastrnak (A)",
+                        "Nick Suzuki (A)",
+                        "Cole Caufield (A)",
+                        "Sidney Crosby (A)",
+                        "Matthew Schaefer (D)",
+                        "Aleksander Barkov (A)",
+                        "Tage Thompson (A)",
+                        "Sebastian Aho (A)",
+                        "Matthew Tkachuk (A)",
+                        "Drake Batherson (A)",
+                        "John Tavares (A)",
+                        "Ivan Demidov (A)",
+                        "Juraj Slafkovsky (A)",
+                        "Matvei Michkov (A)",
+                        "Dougie Hamilton (D)",
+                        "Trevor Zegras (A)",
+                        "Simon Nemec (D)",
+                        "Brayden Point (A)",
+                        "Nico Hischier (A)",
+                        "Andrei Vasilevski (G)",
+                        "Logan Thompson (G)",
+                        "Jakub Dobes (G)",
+                        "Oliver Kapanen (A)"
+                ],
+                "teams": [
+                        "Avalanche du Colorado",
+                        "Oilers d'Edmonton",
+                        "Flyers de Philadelphie",
+                        "Sharks de San Jose"
+                ]
+        },
+        {
+                "name": "Olivier Jubelin",
+                "att": 0,
+                "def": 0,
+                "goaler": 0,
+                "equipe": 0,
+                "total": 0,
+                "players": [
+                        "Cale Makar (D)",
+                        "Leon Draisaitl (A)",
+                        "Kirill Kaprizov (A)",
+                        "Charlie McAvoy (D)",
+                        "Kyle Connor (A)",
+                        "Artemi Panarin (A)",
+                        "Matthew Schaefer (D)",
+                        "Jake Guentzel (A)",
+                        "Erik Karlsson (D)",
+                        "Sam Reinhart (A)",
+                        "Clayton Keller (A)",
+                        "Filip Forsberg (A)",
+                        "Dylan Larkin (A)",
+                        "Will Smith (A)",
+                        "Nick Schmaltz (A)",
+                        "Kirill Marchenko (A)",
+                        "Gabriel Vilardi (A)",
+                        "Jesper Bratt (A)",
+                        "Jimmy Snuggerud (A)",
+                        "Brayden Point (A)",
+                        "Nico Hischier (A)",
+                        "Andrei Vasilevski (G)",
+                        "Logan Thompson (G)",
+                        "Jacob Markström (G)",
+                        "Oliver Kapanen (A)"
+                ],
+                "teams": [
+                        "Hurricanes de la Caroline",
+                        "Sabres de Buffalo",
+                        "Penguins de Pittsburgh",
+                        "Predators de Nashville"
+                ]
+        },
+        {
+                "name": "Yanick Tremblay",
+                "att": 0,
+                "def": 0,
+                "goaler": 0,
+                "equipe": 0,
+                "total": 0,
+                "players": [
+                        "Nathan MacKinnon (A)",
+                        "Lane Hutson (D)",
+                        "David Pastrnak (A)",
+                        "Charlie McAvoy (D)",
+                        "Cole Caufield (A)",
+                        "Miro Heiskanen (D)",
+                        "Mikko Rantanen (A)",
+                        "Jackson LaCombe (D)",
+                        "Mitch Marner (A)",
+                        "Noah Dobson (D)",
+                        "Matthew Tkachuk (A)",
+                        "Logan Cooley (A)",
+                        "Rasmus Andersson (D)",
+                        "Cole Hutson (D)",
+                        "Juraj Slafkovsky (A)",
+                        "Matthew Knies (A)",
+                        "Steven Stamkos (A)",
+                        "Jared McCann (A)",
+                        "Jackson Blake (A)",
+                        "Mike Matheson (D)",
+                        "Philip Broberg (D)",
+                        "Connor Hellebuyck (G)",
+                        "Logan Thompson (G)",
+                        "Jakub Dobes (G)",
+                        "Alex Newhook (A)"
+                ],
+                "teams": [
+                        "Canadiens de Montréal",
+                        "Oilers d'Edmonton",
+                        "Kings de Los Angeles",
+                        "Flames de Calgary"
+                ]
+        },
+        {
+                "name": "Alexandre Neal",
+                "att": 0,
+                "def": 0,
+                "goaler": 0,
+                "equipe": 0,
+                "total": 0,
+                "players": [
+                        "Connor McDavid (A)",
+                        "Lane Hutson (D)",
+                        "David Pastrnak (A)",
+                        "Nick Suzuki (A)",
+                        "William Nylander (A)",
+                        "Sidney Crosby (A)",
+                        "Mikko Rantanen (A)",
+                        "Jackson LaCombe (D)",
+                        "Tage Thompson (A)",
+                        "Noah Dobson (D)",
+                        "Matthew Tkachuk (A)",
+                        "Drake Batherson (A)",
+                        "Devon Toews (D)",
+                        "Cole Hutson (D)",
+                        "Bo Horvat (A)",
+                        "Bowen Byram (D)",
+                        "Alexander Ovechkin (A)",
+                        "Mathew Barzal (A)",
+                        "Jackson Blake (A)",
+                        "Matt Duchene (A)",
+                        "MacKenzie Weegar (D)",
+                        "Sergei Bobrovsky (G)",
+                        "Filip Gustavsson (G)",
+                        "Jakub Dobes (G)",
+                        "Jake Evans (A)"
+                ],
+                "teams": [
+                        "Canadiens de Montréal",
+                        "Bruins de Boston",
+                        "Kings de Los Angeles",
+                        "Jets de Winnipeg"
+                ]
+        },
+        {
+                "name": "Antoine Duguay",
+                "att": 0,
+                "def": 0,
+                "goaler": 0,
+                "equipe": 0,
+                "total": 0,
+                "players": [
+                        "Connor McDavid (A)",
+                        "Quinn Hughes (D)",
+                        "Jason Robertson (A)",
+                        "Nick Suzuki (A)",
+                        "Cole Caufield (A)",
+                        "Wyatt Johnston (A)",
+                        "Jack Eichel (A)",
+                        "Aleksander Barkov (A)",
+                        "Tage Thompson (A)",
+                        "Noah Dobson (D)",
+                        "Matthew Tkachuk (A)",
+                        "Filip Forsberg (A)",
+                        "John Tavares (A)",
+                        "Ivan Demidov (A)",
+                        "Juraj Slafkovsky (A)",
+                        "Pavel Dorofeyev (A)",
+                        "Steven Stamkos (A)",
+                        "Jared McCann (A)",
+                        "Jackson Blake (A)",
+                        "Matt Duchene (A)",
+                        "Logan Stankoven (A)",
+                        "Sergei Bobrovsky (G)",
+                        "Igor Shesterkin (G)",
+                        "Jakub Dobes (G)",
+                        "Alex Newhook (A)"
+                ],
+                "teams": [
+                        "Avalanche du Colorado",
+                        "Sabres de Buffalo",
+                        "Kings de Los Angeles",
+                        "Sharks de San Jose"
+                ]
+        },
+        {
+                "name": "Hak Jun Oh",
+                "att": 0,
+                "def": 0,
+                "goaler": 0,
+                "equipe": 0,
+                "total": 0,
+                "players": [
+                        "Nathan MacKinnon (A)",
+                        "Macklin Celebrini (A)",
+                        "Rasmus Dahlin (D)",
+                        "Jack Hughes (A)",
+                        "Cole Caufield (A)",
+                        "Artemi Panarin (A)",
+                        "Mikko Rantanen (A)",
+                        "Jake Guentzel (A)",
+                        "Brady Tkachuk (A)",
+                        "Mika Zibanejad (A)",
+                        "Matthew Tkachuk (A)",
+                        "Filip Forsberg (A)",
+                        "Rasmus Andersson (D)",
+                        "Gavin Mckenna (A)",
+                        "Andrei Svechnikov (A)",
+                        "Kirill Marchenko (A)",
+                        "Dougie Hamilton (D)",
+                        "Thomas Harley (D)",
+                        "Simon Nemec (D)",
+                        "Brayden Point (A)",
+                        "MacKenzie Weegar (D)",
+                        "Andrei Vasilevski (G)",
+                        "Scott Wedgewood (G)",
+                        "Jacob Markström (G)",
+                        "Zachary Bolduc (A)"
+                ],
+                "teams": [
+                        "Panthers de la Floride",
+                        "Oilers d'Edmonton",
+                        "Devils du New Jersey",
+                        "Sharks de San Jose"
+                ]
+        }
+];
 
-  <div class="section-header">
-    <span class="section-label">Les Paris</span>
-    <button class="refresh-btn-main" onclick="fetchLiveStats()" id="refresh-btn">
-      🔄 Actualiser
-    </button>
-  </div>
-  
-  <div class="filters-container" id="filters-container"></div>
-
-  <div class="bets-list" id="bets-list"></div>
-
-  <script>
-    const bets = [
-      {
-        id: "bet-1",
-        stake: 10,
-        type: "H2H",
-        p1: { name: "Will", player: "Owen Power", playerId: "8482671" },
-        p2: { name: "Ben", player: "Jamie Drysdale", playerId: "8482142" }
-      },
-      {
-        id: "bet-2",
-        playerName: "David Pastrnak",
-        stake: 10,
-        type: "OU",
-        target: 99.5,
-        targetDisplay: "99,5",
-        playerId: "8477956",
-        p1: { name: "Sim", selection: "OVER ▲" },
-        p2: { name: "Gab", selection: "UNDER ▼" }
-      },
-      {
-        id: "bet-3",
-        playerName: "Chris Kreider",
-        stake: 5,
-        type: "OU",
-        target: 64.5,
-        targetDisplay: "64,5",
-        playerId: "8475184",
-        p1: { name: "Math", selection: "OVER ▲" },
-        p2: { name: "Sim", selection: "UNDER ▼" }
-      },
-      {
-        id: "bet-newhook",
-        playerName: "Alex Newhook",
-        stake: 5,
-        type: "OU",
-        target: 60.5,
-        targetDisplay: "60,5",
-        playerId: "8481618",
-        p1: { name: "Will", selection: "OVER ▲" },
-        p2: { name: "Math", selection: "UNDER ▼" }
-      },
-      {
-        id: "bet-4",
-        playerName: "Nick Suzuki",
-        stake: 5,
-        type: "OU",
-        target: 99.5,
-        targetDisplay: "99,5",
-        playerId: "8480018",
-        p1: { name: "Gab", selection: "OVER ▲" },
-        p2: { name: "Ben", selection: "UNDER ▼" }
-      },
-      {
-        id: "bet-5",
-        playerName: "Lane Hutson",
-        stake: 5,
-        type: "OU",
-        target: 89.5,
-        targetDisplay: "89,5",
-        playerId: "8483457",
-        p1: { name: "Gab", selection: "OVER ▲" },
-        p2: { name: "Ben", selection: "UNDER ▼" }
-      },
-      {
-        id: "bet-6",
-        playerName: "Juraj Slafkovský",
-        stake: 10,
-        type: "OU",
-        target: 77.5,
-        targetDisplay: "77,5",
-        playerId: "8483515",
-        p1: { name: "Reg", selection: "OVER ▲" },
-        p2: { name: "Ben", selection: "UNDER ▼" }
-      },
-      {
-        id: "bet-7",
-        playerName: "Matvei Michkov",
-        stake: 5,
-        type: "OU",
-        target: 64.5,
-        targetDisplay: "64,5",
-        playerId: "8484387",
-        p1: { name: "Sim", selection: "OVER ▲" },
-        p2: { name: "Ben", selection: "UNDER ▼" }
-      },
-      {
-        id: "bet-8",
-        playerName: "Alexis Lafrenière",
-        stake: 5,
-        type: "OU",
-        target: 62.5,
-        targetDisplay: "62,5",
-        playerId: "8482109",
-        p1: { name: "Ben", selection: "OVER ▲" },
-        p2: { name: "Phil", selection: "UNDER ▼" }
-      },
-      {
-        id: "bet-9",
-        stake: 10,
-        type: "H2H",
-        p1: { name: "Math", player: "Jack Hughes", playerId: "8481559" },
-        p2: { name: "Gab", player: "Auston Matthews", playerId: "8479318" }
-      },
-      {
-        id: "bet-10",
-        stake: 5,
-        type: "H2H",
-        p1: { name: "Phil", player: "J.T. Miller", playerId: "8476468" },
-        p2: { name: "Sim", player: "Kirill Marchenko", playerId: "8480893" }
-      },
-      {
-        id: "bet-11",
-        stake: 5,
-        type: "H2H",
-        p1: { name: "Will", player: "Otto Stenberg", playerId: "8484230" },
-        p2: { name: "Reg", player: "Gavin McKenna", playerId: "8486067" }
-      },
-      {
-        id: "bet-12",
-        stake: 5,
-        type: "H2H",
-        category: "Victoires",
-        unit: "v.",
-        p1: { name: "Math", player: "Lukas Dostal", playerId: "8480843" },
-        p2: { name: "Ben", player: "Igor Shesterkin", playerId: "8478048" }
-      },
-      {
-        id: "bet-14",
-        stake: 5,
-        type: "H2H",
-        p1: { name: "Ben", player: "Ryan O'Reilly", playerId: "8475158" },
-        p2: { name: "Will", player: "Bryan Rust", playerId: "8475810" }
-      },
-      {
-        id: "bet-15",
-        stake: 5,
-        type: "H2H",
-        p1: { name: "Sim", player: "Filip Hronek", playerId: "8479425" },
-        p2: { name: "Math", player: "Cole Hutson", playerId: "8484873" }
-      },
-      {
-        id: "bet-holloway-snuggerud",
-        stake: 5,
-        type: "H2H",
-        p1: { name: "Ben", player: "Dylan Holloway", playerId: "8482077" },
-        p2: { name: "Sim", player: "Jimmy Snuggerud", playerId: "8483516" }
-      },
-      {
-        id: "bet-16",
-        stake: 5,
-        type: "H2H",
-        p1: { name: "Sim", player: "Mikhail Sergachev", playerId: "8479410" },
-        p2: { name: "Will", player: "Bowen Byram", playerId: "8481524" }
-      },
-      {
-        id: "bet-17",
-        playerName: "Jason Robertson",
-        stake: 5,
-        type: "OU",
-        target: 94.5,
-        targetDisplay: "94,5",
-        playerId: "8480027",
-        p1: { name: "Phil", selection: "OVER ▲" },
-        p2: { name: "Will", selection: "UNDER ▼" }
-      },
-      {
-        id: "bet-18",
-        playerName: "Sebastian Aho",
-        stake: 5,
-        type: "OU",
-        target: 83.5,
-        targetDisplay: "83,5",
-        playerId: "8478427",
-        p1: { name: "Phil", selection: "OVER ▲" },
-        p2: { name: "Math", selection: "UNDER ▼" }
-      },
-      {
-        id: "bet-19",
-        title: "Canadien vs Panthers - Saison",
-        stake: 5,
-        type: "H2H",
-        category: "Points",
-        unit: "pts",
-        p1: { name: "Phil", player: "Canadien", playerId: "MTL", logo: "https://a.espncdn.com/i/teamlogos/nhl/500/mtl.png" },
-        p2: { name: "Will", player: "Panthers", playerId: "FLA", logo: "https://a.espncdn.com/i/teamlogos/nhl/500/fla.png" }
-      },
-      {
-        id: "bet-20",
-        title: "Canadien vs Panthers - Playoff",
-        stake: 5,
-        type: "H2H",
-        category: "Playoff",
-        unit: "Ronde",
-        p1: { name: "Phil", player: "Canadien", playerId: "MTL_PLAYOFF", logo: "https://a.espncdn.com/i/teamlogos/nhl/500/mtl.png" },
-        p2: { name: "Will", player: "Panthers", playerId: "FLA_PLAYOFF", logo: "https://a.espncdn.com/i/teamlogos/nhl/500/fla.png" }
-      },
-      {
-        id: "bet-13",
-        title: "Round 5 Fight",
-        stakePerPerson: 5,
-        type: "MULTI",
-        participants: [
-          { name: "Phil", player: "Tim Stutzle", playerId: "8482116" },
-          { name: "Reg", player: "Artemi Panarin", playerId: "8478550" },
-          { name: "Math", player: "Matthew Tkachuk", playerId: "8479314" },
-          { name: "Will", player: "Leo Carlsson", playerId: "8484153" },
-          { name: "Ben", player: "Brady Tkachuk", playerId: "8480801" },
-          { name: "Sim", player: "Cutter Gauthier", playerId: "8483445" },
-          { name: "Gab", player: "Aleksander Barkov", playerId: "8477493" }
-        ]
-      }
-    ];
-
-    const playerStats = {};
-    let currentFilter = 'Tous';
-
-    function getPlayerStat(pid) {
-      const st = playerStats[pid];
-      if (!st) return { points: 0, gp: 0, position: "F", history: [] };
-      return {
-        points: (typeof st.points === 'number' && !isNaN(st.points)) ? st.points : 0,
-        gp: (typeof st.gp === 'number' && !isNaN(st.gp)) ? st.gp : 0,
-        position: st.position || "F",
-        history: st.history || []
-      };
-    }
-
-    function getAdvancedProjectionText(st) {
-      if (!st || isNaN(st.gp) || st.gp < 10) return "";
-      const gp = st.gp;
-      const pts = st.points;
-      const pos = st.position;
-
-      let baselinePpg = (pos === "D") ? (35 / 82) : (60 / 82);
-
-      if (st.history && st.history.length > 0) {
-        let totalHistPts = 0;
-        let totalHistGp = 0;
-        st.history.forEach(season => {
-          totalHistPts += (season.points || 0);
-          totalHistGp += (season.gamesPlayed || 0);
+        const container = document.getElementById('pool-list');
+        poolData.forEach((participant, index) => {
+            const card = document.createElement('div');
+            card.className = 'card';
+            card.innerHTML = `
+                <div class="rank">#${index + 1}</div>
+                <div class="name">${participant.name}</div>
+                <div class="stats">
+                    <div class="stat-box"><span>Att</span><span class="stat-value">${participant.att}</span></div>
+                    <div class="stat-box"><span>Def</span><span class="stat-value">${participant.def}</span></div>
+                    <div class="stat-box"><span>Goaler</span><span class="stat-value">${participant.goaler}</span></div>
+                    <div class="stat-box"><span>Equipe</span><span class="stat-value">${participant.equipe}</span></div>
+                </div>
+                <div class="total">${participant.total} pts</div>
+            `;
+            container.appendChild(card);
         });
-        if (totalHistGp > 0) {
-          baselinePpg = totalHistPts / totalHistGp;
-        }
-      }
-
-      let currentPpg = pts / gp;
-      let weightCurrent = 0;
-      if (gp < 30) weightCurrent = 0.50;
-      else if (gp < 50) weightCurrent = 0.70;
-      else weightCurrent = 0.90;
-
-      const blendedPpg = (currentPpg * weightCurrent) + (baselinePpg * (1 - weightCurrent));
-      const projected = Math.round(blendedPpg * 82);
-      
-      return `Proj: ~${projected} pts`;
-    }
-
-    function getLastName(fullName) {
-      if (!fullName) return "";
-      if (fullName === "Canadien" || fullName === "Panthers") return fullName;
-      const parts = fullName.trim().split(" ");
-      return parts[parts.length - 1];
-    }
-
-    function getShortName(fullName) {
-      if (!fullName) return "";
-      if (fullName === "Canadien" || fullName === "Panthers") return fullName;
-      const parts = fullName.trim().split(" ");
-      if (parts.length === 1) return parts[0];
-      return `${parts[0].charAt(0)}. ${parts.slice(1).join(" ")}`;
-    }
-
-    async function fetchLiveStats() {
-      const btn = document.getElementById("refresh-btn");
-      if (btn) btn.innerText = "⏳ Chargement...";
-      
-      try {
-        const res = await fetch(`./stats.json?t=${Date.now()}`);
-        if (res.ok) {
-          const data = await res.json();
-          Object.assign(playerStats, data);
-        }
-      } catch (err) {
-        console.error("Erreur lors de la lecture des statistiques :", err);
-      } finally {
-        renderApp();
-        if (btn) btn.innerText = "🔄 Actualiser";
-      }
-    }
-
-    function getAllParticipants() {
-      const names = new Set();
-      bets.forEach(bet => {
-        if (bet.type === 'H2H' || bet.type === 'OU') {
-          if (bet.p1 && bet.p1.name) names.add(bet.p1.name);
-          if (bet.p2 && bet.p2.name) names.add(bet.p2.name);
-        } else if (bet.type === 'MULTI') {
-          bet.participants.forEach(p => names.add(p.name));
-        }
-      });
-      const sortedNames = Array.from(names).sort();
-      if (!sortedNames.includes('Alain')) sortedNames.push('Alain');
-      return sortedNames;
-    }
-
-    function setFilter(name) {
-      currentFilter = name;
-      renderApp();
-    }
-
-    function renderApp() {
-      const userBalances = {};
-
-      bets.forEach(b => {
-        if (b.p1 && b.p1.name) userBalances[b.p1.name] = 0;
-        if (b.p2 && b.p2.name) userBalances[b.p2.name] = 0;
-        if (b.participants) {
-          b.participants.forEach(p => userBalances[p.name] = 0);
-        }
-      });
-
-      userBalances['Alain'] = 'INF';
-
-      const betsListEl = document.getElementById("bets-list");
-      betsListEl.innerHTML = "";
-      
-      const filtersContainer = document.getElementById("filters-container");
-      filtersContainer.innerHTML = "";
-      
-      const participants = ['Tous', ...getAllParticipants()];
-      participants.forEach(name => {
-        const btn = document.createElement('button');
-        btn.className = `filter-btn ${currentFilter === name ? 'active' : ''}`;
-        btn.innerText = name;
-        btn.onclick = () => setFilter(name);
-        filtersContainer.appendChild(btn);
-      });
-
-      if (currentFilter === 'Alain') {
-        betsListEl.innerHTML = `
-          <div class="error-alain-container">
-            <div class="error-alain-title">ERREUR 42069</div>
-            <div class="error-alain-subtitle">J'aime trop trop Sherbrooke pour faire des bets avec vous</div>
-          </div>
-        `;
-      } else {
-        bets.forEach(bet => {
-          let p1Winning = false;
-          let p2Winning = false;
-          let maxPointsMulti = -1;
-          let statsListMulti = [];
-          let totalPotMulti = 0;
-
-          if (bet.type === "H2H") {
-            const st1 = getPlayerStat(bet.p1.playerId);
-            const st2 = getPlayerStat(bet.p2.playerId);
-            p1Winning = st1.points > st2.points;
-            p2Winning = st2.points > st1.points;
-
-            if (p1Winning) { userBalances[bet.p1.name] += bet.stake; userBalances[bet.p2.name] -= bet.stake; }
-            else if (p2Winning) { userBalances[bet.p2.name] += bet.stake; userBalances[bet.p1.name] -= bet.stake; }
-          } else if (bet.type === "OU") {
-            const st = getPlayerStat(bet.playerId);
-            p1Winning = st.points > bet.target;
-            p2Winning = st.points <= bet.target;
-
-            if (p1Winning) { userBalances[bet.p1.name] += bet.stake; userBalances[bet.p2.name] -= bet.stake; }
-            else if (p2Winning) { userBalances[bet.p2.name] += bet.stake; userBalances[bet.p1.name] -= bet.stake; }
-          } else if (bet.type === "MULTI") {
-            statsListMulti = bet.participants.map(p => {
-              const st = getPlayerStat(p.playerId);
-              if (st.points > maxPointsMulti) {
-                maxPointsMulti = st.points;
-              }
-              return { ...p, stats: st };
-            });
-
-            const winners = statsListMulti.filter(item => item.stats.points === maxPointsMulti && maxPointsMulti > 0);
-            totalPotMulti = bet.stakePerPerson * bet.participants.length;
-            
-            bet.participants.forEach(p => {
-              const isWinner = winners.some(w => w.name === p.name);
-              if (isWinner && winners.length === 1) {
-                userBalances[p.name] += (totalPotMulti - bet.stakePerPerson);
-              } else if (isWinner && winners.length > 1) {
-                // Split Pot
-              } else {
-                userBalances[p.name] -= bet.stakePerPerson;
-              }
-            });
-          }
-
-          if (currentFilter !== 'Tous') {
-            let involved = false;
-            if (bet.type === 'H2H' || bet.type === 'OU') {
-              if (bet.p1.name === currentFilter || bet.p2.name === currentFilter) involved = true;
-            } else if (bet.type === 'MULTI') {
-              if (bet.participants.some(p => p.name === currentFilter)) involved = true;
-            }
-            if (!involved) return;
-          }
-
-          let cardHTML = "";
-
-          if (bet.type === "H2H") {
-            const st1 = getPlayerStat(bet.p1.playerId);
-            const st2 = getPlayerStat(bet.p2.playerId);
-            const p1LastName = getLastName(bet.p1.player);
-            const p2LastName = getLastName(bet.p2.player);
-            const categoryLabel = bet.category || "Points";
-            const unitLabel = bet.unit || "pts";
-            const betTitle = bet.title || `${p1LastName} vs ${p2LastName} - ${categoryLabel}`;
-            const p1StatText = unitLabel === "Ronde" ? `Ronde ${st1.points}` : `${st1.points} <span style="font-size: 0.9rem; font-weight: 700;">${unitLabel}</span>`;
-            const p2StatText = unitLabel === "Ronde" ? `Ronde ${st2.points}` : `${st2.points} <span style="font-size: 0.9rem; font-weight: 700;">${unitLabel}</span>`;
-
-            const showProj1 = bet.category !== "Playoff" && bet.category !== "Victoires" && st1.gp >= 10;
-            const showProj2 = bet.category !== "Playoff" && bet.category !== "Victoires" && st2.gp >= 10;
-
-            cardHTML = `
-              <div class="bet-card">
-                <div class="bet-header">
-                  <span class="bet-title">${betTitle}</span>
-                  <span class="bet-stake">${bet.stake} $</span>
-                </div>
-                <div class="bet-body">
-                  <div class="side-box side-blue ${p1Winning ? 'winning' : ''}">
-                    ${p1Winning ? '<div class="win-badge">WIN</div>' : ''}
-                    <div class="participant-name">${bet.p1.name}</div>
-                    ${bet.p1.logo ? `<img src="${bet.p1.logo}" alt="Logo" class="team-logo-img" />` : ''}
-                    <div class="selection-text">${getShortName(bet.p1.player)}</div>
-                    <div class="stat-number">${p1StatText}</div>
-                    <div class="stat-detail">${st1.gp} GP</div>
-                    ${showProj1 ? `<div class="stat-projection">${getAdvancedProjectionText(st1)}</div>` : ''}
-                  </div>
-                  <div class="vs-divider">VS</div>
-                  <div class="side-box side-red ${p2Winning ? 'winning' : ''}">
-                    ${p2Winning ? '<div class="win-badge">WIN</div>' : ''}
-                    <div class="participant-name">${bet.p2.name}</div>
-                    ${bet.p2.logo ? `<img src="${bet.p2.logo}" alt="Logo" class="team-logo-img" />` : ''}
-                    <div class="selection-text">${getShortName(bet.p2.player)}</div>
-                    <div class="stat-number">${p2StatText}</div>
-                    <div class="stat-detail">${st2.gp} GP</div>
-                    ${showProj2 ? `<div class="stat-projection">${getAdvancedProjectionText(st2)}</div>` : ''}
-                  </div>
-                </div>
-              </div>
-            `;
-          } else if (bet.type === "OU") {
-            const st = getPlayerStat(bet.playerId);
-            const betTitle = `${bet.playerName} - Over/Under ${bet.targetDisplay}pts`;
-
-            const isOver = st.points > bet.target;
-            const targetMarkerPercent = 90; 
-            let fillPercent = 0;
-
-            if (isOver) {
-              fillPercent = 100;
-            } else {
-              fillPercent = Math.min((st.points / bet.target) * targetMarkerPercent, targetMarkerPercent);
-            }
-
-            const fillClass = isOver ? 'over-completed' : 'in-progress';
-            const showProj = st.gp >= 10;
-
-            cardHTML = `
-              <div class="bet-card">
-                <div class="bet-header">
-                  <span class="bet-title">${betTitle}</span>
-                  <span class="bet-stake">${bet.stake} $</span>
-                </div>
-                <div class="bet-body">
-                  <div class="side-box side-blue ${p1Winning ? 'winning' : ''}">
-                    ${p1Winning ? '<div class="win-badge">WIN</div>' : ''}
-                    <div class="participant-name">${bet.p1.name}</div>
-                    <div class="selection-text">${bet.p1.selection}</div>
-                    <div class="stat-number-target">${bet.targetDisplay} <span style="font-size: 0.8rem; font-weight: 700;">pts</span></div>
-                  </div>
-                  <div class="vs-divider">
-                    <div class="stat-number" style="font-size:1.4rem;">${st.points} <span style="font-size: 0.9rem; font-weight: 700;">pts</span></div>
-                    <div class="stat-detail">${st.gp} GP</div>
-                    ${showProj ? `<div class="stat-projection">${getAdvancedProjectionText(st)}</div>` : ''}
-                  </div>
-                  <div class="side-box side-red ${p2Winning ? 'winning' : ''}">
-                    ${p2Winning ? '<div class="win-badge">WIN</div>' : ''}
-                    <div class="participant-name">${bet.p2.name}</div>
-                    <div class="selection-text">${bet.p2.selection}</div>
-                    <div class="stat-number-target">${bet.targetDisplay} <span style="font-size: 0.8rem; font-weight: 700;">pts</span></div>
-                  </div>
-                </div>
-
-                <!-- Barre de progression Over/Under -->
-                <div class="progress-container">
-                  <div class="progress-bar-wrapper">
-                    <div class="progress-bar-fill ${fillClass}" style="width: ${fillPercent}%;"></div>
-                    <div class="progress-marker" style="left: ${targetMarkerPercent}%;">
-                      <div class="progress-marker-label">${bet.targetDisplay}</div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            `;
-          } else if (bet.type === "MULTI") {
-            const winners = statsListMulti.filter(item => item.stats.points === maxPointsMulti && maxPointsMulti > 0);
-            const isSplit = winners.length > 1;
-            let winnerPlayerIdMulti = null;
-            let boxesHTML = "";
-
-            if (!isSplit && winners.length === 1) {
-              winnerPlayerIdMulti = winners[0].playerId;
-            }
-
-            statsListMulti.forEach(item => {
-              const isWinner = (item.stats.points === maxPointsMulti && maxPointsMulti > 0);
-              const isThisWinnerSingle = isWinner && !isSplit;
-              const isThisWinnerSplit = isWinner && isSplit;
-
-              let boxClass = "";
-              let badgeHTML = "";
-
-              if (isThisWinnerSingle) {
-                boxClass = "winning";
-                badgeHTML = '<div class="win-badge">WIN</div>';
-              } else if (isThisWinnerSplit) {
-                boxClass = "split-winning";
-                badgeHTML = '<div class="split-badge">SPLIT POT</div>';
-              }
-
-              const showProj = item.stats.gp >= 10;
-              boxesHTML += `
-                <div class="side-box ${boxClass}" style="min-height: 95px; padding: 10px 6px;">
-                  ${badgeHTML}
-                  <div class="participant-name" style="font-size: 0.95rem;">${item.name}</div>
-                  <div class="selection-text" style="font-size: 0.68rem; margin-bottom: 4px;">${getShortName(item.player)}</div>
-                  <div class="stat-number" style="font-size: 1.3rem;">${item.stats.points} <span style="font-size: 0.75rem;">pts</span></div>
-                  <div class="stat-detail" style="font-size: 0.65rem;">${item.stats.gp} GP</div>
-                  ${showProj ? `<div class="stat-projection" style="font-size: 0.58rem;">${getAdvancedProjectionText(item.stats)}</div>` : ''}
-                </div>
-              `;
-            });
-
-            // Si égalité (Split), on affiche l'émoji 💰, sinon on affiche la photo du meneur unique
-            if (isSplit) {
-              boxesHTML += `
-                <div class="side-box" style="min-height: 95px; padding: 0; border: none; background: transparent; box-shadow: none; display: flex; align-items: center; justify-content: center; overflow: hidden;">
-                  <span style="font-size: 3.2rem; line-height: 1; filter: drop-shadow(0px 2px 4px rgba(0,0,0,0.15));">💰</span>
-                </div>
-              `;
-            } else if (winnerPlayerIdMulti) {
-              boxesHTML += `
-                <div class="side-box" style="min-height: 95px; padding: 0; border: none; background: transparent; box-shadow: none; display: flex; align-items: center; justify-content: center; overflow: hidden;">
-                  <img src="https://assets.nhle.com/mugs/nhl/latest/${winnerPlayerIdMulti}.png" alt="Meneur actuel" style="height: 95px; width: auto; object-fit: contain; filter: drop-shadow(0px 2px 4px rgba(0,0,0,0.15));" />
-                </div>
-              `;
-            }
-
-            cardHTML = `
-              <div class="bet-card">
-                <div class="bet-header">
-                  <span class="bet-title">${bet.title}</span>
-                  <span class="bet-stake">${totalPotMulti} $ (Pot)</span>
-                </div>
-                <div class="multi-grid">
-                  ${boxesHTML}
-                </div>
-              </div>
-            `;
-          }
-
-          betsListEl.innerHTML += cardHTML;
-        });
-      }
-
-      const leaderboardEl = document.getElementById("leaderboard");
-      leaderboardEl.innerHTML = "";
-      Object.keys(userBalances).forEach(user => {
-        const bal = userBalances[user];
-        let colorClass = "";
-        let formattedBal = "";
-
-        if (bal === 'INF') {
-          colorClass = "infinite-blue";
-          formattedBal = "∞$";
-        } else {
-          colorClass = bal > 0 ? "positive" : (bal < 0 ? "negative" : "neutral");
-          formattedBal = bal > 0 ? `+${bal}$` : `${bal}$`;
-        }
-
-        const avatarFileName = user.toLowerCase();
-
-        leaderboardEl.innerHTML += `
-          <div class="user-pill">
-            <img src="photos/${avatarFileName}.png" alt="${user}" class="user-avatar" onerror="this.style.display='none'" />
-            <div class="user-info-top">
-              <div class="user-name">${user}</div>
-              <div class="user-balance ${colorClass}">${formattedBal}</div>
-            </div>
-          </div>
-        `;
-      });
-    }
-
-    fetchLiveStats();
-  </script>
+    </script>
 </body>
 </html>
