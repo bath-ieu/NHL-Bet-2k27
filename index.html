@@ -109,7 +109,17 @@
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(115px, 1fr));
       gap: 10px;
+      margin-bottom: 10px;
     }
+
+    .last-updated-text {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      text-align: right;
+      font-weight: 600;
+      padding-right: 4px;
+    }
+
     .user-pill {
       background: rgba(235, 242, 247, 0.85);
       border-radius: 12px;
@@ -481,6 +491,7 @@
   <div class="leaderboard-card">
     <div class="leaderboard-title">Bilan global (Gains / Pertes)</div>
     <div class="leaderboard-grid" id="leaderboard"></div>
+    <div class="last-updated-text" id="last-updated">Dernière mise à jour : Chargement...</div>
   </div>
 
   <div class="section-header">
@@ -710,6 +721,7 @@
 
     const playerStats = {};
     let currentFilter = 'Tous';
+    let lastStatsUpdate = null;
 
     function getPlayerStat(pid) {
       const st = playerStats[pid];
@@ -776,11 +788,20 @@
       try {
         const res = await fetch(`./stats.json?t=${Date.now()}`);
         if (res.ok) {
+          // Récupérer l'heure de modification du fichier via les en-têtes ou l'objet json si disponible
+          const lastModified = res.headers.get("last-modified");
+          if (lastModified) {
+            lastStatsUpdate = new Date(lastModified);
+          } else {
+            lastStatsUpdate = new Date();
+          }
+
           const data = await res.json();
           Object.assign(playerStats, data);
         }
       } catch (err) {
         console.error("Erreur lors de la lecture des statistiques :", err);
+        lastStatsUpdate = new Date();
       } finally {
         renderApp();
         if (btn) btn.innerText = "🔄 Actualiser";
@@ -1094,6 +1115,15 @@
           </div>
         `;
       });
+
+      // Mettre à jour l'affichage de la date et l'heure
+      const lastUpdatedEl = document.getElementById("last-updated");
+      if (lastStatsUpdate) {
+        const options = { year: 'numeric', month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit' };
+        lastUpdatedEl.innerText = `Dernière mise à jour : ${lastStatsUpdate.toLocaleDateString('fr-FR', options)}`;
+      } else {
+        lastUpdatedEl.innerText = "Dernière mise à jour : Inconnue";
+      }
     }
 
     fetchLiveStats();
