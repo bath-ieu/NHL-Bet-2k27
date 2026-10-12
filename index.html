@@ -92,7 +92,7 @@
       backdrop-filter: blur(8px);
       border-radius: 18px;
       padding: 16px;
-      margin-bottom: 20px;
+      margin-bottom: 8px;
       box-shadow: 0 4px 12px rgba(0, 0, 0, 0.04);
       border: 1px solid var(--border-color);
     }
@@ -109,15 +109,14 @@
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(115px, 1fr));
       gap: 10px;
-      margin-bottom: 10px;
     }
 
     .last-updated-text {
-      font-size: 0.75rem;
+      font-size: 0.72rem;
       color: var(--text-muted);
-      text-align: right;
+      text-align: center;
       font-weight: 600;
-      padding-right: 4px;
+      margin-bottom: 20px;
     }
 
     .user-pill {
@@ -491,8 +490,8 @@
   <div class="leaderboard-card">
     <div class="leaderboard-title">Bilan global (Gains / Pertes)</div>
     <div class="leaderboard-grid" id="leaderboard"></div>
-    <div class="last-updated-text" id="last-updated">Dernière mise à jour : Chargement...</div>
   </div>
+  <div class="last-updated-text" id="last-updated">Dernière mise à jour : Chargement...</div>
 
   <div class="section-header">
     <span class="section-label">Les Paris</span>
@@ -788,7 +787,6 @@
       try {
         const res = await fetch(`./stats.json?t=${Date.now()}`);
         if (res.ok) {
-          // Récupérer l'heure de modification du fichier via les en-têtes ou l'objet json si disponible
           const lastModified = res.headers.get("last-modified");
           if (lastModified) {
             lastStatsUpdate = new Date(lastModified);
@@ -1116,7 +1114,6 @@
         `;
       });
 
-      // Mettre à jour l'affichage de la date et l'heure
       const lastUpdatedEl = document.getElementById("last-updated");
       if (lastStatsUpdate) {
         const options = { year: 'numeric', month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit' };
