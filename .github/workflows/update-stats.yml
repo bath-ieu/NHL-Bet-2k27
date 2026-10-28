@@ -1,4 +1,4 @@
-name: Auto Update NHL Stats
+Name: Auto Update NHL Stats
 
 on:
   schedule:
@@ -36,7 +36,7 @@ jobs:
           stats = {}
           CURRENT_SEASON = 20262027
 
-          # 1. Fetch Statistiques des Joueurs (Saison 2026-27 uniquement)
+          # 1. Fetch Statistiques des Joueurs et Historique
           for pid in player_ids:
               url = f'https://api-web.nhle.com/v1/player/{pid}/landing'
               req = urllib.request.Request(url, headers={'User-Agent': 'Mozilla/5.0'})
@@ -44,6 +44,17 @@ jobs:
                   with urllib.request.urlopen(req) as response:
                       data = json.loads(response.read().decode())
                       pts, gp = 0, 0
+                      history = []
+                      position = data.get('position', 'F')
+
+                      # Récupération de l'historique des saisons régulières
+                      for s in data.get('seasonTotals', []):
+                          if s.get('gameTypeId') == 2:
+                              s_pts = s.get('points', s.get('wins', 0)) or 0
+                              s_gp = s.get('gamesPlayed', 0) or 0
+                              s_season = s.get('season')
+                              if s_gp > 0:
+                                  history.append({'season': s_season, 'points': s_pts, 'gamesPlayed': s_gp})
 
                       # Recherche stricte dans la saison 2026-27
                       reg_2026 = [s for s in data.get('seasonTotals', []) if s.get('gameTypeId') == 2 and s.get('season') == CURRENT_SEASON]
@@ -58,15 +69,11 @@ jobs:
                               sub = reg_feat['subSeason']
                               pts = sub.get('points', sub.get('wins', 0)) or 0
                               gp = sub.get('gamesPlayed', 0) or 0
-                          else:
-                              pts, gp = 0, 0
-                      else:
-                          pts, gp = 0, 0
 
-                      stats[str(pid)] = {'points': pts, 'gp': gp}
+                      stats[str(pid)] = {'points': pts, 'gp': gp, 'position': position, 'history': history}
               except Exception as e:
                   print(f'Error for {pid}: {e}')
-                  stats[str(pid)] = {'points': 0, 'gp': 0}
+                  stats[str(pid)] = {'points': 0, 'gp': 0, 'position': 'F', 'history': []}
 
           # 2. Fetch Classement des Équipes
           try:
@@ -79,16 +86,18 @@ jobs:
                       if abbrev in ['MTL', 'FLA']:
                           stats[abbrev] = {
                               'points': team_info.get('points', 0),
-                              'gp': team_info.get('gamesPlayed', 0)
+                              'gp': team_info.get('gamesPlayed', 0),
+                              'position': 'TEAM',
+                              'history': []
                           }
           except Exception as e:
               print(f'Error fetching team standings: {e}')
-              stats['MTL'] = {'points': 0, 'gp': 0}
-              stats['FLA'] = {'points': 0, 'gp': 0}
+              stats['MTL'] = {'points': 0, 'gp': 0, 'position': 'TEAM', 'history': []}
+              stats['FLA'] = {'points': 0, 'gp': 0, 'position': 'TEAM', 'history': []}
 
           # 3. Initialisation Séries Éliminatoires
-          stats['MTL_PLAYOFF'] = {'points': 0, 'gp': 0}
-          stats['FLA_PLAYOFF'] = {'points': 0, 'gp': 0}
+          stats['MTL_PLAYOFF'] = {'points': 0, 'gp': 0, 'position': 'TEAM', 'history': []}
+          stats['FLA_PLAYOFF'] = {'points': 0, 'gp': 0, 'position': 'TEAM', 'history': []}
 
           with open('stats.json', 'w') as f:
               json.dump(stats, f, indent=2)
@@ -99,4 +108,4 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
           git add stats.json
-          git diff --quiet && git diff --staged --quiet || (git commit -m "Add Newhook and Holloway vs Snuggerud bets" && git push)
+          git diff --quiet && git diff --staged --quiet || (git commit -m "Update NHL stats and historical data" && git push)
