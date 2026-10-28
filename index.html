@@ -734,7 +734,7 @@
     }
 
     function getAdvancedProjectionText(st) {
-      if (!st || isNaN(st.gp) || st.gp < 10) return "";
+      if (!st || isNaN(st.gp) || st.gp < 3) return "";
       const gp = st.gp;
       const pts = st.points;
       const pos = st.position;
@@ -742,22 +742,27 @@
       let baselinePpg = (pos === "D") ? (35 / 82) : (60 / 82);
 
       if (st.history && st.history.length > 0) {
-        let totalHistPts = 0;
-        let totalHistGp = 0;
-        st.history.forEach(season => {
-          totalHistPts += (season.points || 0);
-          totalHistGp += (season.gamesPlayed || 0);
+        let weightedPtsSum = 0;
+        let weightedGpSum = 0;
+        
+        st.history.sort((a, b) => b.season - a.season);
+        
+        st.history.forEach((seasonObj, index) => {
+          let weight = Math.pow(0.8, index);
+          weightedPtsSum += (seasonObj.points / seasonObj.gamesPlayed) * seasonObj.gamesPlayed * weight;
+          weightedGpSum += seasonObj.gamesPlayed * weight;
         });
-        if (totalHistGp > 0) {
-          baselinePpg = totalHistPts / totalHistGp;
+
+        if (weightedGpSum > 0) {
+          baselinePpg = weightedPtsSum / weightedGpSum;
         }
       }
 
       let currentPpg = pts / gp;
       let weightCurrent = 0;
-      if (gp < 30) weightCurrent = 0.50;
-      else if (gp < 50) weightCurrent = 0.70;
-      else weightCurrent = 0.90;
+      if (gp < 15) weightCurrent = 0.30;
+      else if (gp < 40) weightCurrent = 0.60;
+      else weightCurrent = 0.85;
 
       const blendedPpg = (currentPpg * weightCurrent) + (baselinePpg * (1 - weightCurrent));
       const projected = Math.round(blendedPpg * 82);
@@ -931,8 +936,8 @@
             const p1StatText = unitLabel === "Ronde" ? `Ronde ${st1.points}` : `${st1.points} <span style="font-size: 0.9rem; font-weight: 700;">${unitLabel}</span>`;
             const p2StatText = unitLabel === "Ronde" ? `Ronde ${st2.points}` : `${st2.points} <span style="font-size: 0.9rem; font-weight: 700;">${unitLabel}</span>`;
 
-            const showProj1 = bet.category !== "Playoff" && bet.category !== "Victoires" && st1.gp >= 10;
-            const showProj2 = bet.category !== "Playoff" && bet.category !== "Victoires" && st2.gp >= 10;
+            const showProj1 = bet.category !== "Playoff" && bet.category !== "Victoires" && st1.gp >= 3;
+            const showProj2 = bet.category !== "Playoff" && bet.category !== "Victoires" && st2.gp >= 3;
 
             cardHTML = `
               <div class="bet-card">
@@ -978,7 +983,7 @@
             }
 
             const fillClass = isOver ? 'over-completed' : 'in-progress';
-            const showProj = st.gp >= 10;
+            const showProj = st.gp >= 3;
 
             cardHTML = `
               <div class="bet-card">
@@ -1042,7 +1047,7 @@
                 badgeHTML = '<div class="split-badge">SPLIT POT</div>';
               }
 
-              const showProj = item.stats.gp >= 10;
+              const showProj = item.stats.gp >= 3;
               boxesHTML += `
                 <div class="side-box ${boxClass}" style="min-height: 95px; padding: 10px 6px;">
                   ${badgeHTML}
