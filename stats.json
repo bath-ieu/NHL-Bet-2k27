@@ -1,158 +1,4846 @@
 {
   "8482671": {
     "points": 11,
-    "gp": 12
+    "gp": 14,
+    "position": "D",
+    "history": [
+      {
+        "season": 20172018,
+        "points": 28,
+        "gamesPlayed": 33
+      },
+      {
+        "season": 20172018,
+        "points": 3,
+        "gamesPlayed": 5
+      },
+      {
+        "season": 20172018,
+        "points": 2,
+        "gamesPlayed": 4
+      },
+      {
+        "season": 20182019,
+        "points": 25,
+        "gamesPlayed": 58
+      },
+      {
+        "season": 20182019,
+        "points": 0,
+        "gamesPlayed": 5
+      },
+      {
+        "season": 20192020,
+        "points": 40,
+        "gamesPlayed": 45
+      },
+      {
+        "season": 20202021,
+        "points": 16,
+        "gamesPlayed": 26
+      },
+      {
+        "season": 20202021,
+        "points": 3,
+        "gamesPlayed": 10
+      },
+      {
+        "season": 20212022,
+        "points": 3,
+        "gamesPlayed": 8
+      },
+      {
+        "season": 20212022,
+        "points": 32,
+        "gamesPlayed": 33
+      },
+      {
+        "season": 20212022,
+        "points": 1,
+        "gamesPlayed": 5
+      },
+      {
+        "season": 20222023,
+        "points": 35,
+        "gamesPlayed": 79
+      },
+      {
+        "season": 20232024,
+        "points": 33,
+        "gamesPlayed": 76
+      },
+      {
+        "season": 20232024,
+        "points": 6,
+        "gamesPlayed": 10
+      },
+      {
+        "season": 20232024,
+        "points": 2,
+        "gamesPlayed": 2
+      },
+      {
+        "season": 20242025,
+        "points": 40,
+        "gamesPlayed": 79
+      },
+      {
+        "season": 20252026,
+        "points": 29,
+        "gamesPlayed": 81
+      },
+      {
+        "season": 20262027,
+        "points": 11,
+        "gamesPlayed": 14
+      }
+    ]
   },
   "8482142": {
-    "points": 3,
-    "gp": 14
+    "points": 6,
+    "gp": 16,
+    "position": "D",
+    "history": [
+      {
+        "season": 20112012,
+        "points": 2,
+        "gamesPlayed": 6
+      },
+      {
+        "season": 20162017,
+        "points": 4,
+        "gamesPlayed": 9
+      },
+      {
+        "season": 20172018,
+        "points": 0,
+        "gamesPlayed": 1
+      },
+      {
+        "season": 20172018,
+        "points": 0,
+        "gamesPlayed": 1
+      },
+      {
+        "season": 20172018,
+        "points": 50,
+        "gamesPlayed": 57
+      },
+      {
+        "season": 20172018,
+        "points": 1,
+        "gamesPlayed": 4
+      },
+      {
+        "season": 20172018,
+        "points": 23,
+        "gamesPlayed": 32
+      },
+      {
+        "season": 20182019,
+        "points": 40,
+        "gamesPlayed": 63
+      },
+      {
+        "season": 20182019,
+        "points": 4,
+        "gamesPlayed": 5
+      },
+      {
+        "season": 20182019,
+        "points": 2,
+        "gamesPlayed": 7
+      },
+      {
+        "season": 20192020,
+        "points": 5,
+        "gamesPlayed": 5
+      },
+      {
+        "season": 20192020,
+        "points": 47,
+        "gamesPlayed": 49
+      },
+      {
+        "season": 20192020,
+        "points": 3,
+        "gamesPlayed": 7
+      },
+      {
+        "season": 20202021,
+        "points": 8,
+        "gamesPlayed": 24
+      },
+      {
+        "season": 20202021,
+        "points": 2,
+        "gamesPlayed": 7
+      },
+      {
+        "season": 20202021,
+        "points": 10,
+        "gamesPlayed": 14
+      },
+      {
+        "season": 20212022,
+        "points": 32,
+        "gamesPlayed": 81
+      },
+      {
+        "season": 20222023,
+        "points": 0,
+        "gamesPlayed": 8
+      },
+      {
+        "season": 20232024,
+        "points": 5,
+        "gamesPlayed": 10
+      },
+      {
+        "season": 20232024,
+        "points": 5,
+        "gamesPlayed": 24
+      },
+      {
+        "season": 20242025,
+        "points": 20,
+        "gamesPlayed": 70
+      },
+      {
+        "season": 20252026,
+        "points": 32,
+        "gamesPlayed": 78
+      },
+      {
+        "season": 20262027,
+        "points": 6,
+        "gamesPlayed": 16
+      }
+    ]
   },
   "8477956": {
-    "points": 18,
-    "gp": 13
+    "points": 19,
+    "gp": 15,
+    "position": "R",
+    "history": [
+      {
+        "season": 20092010,
+        "points": 52,
+        "gamesPlayed": 30
+      },
+      {
+        "season": 20102011,
+        "points": 19,
+        "gamesPlayed": 16
+      },
+      {
+        "season": 20112012,
+        "points": 40,
+        "gamesPlayed": 17
+      },
+      {
+        "season": 20112012,
+        "points": 47,
+        "gamesPlayed": 31
+      },
+      {
+        "season": 20112012,
+        "points": 1,
+        "gamesPlayed": 3
+      },
+      {
+        "season": 20112012,
+        "points": 0,
+        "gamesPlayed": 2
+      },
+      {
+        "season": 20122013,
+        "points": 14,
+        "gamesPlayed": 7
+      },
+      {
+        "season": 20122013,
+        "points": 29,
+        "gamesPlayed": 36
+      },
+      {
+        "season": 20122013,
+        "points": 3,
+        "gamesPlayed": 16
+      },
+      {
+        "season": 20132014,
+        "points": 2,
+        "gamesPlayed": 1
+      },
+      {
+        "season": 20132014,
+        "points": 24,
+        "gamesPlayed": 36
+      },
+      {
+        "season": 20132014,
+        "points": 5,
+        "gamesPlayed": 7
+      },
+      {
+        "season": 20142015,
+        "points": 27,
+        "gamesPlayed": 46
+      },
+      {
+        "season": 20142015,
+        "points": 28,
+        "gamesPlayed": 25
+      },
+      {
+        "season": 20142015,
+        "points": 7,
+        "gamesPlayed": 5
+      },
+      {
+        "season": 20152016,
+        "points": 26,
+        "gamesPlayed": 51
+      },
+      {
+        "season": 20152016,
+        "points": 4,
+        "gamesPlayed": 3
+      },
+      {
+        "season": 20152016,
+        "points": 4,
+        "gamesPlayed": 4
+      },
+      {
+        "season": 20152016,
+        "points": 6,
+        "gamesPlayed": 8
+      },
+      {
+        "season": 20152016,
+        "points": 1,
+        "gamesPlayed": 2
+      },
+      {
+        "season": 20162017,
+        "points": 70,
+        "gamesPlayed": 75
+      },
+      {
+        "season": 20162017,
+        "points": 0,
+        "gamesPlayed": 3
+      },
+      {
+        "season": 20162017,
+        "points": 7,
+        "gamesPlayed": 8
+      },
+      {
+        "season": 20172018,
+        "points": 80,
+        "gamesPlayed": 82
+      },
+      {
+        "season": 20172018,
+        "points": 6,
+        "gamesPlayed": 5
+      },
+      {
+        "season": 20182019,
+        "points": 81,
+        "gamesPlayed": 66
+      },
+      {
+        "season": 20192020,
+        "points": 95,
+        "gamesPlayed": 70
+      },
+      {
+        "season": 20202021,
+        "points": 48,
+        "gamesPlayed": 48
+      },
+      {
+        "season": 20212022,
+        "points": 77,
+        "gamesPlayed": 72
+      },
+      {
+        "season": 20212022,
+        "points": 10,
+        "gamesPlayed": 7
+      },
+      {
+        "season": 20222023,
+        "points": 113,
+        "gamesPlayed": 82
+      },
+      {
+        "season": 20232024,
+        "points": 110,
+        "gamesPlayed": 82
+      },
+      {
+        "season": 20232024,
+        "points": 1,
+        "gamesPlayed": 4
+      },
+      {
+        "season": 20242025,
+        "points": 106,
+        "gamesPlayed": 82
+      },
+      {
+        "season": 20242025,
+        "points": 15,
+        "gamesPlayed": 8
+      },
+      {
+        "season": 20252026,
+        "points": 100,
+        "gamesPlayed": 77
+      },
+      {
+        "season": 20252026,
+        "points": 5,
+        "gamesPlayed": 5
+      },
+      {
+        "season": 20262027,
+        "points": 19,
+        "gamesPlayed": 15
+      }
+    ]
   },
   "8475184": {
-    "points": 4,
-    "gp": 12
+    "points": 7,
+    "gp": 14,
+    "position": "L",
+    "history": [
+      {
+        "season": 20052006,
+        "points": 15,
+        "gamesPlayed": 19
+      },
+      {
+        "season": 20062007,
+        "points": 41,
+        "gamesPlayed": 20
+      },
+      {
+        "season": 20072008,
+        "points": 41,
+        "gamesPlayed": 24
+      },
+      {
+        "season": 20082009,
+        "points": 56,
+        "gamesPlayed": 26
+      },
+      {
+        "season": 20082009,
+        "points": 6,
+        "gamesPlayed": 5
+      },
+      {
+        "season": 20092010,
+        "points": 23,
+        "gamesPlayed": 38
+      },
+      {
+        "season": 20092010,
+        "points": 7,
+        "gamesPlayed": 7
+      },
+      {
+        "season": 20092010,
+        "points": 2,
+        "gamesPlayed": 6
+      },
+      {
+        "season": 20102011,
+        "points": 24,
+        "gamesPlayed": 32
+      },
+      {
+        "season": 20102011,
+        "points": 6,
+        "gamesPlayed": 6
+      },
+      {
+        "season": 20102011,
+        "points": 3,
+        "gamesPlayed": 7
+      },
+      {
+        "season": 20112012,
+        "points": 45,
+        "gamesPlayed": 44
+      },
+      {
+        "season": 20122013,
+        "points": 3,
+        "gamesPlayed": 23
+      },
+      {
+        "season": 20122013,
+        "points": 23,
+        "gamesPlayed": 48
+      },
+      {
+        "season": 20132014,
+        "points": 37,
+        "gamesPlayed": 66
+      },
+      {
+        "season": 20132014,
+        "points": 4,
+        "gamesPlayed": 6
+      },
+      {
+        "season": 20142015,
+        "points": 46,
+        "gamesPlayed": 80
+      },
+      {
+        "season": 20152016,
+        "points": 43,
+        "gamesPlayed": 79
+      },
+      {
+        "season": 20162017,
+        "points": 53,
+        "gamesPlayed": 75
+      },
+      {
+        "season": 20172018,
+        "points": 37,
+        "gamesPlayed": 58
+      },
+      {
+        "season": 20172018,
+        "points": 10,
+        "gamesPlayed": 10
+      },
+      {
+        "season": 20182019,
+        "points": 52,
+        "gamesPlayed": 79
+      },
+      {
+        "season": 20182019,
+        "points": 4,
+        "gamesPlayed": 8
+      },
+      {
+        "season": 20192020,
+        "points": 45,
+        "gamesPlayed": 63
+      },
+      {
+        "season": 20202021,
+        "points": 30,
+        "gamesPlayed": 50
+      },
+      {
+        "season": 20212022,
+        "points": 77,
+        "gamesPlayed": 81
+      },
+      {
+        "season": 20222023,
+        "points": 54,
+        "gamesPlayed": 79
+      },
+      {
+        "season": 20232024,
+        "points": 75,
+        "gamesPlayed": 82
+      },
+      {
+        "season": 20242025,
+        "points": 30,
+        "gamesPlayed": 68
+      },
+      {
+        "season": 20242025,
+        "points": 1,
+        "gamesPlayed": 2
+      },
+      {
+        "season": 20252026,
+        "points": 50,
+        "gamesPlayed": 75
+      },
+      {
+        "season": 20262027,
+        "points": 7,
+        "gamesPlayed": 14
+      }
+    ]
   },
   "8481618": {
-    "points": 4,
-    "gp": 12
+    "points": 6,
+    "gp": 14,
+    "position": "C",
+    "history": [
+      {
+        "season": 20142015,
+        "points": 48,
+        "gamesPlayed": 28
+      },
+      {
+        "season": 20152016,
+        "points": 2,
+        "gamesPlayed": 2
+      },
+      {
+        "season": 20152016,
+        "points": 5,
+        "gamesPlayed": 9
+      },
+      {
+        "season": 20152016,
+        "points": 10,
+        "gamesPlayed": 7
+      },
+      {
+        "season": 20162017,
+        "points": 74,
+        "gamesPlayed": 33
+      },
+      {
+        "season": 20162017,
+        "points": 1,
+        "gamesPlayed": 1
+      },
+      {
+        "season": 20162017,
+        "points": 1,
+        "gamesPlayed": 2
+      },
+      {
+        "season": 20162017,
+        "points": 7,
+        "gamesPlayed": 5
+      },
+      {
+        "season": 20172018,
+        "points": 66,
+        "gamesPlayed": 45
+      },
+      {
+        "season": 20172018,
+        "points": 4,
+        "gamesPlayed": 3
+      },
+      {
+        "season": 20172018,
+        "points": 4,
+        "gamesPlayed": 5
+      },
+      {
+        "season": 20182019,
+        "points": 102,
+        "gamesPlayed": 53
+      },
+      {
+        "season": 20182019,
+        "points": 4,
+        "gamesPlayed": 6
+      },
+      {
+        "season": 20182019,
+        "points": 10,
+        "gamesPlayed": 7
+      },
+      {
+        "season": 20192020,
+        "points": 42,
+        "gamesPlayed": 34
+      },
+      {
+        "season": 20202021,
+        "points": 3,
+        "gamesPlayed": 6
+      },
+      {
+        "season": 20202021,
+        "points": 16,
+        "gamesPlayed": 12
+      },
+      {
+        "season": 20202021,
+        "points": 6,
+        "gamesPlayed": 6
+      },
+      {
+        "season": 20202021,
+        "points": 9,
+        "gamesPlayed": 8
+      },
+      {
+        "season": 20212022,
+        "points": 33,
+        "gamesPlayed": 71
+      },
+      {
+        "season": 20212022,
+        "points": 11,
+        "gamesPlayed": 10
+      },
+      {
+        "season": 20222023,
+        "points": 30,
+        "gamesPlayed": 82
+      },
+      {
+        "season": 20232024,
+        "points": 34,
+        "gamesPlayed": 55
+      },
+      {
+        "season": 20242025,
+        "points": 26,
+        "gamesPlayed": 82
+      },
+      {
+        "season": 20252026,
+        "points": 25,
+        "gamesPlayed": 42
+      },
+      {
+        "season": 20262027,
+        "points": 6,
+        "gamesPlayed": 14
+      }
+    ]
   },
   "8480018": {
     "points": 12,
-    "gp": 9
+    "gp": 9,
+    "position": "C",
+    "history": [
+      {
+        "season": 20142015,
+        "points": 1,
+        "gamesPlayed": 1
+      },
+      {
+        "season": 20142015,
+        "points": 68,
+        "gamesPlayed": 31
+      },
+      {
+        "season": 20152016,
+        "points": 38,
+        "gamesPlayed": 63
+      },
+      {
+        "season": 20152016,
+        "points": 2,
+        "gamesPlayed": 3
+      },
+      {
+        "season": 20152016,
+        "points": 4,
+        "gamesPlayed": 6
+      },
+      {
+        "season": 20162017,
+        "points": 3,
+        "gamesPlayed": 4
+      },
+      {
+        "season": 20162017,
+        "points": 96,
+        "gamesPlayed": 65
+      },
+      {
+        "season": 20172018,
+        "points": 100,
+        "gamesPlayed": 64
+      },
+      {
+        "season": 20182019,
+        "points": 45,
+        "gamesPlayed": 30
+      },
+      {
+        "season": 20182019,
+        "points": 3,
+        "gamesPlayed": 5
+      },
+      {
+        "season": 20182019,
+        "points": 49,
+        "gamesPlayed": 29
+      },
+      {
+        "season": 20182019,
+        "points": 7,
+        "gamesPlayed": 4
+      },
+      {
+        "season": 20192020,
+        "points": 41,
+        "gamesPlayed": 71
+      },
+      {
+        "season": 20202021,
+        "points": 41,
+        "gamesPlayed": 56
+      },
+      {
+        "season": 20212022,
+        "points": 61,
+        "gamesPlayed": 82
+      },
+      {
+        "season": 20222023,
+        "points": 66,
+        "gamesPlayed": 82
+      },
+      {
+        "season": 20232024,
+        "points": 77,
+        "gamesPlayed": 82
+      },
+      {
+        "season": 20242025,
+        "points": 89,
+        "gamesPlayed": 82
+      },
+      {
+        "season": 20252026,
+        "points": 101,
+        "gamesPlayed": 82
+      },
+      {
+        "season": 20252026,
+        "points": 2,
+        "gamesPlayed": 6
+      },
+      {
+        "season": 20262027,
+        "points": 12,
+        "gamesPlayed": 9
+      }
+    ]
   },
   "8483457": {
-    "points": 10,
-    "gp": 12
+    "points": 13,
+    "gp": 14,
+    "position": "D",
+    "history": [
+      {
+        "season": 20132014,
+        "points": 3,
+        "gamesPlayed": 6
+      },
+      {
+        "season": 20152016,
+        "points": 7,
+        "gamesPlayed": 9
+      },
+      {
+        "season": 20162017,
+        "points": 7,
+        "gamesPlayed": 4
+      },
+      {
+        "season": 20172018,
+        "points": 18,
+        "gamesPlayed": 15
+      },
+      {
+        "season": 20172018,
+        "points": 7,
+        "gamesPlayed": 9
+      },
+      {
+        "season": 20182019,
+        "points": 25,
+        "gamesPlayed": 20
+      },
+      {
+        "season": 20182019,
+        "points": 16,
+        "gamesPlayed": 9
+      },
+      {
+        "season": 20192020,
+        "points": 38,
+        "gamesPlayed": 19
+      },
+      {
+        "season": 20192020,
+        "points": 2,
+        "gamesPlayed": 4
+      },
+      {
+        "season": 20192020,
+        "points": 3,
+        "gamesPlayed": 7
+      },
+      {
+        "season": 20202021,
+        "points": 19,
+        "gamesPlayed": 39
+      },
+      {
+        "season": 20202021,
+        "points": 14,
+        "gamesPlayed": 27
+      },
+      {
+        "season": 20202021,
+        "points": 8,
+        "gamesPlayed": 10
+      },
+      {
+        "season": 20202021,
+        "points": 5,
+        "gamesPlayed": 5
+      },
+      {
+        "season": 20212022,
+        "points": 63,
+        "gamesPlayed": 60
+      },
+      {
+        "season": 20212022,
+        "points": 32,
+        "gamesPlayed": 27
+      },
+      {
+        "season": 20212022,
+        "points": 8,
+        "gamesPlayed": 6
+      },
+      {
+        "season": 20222023,
+        "points": 48,
+        "gamesPlayed": 39
+      },
+      {
+        "season": 20222023,
+        "points": 4,
+        "gamesPlayed": 7
+      },
+      {
+        "season": 20222023,
+        "points": 6,
+        "gamesPlayed": 9
+      },
+      {
+        "season": 20232024,
+        "points": 2,
+        "gamesPlayed": 2
+      },
+      {
+        "season": 20232024,
+        "points": 49,
+        "gamesPlayed": 38
+      },
+      {
+        "season": 20232024,
+        "points": 6,
+        "gamesPlayed": 7
+      },
+      {
+        "season": 20242025,
+        "points": 66,
+        "gamesPlayed": 82
+      },
+      {
+        "season": 20252026,
+        "points": 78,
+        "gamesPlayed": 82
+      },
+      {
+        "season": 20262027,
+        "points": 13,
+        "gamesPlayed": 14
+      }
+    ]
   },
   "8483515": {
-    "points": 8,
-    "gp": 12
+    "points": 9,
+    "gp": 14,
+    "position": "L",
+    "history": [
+      {
+        "season": 20152016,
+        "points": 9,
+        "gamesPlayed": 6
+      },
+      {
+        "season": 20162017,
+        "points": 19,
+        "gamesPlayed": 7
+      },
+      {
+        "season": 20172018,
+        "points": 54,
+        "gamesPlayed": 23
+      },
+      {
+        "season": 20172018,
+        "points": 14,
+        "gamesPlayed": 18
+      },
+      {
+        "season": 20172018,
+        "points": 7,
+        "gamesPlayed": 7
+      },
+      {
+        "season": 20182019,
+        "points": 17,
+        "gamesPlayed": 11
+      },
+      {
+        "season": 20182019,
+        "points": 2,
+        "gamesPlayed": 3
+      },
+      {
+        "season": 20182019,
+        "points": 42,
+        "gamesPlayed": 22
+      },
+      {
+        "season": 20192020,
+        "points": 52,
+        "gamesPlayed": 39
+      },
+      {
+        "season": 20192020,
+        "points": 3,
+        "gamesPlayed": 4
+      },
+      {
+        "season": 20192020,
+        "points": 3,
+        "gamesPlayed": 2
+      },
+      {
+        "season": 20202021,
+        "points": 13,
+        "gamesPlayed": 16
+      },
+      {
+        "season": 20202021,
+        "points": 2,
+        "gamesPlayed": 1
+      },
+      {
+        "season": 20202021,
+        "points": 0,
+        "gamesPlayed": 5
+      },
+      {
+        "season": 20202021,
+        "points": 0,
+        "gamesPlayed": 6
+      },
+      {
+        "season": 20212022,
+        "points": 10,
+        "gamesPlayed": 31
+      },
+      {
+        "season": 20212022,
+        "points": 9,
+        "gamesPlayed": 5
+      },
+      {
+        "season": 20212022,
+        "points": 1,
+        "gamesPlayed": 3
+      },
+      {
+        "season": 20212022,
+        "points": 1,
+        "gamesPlayed": 4
+      },
+      {
+        "season": 20212022,
+        "points": 18,
+        "gamesPlayed": 11
+      },
+      {
+        "season": 20212022,
+        "points": 7,
+        "gamesPlayed": 7
+      },
+      {
+        "season": 20212022,
+        "points": 9,
+        "gamesPlayed": 8
+      },
+      {
+        "season": 20222023,
+        "points": 10,
+        "gamesPlayed": 39
+      },
+      {
+        "season": 20232024,
+        "points": 50,
+        "gamesPlayed": 82
+      },
+      {
+        "season": 20232024,
+        "points": 8,
+        "gamesPlayed": 8
+      },
+      {
+        "season": 20242025,
+        "points": 51,
+        "gamesPlayed": 79
+      },
+      {
+        "season": 20252026,
+        "points": 73,
+        "gamesPlayed": 82
+      },
+      {
+        "season": 20252026,
+        "points": 8,
+        "gamesPlayed": 6
+      },
+      {
+        "season": 20262027,
+        "points": 9,
+        "gamesPlayed": 14
+      }
+    ]
   },
   "8484387": {
-    "points": 10,
-    "gp": 14
+    "points": 12,
+    "gp": 16,
+    "position": "R",
+    "history": [
+      {
+        "season": 20182019,
+        "points": 10,
+        "gamesPlayed": 7
+      },
+      {
+        "season": 20192020,
+        "points": 109,
+        "gamesPlayed": 26
+      },
+      {
+        "season": 20192020,
+        "points": 14,
+        "gamesPlayed": 4
+      },
+      {
+        "season": 20202021,
+        "points": 52,
+        "gamesPlayed": 50
+      },
+      {
+        "season": 20202021,
+        "points": 4,
+        "gamesPlayed": 6
+      },
+      {
+        "season": 20202021,
+        "points": 16,
+        "gamesPlayed": 7
+      },
+      {
+        "season": 20212022,
+        "points": 5,
+        "gamesPlayed": 13
+      },
+      {
+        "season": 20212022,
+        "points": 13,
+        "gamesPlayed": 5
+      },
+      {
+        "season": 20212022,
+        "points": 13,
+        "gamesPlayed": 6
+      },
+      {
+        "season": 20212022,
+        "points": 38,
+        "gamesPlayed": 22
+      },
+      {
+        "season": 20212022,
+        "points": 2,
+        "gamesPlayed": 3
+      },
+      {
+        "season": 20222023,
+        "points": 0,
+        "gamesPlayed": 3
+      },
+      {
+        "season": 20222023,
+        "points": 14,
+        "gamesPlayed": 12
+      },
+      {
+        "season": 20222023,
+        "points": 20,
+        "gamesPlayed": 27
+      },
+      {
+        "season": 20232024,
+        "points": 0,
+        "gamesPlayed": 1
+      },
+      {
+        "season": 20232024,
+        "points": 41,
+        "gamesPlayed": 47
+      },
+      {
+        "season": 20242025,
+        "points": 63,
+        "gamesPlayed": 80
+      },
+      {
+        "season": 20252026,
+        "points": 51,
+        "gamesPlayed": 81
+      },
+      {
+        "season": 20262027,
+        "points": 12,
+        "gamesPlayed": 16
+      }
+    ]
   },
   "8482109": {
     "points": 16,
-    "gp": 14
+    "gp": 15,
+    "position": "L",
+    "history": [
+      {
+        "season": 20132014,
+        "points": 4,
+        "gamesPlayed": 2
+      },
+      {
+        "season": 20142015,
+        "points": 19,
+        "gamesPlayed": 27
+      },
+      {
+        "season": 20152016,
+        "points": 0,
+        "gamesPlayed": 2
+      },
+      {
+        "season": 20152016,
+        "points": 69,
+        "gamesPlayed": 26
+      },
+      {
+        "season": 20162017,
+        "points": 83,
+        "gamesPlayed": 36
+      },
+      {
+        "season": 20162017,
+        "points": 4,
+        "gamesPlayed": 5
+      },
+      {
+        "season": 20172018,
+        "points": 0,
+        "gamesPlayed": 3
+      },
+      {
+        "season": 20172018,
+        "points": 80,
+        "gamesPlayed": 60
+      },
+      {
+        "season": 20172018,
+        "points": 6,
+        "gamesPlayed": 6
+      },
+      {
+        "season": 20172018,
+        "points": 6,
+        "gamesPlayed": 5
+      },
+      {
+        "season": 20182019,
+        "points": 11,
+        "gamesPlayed": 5
+      },
+      {
+        "season": 20182019,
+        "points": 105,
+        "gamesPlayed": 61
+      },
+      {
+        "season": 20182019,
+        "points": 1,
+        "gamesPlayed": 5
+      },
+      {
+        "season": 20192020,
+        "points": 112,
+        "gamesPlayed": 52
+      },
+      {
+        "season": 20192020,
+        "points": 10,
+        "gamesPlayed": 5
+      },
+      {
+        "season": 20202021,
+        "points": 21,
+        "gamesPlayed": 56
+      },
+      {
+        "season": 20212022,
+        "points": 31,
+        "gamesPlayed": 79
+      },
+      {
+        "season": 20222023,
+        "points": 39,
+        "gamesPlayed": 81
+      },
+      {
+        "season": 20232024,
+        "points": 57,
+        "gamesPlayed": 82
+      },
+      {
+        "season": 20242025,
+        "points": 45,
+        "gamesPlayed": 82
+      },
+      {
+        "season": 20252026,
+        "points": 57,
+        "gamesPlayed": 82
+      },
+      {
+        "season": 20262027,
+        "points": 16,
+        "gamesPlayed": 15
+      }
+    ]
   },
   "8481559": {
-    "points": 14,
-    "gp": 12
+    "points": 16,
+    "gp": 14,
+    "position": "C",
+    "history": [
+      {
+        "season": 20102011,
+        "points": 11,
+        "gamesPlayed": 6
+      },
+      {
+        "season": 20152016,
+        "points": 4,
+        "gamesPlayed": 5
+      },
+      {
+        "season": 20162017,
+        "points": 159,
+        "gamesPlayed": 80
+      },
+      {
+        "season": 20162017,
+        "points": 73,
+        "gamesPlayed": 33
+      },
+      {
+        "season": 20172018,
+        "points": 54,
+        "gamesPlayed": 27
+      },
+      {
+        "season": 20172018,
+        "points": 15,
+        "gamesPlayed": 6
+      },
+      {
+        "season": 20172018,
+        "points": 12,
+        "gamesPlayed": 7
+      },
+      {
+        "season": 20172018,
+        "points": 68,
+        "gamesPlayed": 36
+      },
+      {
+        "season": 20172018,
+        "points": 48,
+        "gamesPlayed": 24
+      },
+      {
+        "season": 20182019,
+        "points": 48,
+        "gamesPlayed": 24
+      },
+      {
+        "season": 20182019,
+        "points": 112,
+        "gamesPlayed": 50
+      },
+      {
+        "season": 20182019,
+        "points": 4,
+        "gamesPlayed": 4
+      },
+      {
+        "season": 20182019,
+        "points": 20,
+        "gamesPlayed": 7
+      },
+      {
+        "season": 20182019,
+        "points": 3,
+        "gamesPlayed": 7
+      },
+      {
+        "season": 20192020,
+        "points": 21,
+        "gamesPlayed": 61
+      },
+      {
+        "season": 20202021,
+        "points": 31,
+        "gamesPlayed": 56
+      },
+      {
+        "season": 20212022,
+        "points": 56,
+        "gamesPlayed": 49
+      },
+      {
+        "season": 20222023,
+        "points": 99,
+        "gamesPlayed": 78
+      },
+      {
+        "season": 20232024,
+        "points": 74,
+        "gamesPlayed": 62
+      },
+      {
+        "season": 20242025,
+        "points": 70,
+        "gamesPlayed": 62
+      },
+      {
+        "season": 20242025,
+        "points": 1,
+        "gamesPlayed": 4
+      },
+      {
+        "season": 20252026,
+        "points": 77,
+        "gamesPlayed": 61
+      },
+      {
+        "season": 20252026,
+        "points": 7,
+        "gamesPlayed": 6
+      },
+      {
+        "season": 20262027,
+        "points": 16,
+        "gamesPlayed": 14
+      }
+    ]
   },
   "8479318": {
-    "points": 20,
-    "gp": 14
+    "points": 24,
+    "gp": 16,
+    "position": "C",
+    "history": [
+      {
+        "season": 20092010,
+        "points": 6,
+        "gamesPlayed": 3
+      },
+      {
+        "season": 20112012,
+        "points": 22,
+        "gamesPlayed": 9
+      },
+      {
+        "season": 20122013,
+        "points": 100,
+        "gamesPlayed": 48
+      },
+      {
+        "season": 20132014,
+        "points": 20,
+        "gamesPlayed": 20
+      },
+      {
+        "season": 20132014,
+        "points": 20,
+        "gamesPlayed": 14
+      },
+      {
+        "season": 20132014,
+        "points": 9,
+        "gamesPlayed": 10
+      },
+      {
+        "season": 20142015,
+        "points": 48,
+        "gamesPlayed": 24
+      },
+      {
+        "season": 20142015,
+        "points": 69,
+        "gamesPlayed": 36
+      },
+      {
+        "season": 20142015,
+        "points": 3,
+        "gamesPlayed": 5
+      },
+      {
+        "season": 20152016,
+        "points": 11,
+        "gamesPlayed": 7
+      },
+      {
+        "season": 20152016,
+        "points": 46,
+        "gamesPlayed": 36
+      },
+      {
+        "season": 20152016,
+        "points": 1,
+        "gamesPlayed": 2
+      },
+      {
+        "season": 20152016,
+        "points": 9,
+        "gamesPlayed": 10
+      },
+      {
+        "season": 20162017,
+        "points": 69,
+        "gamesPlayed": 82
+      },
+      {
+        "season": 20162017,
+        "points": 3,
+        "gamesPlayed": 3
+      },
+      {
+        "season": 20172018,
+        "points": 63,
+        "gamesPlayed": 62
+      },
+      {
+        "season": 20182019,
+        "points": 73,
+        "gamesPlayed": 68
+      },
+      {
+        "season": 20192020,
+        "points": 80,
+        "gamesPlayed": 70
+      },
+      {
+        "season": 20202021,
+        "points": 66,
+        "gamesPlayed": 52
+      },
+      {
+        "season": 20212022,
+        "points": 106,
+        "gamesPlayed": 73
+      },
+      {
+        "season": 20222023,
+        "points": 85,
+        "gamesPlayed": 74
+      },
+      {
+        "season": 20232024,
+        "points": 107,
+        "gamesPlayed": 81
+      },
+      {
+        "season": 20242025,
+        "points": 78,
+        "gamesPlayed": 67
+      },
+      {
+        "season": 20242025,
+        "points": 3,
+        "gamesPlayed": 3
+      },
+      {
+        "season": 20252026,
+        "points": 53,
+        "gamesPlayed": 60
+      },
+      {
+        "season": 20252026,
+        "points": 7,
+        "gamesPlayed": 6
+      },
+      {
+        "season": 20262027,
+        "points": 24,
+        "gamesPlayed": 16
+      }
+    ]
   },
   "8476468": {
     "points": 10,
-    "gp": 14
+    "gp": 15,
+    "position": "C",
+    "history": [
+      {
+        "season": 20082009,
+        "points": 42,
+        "gamesPlayed": 45
+      },
+      {
+        "season": 20092010,
+        "points": 12,
+        "gamesPlayed": 29
+      },
+      {
+        "season": 20092010,
+        "points": 19,
+        "gamesPlayed": 17
+      },
+      {
+        "season": 20092010,
+        "points": 0,
+        "gamesPlayed": 1
+      },
+      {
+        "season": 20102011,
+        "points": 15,
+        "gamesPlayed": 21
+      },
+      {
+        "season": 20102011,
+        "points": 35,
+        "gamesPlayed": 35
+      },
+      {
+        "season": 20102011,
+        "points": 13,
+        "gamesPlayed": 6
+      },
+      {
+        "season": 20112012,
+        "points": 62,
+        "gamesPlayed": 61
+      },
+      {
+        "season": 20112012,
+        "points": 4,
+        "gamesPlayed": 6
+      },
+      {
+        "season": 20122013,
+        "points": 4,
+        "gamesPlayed": 26
+      },
+      {
+        "season": 20122013,
+        "points": 9,
+        "gamesPlayed": 7
+      },
+      {
+        "season": 20122013,
+        "points": 23,
+        "gamesPlayed": 42
+      },
+      {
+        "season": 20132014,
+        "points": 6,
+        "gamesPlayed": 30
+      },
+      {
+        "season": 20132014,
+        "points": 42,
+        "gamesPlayed": 41
+      },
+      {
+        "season": 20142015,
+        "points": 23,
+        "gamesPlayed": 58
+      },
+      {
+        "season": 20142015,
+        "points": 15,
+        "gamesPlayed": 18
+      },
+      {
+        "season": 20152016,
+        "points": 43,
+        "gamesPlayed": 82
+      },
+      {
+        "season": 20162017,
+        "points": 56,
+        "gamesPlayed": 82
+      },
+      {
+        "season": 20162017,
+        "points": 0,
+        "gamesPlayed": 1
+      },
+      {
+        "season": 20172018,
+        "points": 40,
+        "gamesPlayed": 63
+      },
+      {
+        "season": 20172018,
+        "points": 18,
+        "gamesPlayed": 19
+      },
+      {
+        "season": 20182019,
+        "points": 47,
+        "gamesPlayed": 75
+      },
+      {
+        "season": 20192020,
+        "points": 72,
+        "gamesPlayed": 69
+      },
+      {
+        "season": 20202021,
+        "points": 46,
+        "gamesPlayed": 53
+      },
+      {
+        "season": 20212022,
+        "points": 99,
+        "gamesPlayed": 80
+      },
+      {
+        "season": 20222023,
+        "points": 82,
+        "gamesPlayed": 81
+      },
+      {
+        "season": 20232024,
+        "points": 103,
+        "gamesPlayed": 81
+      },
+      {
+        "season": 20242025,
+        "points": 35,
+        "gamesPlayed": 40
+      },
+      {
+        "season": 20242025,
+        "points": 35,
+        "gamesPlayed": 32
+      },
+      {
+        "season": 20242025,
+        "points": 0,
+        "gamesPlayed": 4
+      },
+      {
+        "season": 20252026,
+        "points": 53,
+        "gamesPlayed": 68
+      },
+      {
+        "season": 20252026,
+        "points": 0,
+        "gamesPlayed": 6
+      },
+      {
+        "season": 20262027,
+        "points": 10,
+        "gamesPlayed": 15
+      }
+    ]
   },
   "8480893": {
     "points": 14,
-    "gp": 14
+    "gp": 14,
+    "position": "R",
+    "history": [
+      {
+        "season": 20152016,
+        "points": 52,
+        "gamesPlayed": 32
+      },
+      {
+        "season": 20152016,
+        "points": 9,
+        "gamesPlayed": 10
+      },
+      {
+        "season": 20162017,
+        "points": 40,
+        "gamesPlayed": 23
+      },
+      {
+        "season": 20162017,
+        "points": 26,
+        "gamesPlayed": 29
+      },
+      {
+        "season": 20162017,
+        "points": 5,
+        "gamesPlayed": 2
+      },
+      {
+        "season": 20172018,
+        "points": 16,
+        "gamesPlayed": 31
+      },
+      {
+        "season": 20172018,
+        "points": 0,
+        "gamesPlayed": 2
+      },
+      {
+        "season": 20172018,
+        "points": 6,
+        "gamesPlayed": 5
+      },
+      {
+        "season": 20182019,
+        "points": 19,
+        "gamesPlayed": 15
+      },
+      {
+        "season": 20182019,
+        "points": 3,
+        "gamesPlayed": 23
+      },
+      {
+        "season": 20182019,
+        "points": 0,
+        "gamesPlayed": 1
+      },
+      {
+        "season": 20182019,
+        "points": 1,
+        "gamesPlayed": 7
+      },
+      {
+        "season": 20182019,
+        "points": 4,
+        "gamesPlayed": 5
+      },
+      {
+        "season": 20192020,
+        "points": 12,
+        "gamesPlayed": 14
+      },
+      {
+        "season": 20192020,
+        "points": 16,
+        "gamesPlayed": 31
+      },
+      {
+        "season": 20192020,
+        "points": 6,
+        "gamesPlayed": 7
+      },
+      {
+        "season": 20192020,
+        "points": 0,
+        "gamesPlayed": 2
+      },
+      {
+        "season": 20202021,
+        "points": 28,
+        "gamesPlayed": 41
+      },
+      {
+        "season": 20202021,
+        "points": 7,
+        "gamesPlayed": 2
+      },
+      {
+        "season": 20202021,
+        "points": 0,
+        "gamesPlayed": 3
+      },
+      {
+        "season": 20212022,
+        "points": 20,
+        "gamesPlayed": 39
+      },
+      {
+        "season": 20212022,
+        "points": 3,
+        "gamesPlayed": 2
+      },
+      {
+        "season": 20212022,
+        "points": 2,
+        "gamesPlayed": 3
+      },
+      {
+        "season": 20222023,
+        "points": 25,
+        "gamesPlayed": 59
+      },
+      {
+        "season": 20222023,
+        "points": 19,
+        "gamesPlayed": 16
+      },
+      {
+        "season": 20232024,
+        "points": 42,
+        "gamesPlayed": 78
+      },
+      {
+        "season": 20242025,
+        "points": 74,
+        "gamesPlayed": 79
+      },
+      {
+        "season": 20252026,
+        "points": 67,
+        "gamesPlayed": 76
+      },
+      {
+        "season": 20262027,
+        "points": 14,
+        "gamesPlayed": 14
+      }
+    ]
   },
   "8484230": {
     "points": 4,
-    "gp": 6
+    "gp": 8,
+    "position": "C",
+    "history": [
+      {
+        "season": 20162017,
+        "points": 3,
+        "gamesPlayed": 6
+      },
+      {
+        "season": 20172018,
+        "points": 11,
+        "gamesPlayed": 7
+      },
+      {
+        "season": 20182019,
+        "points": 48,
+        "gamesPlayed": 11
+      },
+      {
+        "season": 20182019,
+        "points": 22,
+        "gamesPlayed": 17
+      },
+      {
+        "season": 20182019,
+        "points": 22,
+        "gamesPlayed": 7
+      },
+      {
+        "season": 20192020,
+        "points": 7,
+        "gamesPlayed": 5
+      },
+      {
+        "season": 20192020,
+        "points": 56,
+        "gamesPlayed": 14
+      },
+      {
+        "season": 20192020,
+        "points": 43,
+        "gamesPlayed": 15
+      },
+      {
+        "season": 20192020,
+        "points": 5,
+        "gamesPlayed": 16
+      },
+      {
+        "season": 20202021,
+        "points": 8,
+        "gamesPlayed": 3
+      },
+      {
+        "season": 20202021,
+        "points": 1,
+        "gamesPlayed": 2
+      },
+      {
+        "season": 20212022,
+        "points": 12,
+        "gamesPlayed": 8
+      },
+      {
+        "season": 20212022,
+        "points": 35,
+        "gamesPlayed": 38
+      },
+      {
+        "season": 20212022,
+        "points": 24,
+        "gamesPlayed": 12
+      },
+      {
+        "season": 20212022,
+        "points": 2,
+        "gamesPlayed": 6
+      },
+      {
+        "season": 20222023,
+        "points": 26,
+        "gamesPlayed": 29
+      },
+      {
+        "season": 20222023,
+        "points": 10,
+        "gamesPlayed": 3
+      },
+      {
+        "season": 20222023,
+        "points": 9,
+        "gamesPlayed": 5
+      },
+      {
+        "season": 20222023,
+        "points": 0,
+        "gamesPlayed": 2
+      },
+      {
+        "season": 20222023,
+        "points": 3,
+        "gamesPlayed": 23
+      },
+      {
+        "season": 20222023,
+        "points": 3,
+        "gamesPlayed": 6
+      },
+      {
+        "season": 20222023,
+        "points": 8,
+        "gamesPlayed": 6
+      },
+      {
+        "season": 20222023,
+        "points": 16,
+        "gamesPlayed": 7
+      },
+      {
+        "season": 20232024,
+        "points": 6,
+        "gamesPlayed": 31
+      },
+      {
+        "season": 20232024,
+        "points": 9,
+        "gamesPlayed": 7
+      },
+      {
+        "season": 20232024,
+        "points": 0,
+        "gamesPlayed": 1
+      },
+      {
+        "season": 20232024,
+        "points": 0,
+        "gamesPlayed": 1
+      },
+      {
+        "season": 20232024,
+        "points": 9,
+        "gamesPlayed": 9
+      },
+      {
+        "season": 20242025,
+        "points": 6,
+        "gamesPlayed": 25
+      },
+      {
+        "season": 20242025,
+        "points": 8,
+        "gamesPlayed": 7
+      },
+      {
+        "season": 20242025,
+        "points": 17,
+        "gamesPlayed": 38
+      },
+      {
+        "season": 20252026,
+        "points": 10,
+        "gamesPlayed": 32
+      },
+      {
+        "season": 20252026,
+        "points": 17,
+        "gamesPlayed": 36
+      },
+      {
+        "season": 20262027,
+        "points": 1,
+        "gamesPlayed": 3
+      },
+      {
+        "season": 20262027,
+        "points": 4,
+        "gamesPlayed": 8
+      }
+    ]
   },
   "8486067": {
-    "points": 8,
-    "gp": 14
+    "points": 11,
+    "gp": 16,
+    "position": "L",
+    "history": [
+      {
+        "season": 20182019,
+        "points": 12,
+        "gamesPlayed": 8
+      },
+      {
+        "season": 20192020,
+        "points": 39,
+        "gamesPlayed": 20
+      },
+      {
+        "season": 20212022,
+        "points": 65,
+        "gamesPlayed": 35
+      },
+      {
+        "season": 20212022,
+        "points": 22,
+        "gamesPlayed": 9
+      },
+      {
+        "season": 20222023,
+        "points": 18,
+        "gamesPlayed": 16
+      },
+      {
+        "season": 20232024,
+        "points": 97,
+        "gamesPlayed": 61
+      },
+      {
+        "season": 20242025,
+        "points": 129,
+        "gamesPlayed": 56
+      },
+      {
+        "season": 20242025,
+        "points": 6,
+        "gamesPlayed": 5
+      },
+      {
+        "season": 20242025,
+        "points": 1,
+        "gamesPlayed": 5
+      },
+      {
+        "season": 20252026,
+        "points": 51,
+        "gamesPlayed": 35
+      },
+      {
+        "season": 20252026,
+        "points": 14,
+        "gamesPlayed": 7
+      },
+      {
+        "season": 20252026,
+        "points": 2,
+        "gamesPlayed": 1
+      },
+      {
+        "season": 20262027,
+        "points": 11,
+        "gamesPlayed": 16
+      }
+    ]
   },
   "8480843": {
     "points": 4,
-    "gp": 9
+    "gp": 9,
+    "position": "G",
+    "history": [
+      {
+        "season": 20122013,
+        "points": 0,
+        "gamesPlayed": 1
+      },
+      {
+        "season": 20132014,
+        "points": 0,
+        "gamesPlayed": 35
+      },
+      {
+        "season": 20142015,
+        "points": 0,
+        "gamesPlayed": 34
+      },
+      {
+        "season": 20152016,
+        "points": 3,
+        "gamesPlayed": 7
+      },
+      {
+        "season": 20152016,
+        "points": 16,
+        "gamesPlayed": 25
+      },
+      {
+        "season": 20152016,
+        "points": 11,
+        "gamesPlayed": 14
+      },
+      {
+        "season": 20162017,
+        "points": 26,
+        "gamesPlayed": 39
+      },
+      {
+        "season": 20162017,
+        "points": 0,
+        "gamesPlayed": 4
+      },
+      {
+        "season": 20172018,
+        "points": 10,
+        "gamesPlayed": 20
+      },
+      {
+        "season": 20172018,
+        "points": 2,
+        "gamesPlayed": 5
+      },
+      {
+        "season": 20172018,
+        "points": 11,
+        "gamesPlayed": 14
+      },
+      {
+        "season": 20172018,
+        "points": 0,
+        "gamesPlayed": 1
+      },
+      {
+        "season": 20182019,
+        "points": 4,
+        "gamesPlayed": 10
+      },
+      {
+        "season": 20182019,
+        "points": 0,
+        "gamesPlayed": 1
+      },
+      {
+        "season": 20182019,
+        "points": 1,
+        "gamesPlayed": 2
+      },
+      {
+        "season": 20182019,
+        "points": 15,
+        "gamesPlayed": 24
+      },
+      {
+        "season": 20182019,
+        "points": 2,
+        "gamesPlayed": 4
+      },
+      {
+        "season": 20182019,
+        "points": 1,
+        "gamesPlayed": 1
+      },
+      {
+        "season": 20192020,
+        "points": 27,
+        "gamesPlayed": 43
+      },
+      {
+        "season": 20192020,
+        "points": 1,
+        "gamesPlayed": 3
+      },
+      {
+        "season": 20202021,
+        "points": 10,
+        "gamesPlayed": 11
+      },
+      {
+        "season": 20202021,
+        "points": 15,
+        "gamesPlayed": 24
+      },
+      {
+        "season": 20212022,
+        "points": 1,
+        "gamesPlayed": 4
+      },
+      {
+        "season": 20212022,
+        "points": 1,
+        "gamesPlayed": 1
+      },
+      {
+        "season": 20212022,
+        "points": 18,
+        "gamesPlayed": 40
+      },
+      {
+        "season": 20222023,
+        "points": 4,
+        "gamesPlayed": 19
+      },
+      {
+        "season": 20222023,
+        "points": 11,
+        "gamesPlayed": 34
+      },
+      {
+        "season": 20232024,
+        "points": 14,
+        "gamesPlayed": 44
+      },
+      {
+        "season": 20232024,
+        "points": 6,
+        "gamesPlayed": 8
+      },
+      {
+        "season": 20242025,
+        "points": 23,
+        "gamesPlayed": 54
+      },
+      {
+        "season": 20252026,
+        "points": 30,
+        "gamesPlayed": 56
+      },
+      {
+        "season": 20252026,
+        "points": 1,
+        "gamesPlayed": 4
+      },
+      {
+        "season": 20262027,
+        "points": 4,
+        "gamesPlayed": 9
+      }
+    ]
   },
   "8478048": {
     "points": 3,
-    "gp": 5
+    "gp": 5,
+    "position": "G",
+    "history": [
+      {
+        "season": 20122013,
+        "points": 9,
+        "gamesPlayed": 15
+      },
+      {
+        "season": 20132014,
+        "points": 14,
+        "gamesPlayed": 23
+      },
+      {
+        "season": 20132014,
+        "points": 1,
+        "gamesPlayed": 9
+      },
+      {
+        "season": 20142015,
+        "points": 3,
+        "gamesPlayed": 6
+      },
+      {
+        "season": 20142015,
+        "points": 3,
+        "gamesPlayed": 5
+      },
+      {
+        "season": 20142015,
+        "points": 3,
+        "gamesPlayed": 8
+      },
+      {
+        "season": 20142015,
+        "points": 2,
+        "gamesPlayed": 3
+      },
+      {
+        "season": 20152016,
+        "points": 5,
+        "gamesPlayed": 7
+      },
+      {
+        "season": 20152016,
+        "points": 16,
+        "gamesPlayed": 25
+      },
+      {
+        "season": 20152016,
+        "points": 1,
+        "gamesPlayed": 2
+      },
+      {
+        "season": 20162017,
+        "points": 27,
+        "gamesPlayed": 39
+      },
+      {
+        "season": 20172018,
+        "points": 28,
+        "gamesPlayed": 28
+      },
+      {
+        "season": 20172018,
+        "points": 2,
+        "gamesPlayed": 4
+      },
+      {
+        "season": 20182019,
+        "points": 24,
+        "gamesPlayed": 28
+      },
+      {
+        "season": 20192020,
+        "points": 10,
+        "gamesPlayed": 12
+      },
+      {
+        "season": 20192020,
+        "points": 17,
+        "gamesPlayed": 25
+      },
+      {
+        "season": 20202021,
+        "points": 16,
+        "gamesPlayed": 35
+      },
+      {
+        "season": 20212022,
+        "points": 36,
+        "gamesPlayed": 53
+      },
+      {
+        "season": 20222023,
+        "points": 37,
+        "gamesPlayed": 58
+      },
+      {
+        "season": 20232024,
+        "points": 36,
+        "gamesPlayed": 55
+      },
+      {
+        "season": 20242025,
+        "points": 27,
+        "gamesPlayed": 61
+      },
+      {
+        "season": 20252026,
+        "points": 25,
+        "gamesPlayed": 51
+      },
+      {
+        "season": 20262027,
+        "points": 3,
+        "gamesPlayed": 5
+      }
+    ]
   },
   "8482116": {
-    "points": 16,
-    "gp": 13
+    "points": 21,
+    "gp": 16,
+    "position": "C",
+    "history": [
+      {
+        "season": 20142015,
+        "points": 0,
+        "gamesPlayed": 2
+      },
+      {
+        "season": 20152016,
+        "points": 61,
+        "gamesPlayed": 27
+      },
+      {
+        "season": 20162017,
+        "points": 83,
+        "gamesPlayed": 32
+      },
+      {
+        "season": 20172018,
+        "points": 47,
+        "gamesPlayed": 25
+      },
+      {
+        "season": 20172018,
+        "points": 4,
+        "gamesPlayed": 5
+      },
+      {
+        "season": 20182019,
+        "points": 55,
+        "gamesPlayed": 21
+      },
+      {
+        "season": 20182019,
+        "points": 9,
+        "gamesPlayed": 5
+      },
+      {
+        "season": 20192020,
+        "points": 34,
+        "gamesPlayed": 41
+      },
+      {
+        "season": 20192020,
+        "points": 5,
+        "gamesPlayed": 8
+      },
+      {
+        "season": 20192020,
+        "points": 5,
+        "gamesPlayed": 5
+      },
+      {
+        "season": 20202021,
+        "points": 29,
+        "gamesPlayed": 53
+      },
+      {
+        "season": 20202021,
+        "points": 10,
+        "gamesPlayed": 5
+      },
+      {
+        "season": 20212022,
+        "points": 58,
+        "gamesPlayed": 79
+      },
+      {
+        "season": 20212022,
+        "points": 2,
+        "gamesPlayed": 3
+      },
+      {
+        "season": 20222023,
+        "points": 90,
+        "gamesPlayed": 78
+      },
+      {
+        "season": 20232024,
+        "points": 70,
+        "gamesPlayed": 75
+      },
+      {
+        "season": 20242025,
+        "points": 79,
+        "gamesPlayed": 82
+      },
+      {
+        "season": 20242025,
+        "points": 2,
+        "gamesPlayed": 5
+      },
+      {
+        "season": 20252026,
+        "points": 83,
+        "gamesPlayed": 80
+      },
+      {
+        "season": 20252026,
+        "points": 6,
+        "gamesPlayed": 5
+      },
+      {
+        "season": 20262027,
+        "points": 21,
+        "gamesPlayed": 16
+      }
+    ]
   },
   "8478550": {
-    "points": 11,
-    "gp": 11
+    "points": 13,
+    "gp": 13,
+    "position": "L",
+    "history": [
+      {
+        "season": 20082009,
+        "points": 1,
+        "gamesPlayed": 5
+      },
+      {
+        "season": 20092010,
+        "points": 9,
+        "gamesPlayed": 20
+      },
+      {
+        "season": 20102011,
+        "points": 21,
+        "gamesPlayed": 40
+      },
+      {
+        "season": 20112012,
+        "points": 26,
+        "gamesPlayed": 38
+      },
+      {
+        "season": 20112012,
+        "points": 5,
+        "gamesPlayed": 12
+      },
+      {
+        "season": 20122013,
+        "points": 18,
+        "gamesPlayed": 40
+      },
+      {
+        "season": 20122013,
+        "points": 1,
+        "gamesPlayed": 3
+      },
+      {
+        "season": 20132014,
+        "points": 40,
+        "gamesPlayed": 51
+      },
+      {
+        "season": 20142015,
+        "points": 62,
+        "gamesPlayed": 54
+      },
+      {
+        "season": 20142015,
+        "points": 10,
+        "gamesPlayed": 10
+      },
+      {
+        "season": 20152016,
+        "points": 77,
+        "gamesPlayed": 80
+      },
+      {
+        "season": 20152016,
+        "points": 15,
+        "gamesPlayed": 10
+      },
+      {
+        "season": 20162017,
+        "points": 74,
+        "gamesPlayed": 82
+      },
+      {
+        "season": 20162017,
+        "points": 2,
+        "gamesPlayed": 4
+      },
+      {
+        "season": 20162017,
+        "points": 17,
+        "gamesPlayed": 9
+      },
+      {
+        "season": 20172018,
+        "points": 82,
+        "gamesPlayed": 81
+      },
+      {
+        "season": 20182019,
+        "points": 87,
+        "gamesPlayed": 79
+      },
+      {
+        "season": 20192020,
+        "points": 95,
+        "gamesPlayed": 69
+      },
+      {
+        "season": 20202021,
+        "points": 58,
+        "gamesPlayed": 42
+      },
+      {
+        "season": 20212022,
+        "points": 96,
+        "gamesPlayed": 75
+      },
+      {
+        "season": 20222023,
+        "points": 92,
+        "gamesPlayed": 82
+      },
+      {
+        "season": 20232024,
+        "points": 120,
+        "gamesPlayed": 82
+      },
+      {
+        "season": 20242025,
+        "points": 89,
+        "gamesPlayed": 80
+      },
+      {
+        "season": 20252026,
+        "points": 57,
+        "gamesPlayed": 52
+      },
+      {
+        "season": 20252026,
+        "points": 27,
+        "gamesPlayed": 26
+      },
+      {
+        "season": 20262027,
+        "points": 13,
+        "gamesPlayed": 13
+      }
+    ]
   },
   "8479314": {
     "points": 20,
-    "gp": 13
+    "gp": 14,
+    "position": "L",
+    "history": [
+      {
+        "season": 20092010,
+        "points": 11,
+        "gamesPlayed": 5
+      },
+      {
+        "season": 20122013,
+        "points": 82,
+        "gamesPlayed": 41
+      },
+      {
+        "season": 20132014,
+        "points": 17,
+        "gamesPlayed": 33
+      },
+      {
+        "season": 20132014,
+        "points": 17,
+        "gamesPlayed": 20
+      },
+      {
+        "season": 20142015,
+        "points": 33,
+        "gamesPlayed": 24
+      },
+      {
+        "season": 20142015,
+        "points": 62,
+        "gamesPlayed": 41
+      },
+      {
+        "season": 20142015,
+        "points": 12,
+        "gamesPlayed": 7
+      },
+      {
+        "season": 20152016,
+        "points": 107,
+        "gamesPlayed": 57
+      },
+      {
+        "season": 20152016,
+        "points": 11,
+        "gamesPlayed": 7
+      },
+      {
+        "season": 20152016,
+        "points": 8,
+        "gamesPlayed": 4
+      },
+      {
+        "season": 20162017,
+        "points": 48,
+        "gamesPlayed": 76
+      },
+      {
+        "season": 20172018,
+        "points": 49,
+        "gamesPlayed": 68
+      },
+      {
+        "season": 20182019,
+        "points": 77,
+        "gamesPlayed": 80
+      },
+      {
+        "season": 20192020,
+        "points": 61,
+        "gamesPlayed": 69
+      },
+      {
+        "season": 20202021,
+        "points": 43,
+        "gamesPlayed": 56
+      },
+      {
+        "season": 20212022,
+        "points": 104,
+        "gamesPlayed": 82
+      },
+      {
+        "season": 20222023,
+        "points": 109,
+        "gamesPlayed": 79
+      },
+      {
+        "season": 20232024,
+        "points": 88,
+        "gamesPlayed": 80
+      },
+      {
+        "season": 20242025,
+        "points": 57,
+        "gamesPlayed": 52
+      },
+      {
+        "season": 20242025,
+        "points": 3,
+        "gamesPlayed": 3
+      },
+      {
+        "season": 20252026,
+        "points": 34,
+        "gamesPlayed": 31
+      },
+      {
+        "season": 20252026,
+        "points": 6,
+        "gamesPlayed": 6
+      },
+      {
+        "season": 20262027,
+        "points": 20,
+        "gamesPlayed": 14
+      }
+    ]
   },
   "8484153": {
-    "points": 15,
-    "gp": 12
+    "points": 21,
+    "gp": 14,
+    "position": "C",
+    "history": [
+      {
+        "season": 20152016,
+        "points": 4,
+        "gamesPlayed": 6
+      },
+      {
+        "season": 20172018,
+        "points": 27,
+        "gamesPlayed": 15
+      },
+      {
+        "season": 20182019,
+        "points": 10,
+        "gamesPlayed": 19
+      },
+      {
+        "season": 20182019,
+        "points": 1,
+        "gamesPlayed": 2
+      },
+      {
+        "season": 20182019,
+        "points": 1,
+        "gamesPlayed": 3
+      },
+      {
+        "season": 20192020,
+        "points": 17,
+        "gamesPlayed": 15
+      },
+      {
+        "season": 20192020,
+        "points": 5,
+        "gamesPlayed": 5
+      },
+      {
+        "season": 20192020,
+        "points": 0,
+        "gamesPlayed": 2
+      },
+      {
+        "season": 20192020,
+        "points": 1,
+        "gamesPlayed": 3
+      },
+      {
+        "season": 20202021,
+        "points": 0,
+        "gamesPlayed": 1
+      },
+      {
+        "season": 20202021,
+        "points": 9,
+        "gamesPlayed": 19
+      },
+      {
+        "season": 20212022,
+        "points": 27,
+        "gamesPlayed": 14
+      },
+      {
+        "season": 20212022,
+        "points": 3,
+        "gamesPlayed": 5
+      },
+      {
+        "season": 20212022,
+        "points": 9,
+        "gamesPlayed": 35
+      },
+      {
+        "season": 20212022,
+        "points": 3,
+        "gamesPlayed": 2
+      },
+      {
+        "season": 20212022,
+        "points": 3,
+        "gamesPlayed": 2
+      },
+      {
+        "season": 20222023,
+        "points": 25,
+        "gamesPlayed": 44
+      },
+      {
+        "season": 20222023,
+        "points": 6,
+        "gamesPlayed": 7
+      },
+      {
+        "season": 20222023,
+        "points": 2,
+        "gamesPlayed": 2
+      },
+      {
+        "season": 20222023,
+        "points": 5,
+        "gamesPlayed": 8
+      },
+      {
+        "season": 20232024,
+        "points": 29,
+        "gamesPlayed": 55
+      },
+      {
+        "season": 20242025,
+        "points": 45,
+        "gamesPlayed": 76
+      },
+      {
+        "season": 20242025,
+        "points": 10,
+        "gamesPlayed": 10
+      },
+      {
+        "season": 20242025,
+        "points": 5,
+        "gamesPlayed": 3
+      },
+      {
+        "season": 20242025,
+        "points": 0,
+        "gamesPlayed": 1
+      },
+      {
+        "season": 20252026,
+        "points": 67,
+        "gamesPlayed": 70
+      },
+      {
+        "season": 20262027,
+        "points": 21,
+        "gamesPlayed": 14
+      }
+    ]
   },
   "8480801": {
     "points": 15,
-    "gp": 13
+    "gp": 14,
+    "position": "L",
+    "history": [
+      {
+        "season": 20082009,
+        "points": 3,
+        "gamesPlayed": 5
+      },
+      {
+        "season": 20102011,
+        "points": 7,
+        "gamesPlayed": 4
+      },
+      {
+        "season": 20112012,
+        "points": 4,
+        "gamesPlayed": 3
+      },
+      {
+        "season": 20132014,
+        "points": 0,
+        "gamesPlayed": 4
+      },
+      {
+        "season": 20132014,
+        "points": 33,
+        "gamesPlayed": 26
+      },
+      {
+        "season": 20142015,
+        "points": 43,
+        "gamesPlayed": 30
+      },
+      {
+        "season": 20152016,
+        "points": 8,
+        "gamesPlayed": 32
+      },
+      {
+        "season": 20152016,
+        "points": 5,
+        "gamesPlayed": 5
+      },
+      {
+        "season": 20152016,
+        "points": 25,
+        "gamesPlayed": 55
+      },
+      {
+        "season": 20162017,
+        "points": 23,
+        "gamesPlayed": 24
+      },
+      {
+        "season": 20162017,
+        "points": 7,
+        "gamesPlayed": 7
+      },
+      {
+        "season": 20162017,
+        "points": 54,
+        "gamesPlayed": 61
+      },
+      {
+        "season": 20172018,
+        "points": 31,
+        "gamesPlayed": 40
+      },
+      {
+        "season": 20172018,
+        "points": 9,
+        "gamesPlayed": 7
+      },
+      {
+        "season": 20182019,
+        "points": 45,
+        "gamesPlayed": 71
+      },
+      {
+        "season": 20192020,
+        "points": 44,
+        "gamesPlayed": 71
+      },
+      {
+        "season": 20202021,
+        "points": 36,
+        "gamesPlayed": 56
+      },
+      {
+        "season": 20212022,
+        "points": 67,
+        "gamesPlayed": 79
+      },
+      {
+        "season": 20222023,
+        "points": 83,
+        "gamesPlayed": 82
+      },
+      {
+        "season": 20232024,
+        "points": 74,
+        "gamesPlayed": 81
+      },
+      {
+        "season": 20232024,
+        "points": 13,
+        "gamesPlayed": 8
+      },
+      {
+        "season": 20232024,
+        "points": 1,
+        "gamesPlayed": 1
+      },
+      {
+        "season": 20242025,
+        "points": 55,
+        "gamesPlayed": 72
+      },
+      {
+        "season": 20242025,
+        "points": 3,
+        "gamesPlayed": 4
+      },
+      {
+        "season": 20252026,
+        "points": 59,
+        "gamesPlayed": 60
+      },
+      {
+        "season": 20252026,
+        "points": 5,
+        "gamesPlayed": 6
+      },
+      {
+        "season": 20262027,
+        "points": 15,
+        "gamesPlayed": 14
+      }
+    ]
   },
   "8483445": {
-    "points": 7,
-    "gp": 11
+    "points": 12,
+    "gp": 13,
+    "position": "L",
+    "history": [
+      {
+        "season": 20132014,
+        "points": 2,
+        "gamesPlayed": 6
+      },
+      {
+        "season": 20152016,
+        "points": 6,
+        "gamesPlayed": 8
+      },
+      {
+        "season": 20162017,
+        "points": 3,
+        "gamesPlayed": 5
+      },
+      {
+        "season": 20172018,
+        "points": 17,
+        "gamesPlayed": 17
+      },
+      {
+        "season": 20172018,
+        "points": 10,
+        "gamesPlayed": 6
+      },
+      {
+        "season": 20182019,
+        "points": 16,
+        "gamesPlayed": 19
+      },
+      {
+        "season": 20182019,
+        "points": 55,
+        "gamesPlayed": 65
+      },
+      {
+        "season": 20182019,
+        "points": 7,
+        "gamesPlayed": 6
+      },
+      {
+        "season": 20192020,
+        "points": 5,
+        "gamesPlayed": 4
+      },
+      {
+        "season": 20192020,
+        "points": 12,
+        "gamesPlayed": 12
+      },
+      {
+        "season": 20192020,
+        "points": 1,
+        "gamesPlayed": 4
+      },
+      {
+        "season": 20202021,
+        "points": 37,
+        "gamesPlayed": 44
+      },
+      {
+        "season": 20202021,
+        "points": 21,
+        "gamesPlayed": 32
+      },
+      {
+        "season": 20202021,
+        "points": 0,
+        "gamesPlayed": 1
+      },
+      {
+        "season": 20212022,
+        "points": 65,
+        "gamesPlayed": 54
+      },
+      {
+        "season": 20212022,
+        "points": 28,
+        "gamesPlayed": 22
+      },
+      {
+        "season": 20212022,
+        "points": 9,
+        "gamesPlayed": 6
+      },
+      {
+        "season": 20222023,
+        "points": 37,
+        "gamesPlayed": 32
+      },
+      {
+        "season": 20222023,
+        "points": 10,
+        "gamesPlayed": 7
+      },
+      {
+        "season": 20222023,
+        "points": 9,
+        "gamesPlayed": 10
+      },
+      {
+        "season": 20232024,
+        "points": 1,
+        "gamesPlayed": 1
+      },
+      {
+        "season": 20232024,
+        "points": 65,
+        "gamesPlayed": 41
+      },
+      {
+        "season": 20232024,
+        "points": 12,
+        "gamesPlayed": 7
+      },
+      {
+        "season": 20242025,
+        "points": 44,
+        "gamesPlayed": 82
+      },
+      {
+        "season": 20242025,
+        "points": 9,
+        "gamesPlayed": 10
+      },
+      {
+        "season": 20242025,
+        "points": 0,
+        "gamesPlayed": 1
+      },
+      {
+        "season": 20252026,
+        "points": 69,
+        "gamesPlayed": 76
+      },
+      {
+        "season": 20262027,
+        "points": 12,
+        "gamesPlayed": 13
+      }
+    ]
   },
   "8477493": {
     "points": 0,
-    "gp": 2
+    "gp": 2,
+    "position": "C",
+    "history": [
+      {
+        "season": 20092010,
+        "points": 14,
+        "gamesPlayed": 8
+      },
+      {
+        "season": 20102011,
+        "points": 15,
+        "gamesPlayed": 11
+      },
+      {
+        "season": 20102011,
+        "points": 17,
+        "gamesPlayed": 25
+      },
+      {
+        "season": 20112012,
+        "points": 5,
+        "gamesPlayed": 5
+      },
+      {
+        "season": 20112012,
+        "points": 16,
+        "gamesPlayed": 32
+      },
+      {
+        "season": 20112012,
+        "points": 3,
+        "gamesPlayed": 7
+      },
+      {
+        "season": 20122013,
+        "points": 48,
+        "gamesPlayed": 53
+      },
+      {
+        "season": 20132014,
+        "points": 24,
+        "gamesPlayed": 54
+      },
+      {
+        "season": 20132014,
+        "points": 1,
+        "gamesPlayed": 2
+      },
+      {
+        "season": 20142015,
+        "points": 36,
+        "gamesPlayed": 71
+      },
+      {
+        "season": 20142015,
+        "points": 7,
+        "gamesPlayed": 8
+      },
+      {
+        "season": 20152016,
+        "points": 59,
+        "gamesPlayed": 66
+      },
+      {
+        "season": 20152016,
+        "points": 9,
+        "gamesPlayed": 9
+      },
+      {
+        "season": 20162017,
+        "points": 52,
+        "gamesPlayed": 61
+      },
+      {
+        "season": 20162017,
+        "points": 0,
+        "gamesPlayed": 3
+      },
+      {
+        "season": 20172018,
+        "points": 78,
+        "gamesPlayed": 79
+      },
+      {
+        "season": 20182019,
+        "points": 96,
+        "gamesPlayed": 82
+      },
+      {
+        "season": 20192020,
+        "points": 62,
+        "gamesPlayed": 66
+      },
+      {
+        "season": 20202021,
+        "points": 58,
+        "gamesPlayed": 50
+      },
+      {
+        "season": 20212022,
+        "points": 88,
+        "gamesPlayed": 67
+      },
+      {
+        "season": 20222023,
+        "points": 78,
+        "gamesPlayed": 68
+      },
+      {
+        "season": 20232024,
+        "points": 80,
+        "gamesPlayed": 73
+      },
+      {
+        "season": 20242025,
+        "points": 71,
+        "gamesPlayed": 67
+      },
+      {
+        "season": 20242025,
+        "points": 2,
+        "gamesPlayed": 3
+      },
+      {
+        "season": 20262027,
+        "points": 0,
+        "gamesPlayed": 2
+      }
+    ]
   },
   "8475158": {
-    "points": 13,
-    "gp": 12
+    "points": 15,
+    "gp": 14,
+    "position": "C",
+    "history": [
+      {
+        "season": 20052006,
+        "points": 71,
+        "gamesPlayed": 51
+      },
+      {
+        "season": 20062007,
+        "points": 74,
+        "gamesPlayed": 50
+      },
+      {
+        "season": 20062007,
+        "points": 1,
+        "gamesPlayed": 1
+      },
+      {
+        "season": 20072008,
+        "points": 52,
+        "gamesPlayed": 61
+      },
+      {
+        "season": 20082009,
+        "points": 66,
+        "gamesPlayed": 68
+      },
+      {
+        "season": 20082009,
+        "points": 5,
+        "gamesPlayed": 6
+      },
+      {
+        "season": 20092010,
+        "points": 26,
+        "gamesPlayed": 81
+      },
+      {
+        "season": 20102011,
+        "points": 26,
+        "gamesPlayed": 74
+      },
+      {
+        "season": 20112012,
+        "points": 55,
+        "gamesPlayed": 81
+      },
+      {
+        "season": 20112012,
+        "points": 4,
+        "gamesPlayed": 7
+      },
+      {
+        "season": 20122013,
+        "points": 20,
+        "gamesPlayed": 29
+      },
+      {
+        "season": 20122013,
+        "points": 3,
+        "gamesPlayed": 8
+      },
+      {
+        "season": 20122013,
+        "points": 10,
+        "gamesPlayed": 12
+      },
+      {
+        "season": 20132014,
+        "points": 64,
+        "gamesPlayed": 80
+      },
+      {
+        "season": 20142015,
+        "points": 55,
+        "gamesPlayed": 82
+      },
+      {
+        "season": 20142015,
+        "points": 11,
+        "gamesPlayed": 10
+      },
+      {
+        "season": 20152016,
+        "points": 60,
+        "gamesPlayed": 71
+      },
+      {
+        "season": 20152016,
+        "points": 8,
+        "gamesPlayed": 10
+      },
+      {
+        "season": 20162017,
+        "points": 55,
+        "gamesPlayed": 72
+      },
+      {
+        "season": 20162017,
+        "points": 0,
+        "gamesPlayed": 6
+      },
+      {
+        "season": 20162017,
+        "points": 9,
+        "gamesPlayed": 10
+      },
+      {
+        "season": 20172018,
+        "points": 61,
+        "gamesPlayed": 81
+      },
+      {
+        "season": 20172018,
+        "points": 4,
+        "gamesPlayed": 10
+      },
+      {
+        "season": 20182019,
+        "points": 77,
+        "gamesPlayed": 82
+      },
+      {
+        "season": 20192020,
+        "points": 61,
+        "gamesPlayed": 71
+      },
+      {
+        "season": 20202021,
+        "points": 54,
+        "gamesPlayed": 56
+      },
+      {
+        "season": 20212022,
+        "points": 58,
+        "gamesPlayed": 78
+      },
+      {
+        "season": 20222023,
+        "points": 19,
+        "gamesPlayed": 40
+      },
+      {
+        "season": 20222023,
+        "points": 11,
+        "gamesPlayed": 13
+      },
+      {
+        "season": 20232024,
+        "points": 69,
+        "gamesPlayed": 82
+      },
+      {
+        "season": 20242025,
+        "points": 53,
+        "gamesPlayed": 79
+      },
+      {
+        "season": 20242025,
+        "points": 4,
+        "gamesPlayed": 8
+      },
+      {
+        "season": 20242025,
+        "points": 2,
+        "gamesPlayed": 2
+      },
+      {
+        "season": 20252026,
+        "points": 74,
+        "gamesPlayed": 81
+      },
+      {
+        "season": 20262027,
+        "points": 15,
+        "gamesPlayed": 14
+      }
+    ]
   },
   "8475810": {
     "points": 5,
-    "gp": 7
+    "gp": 7,
+    "position": "R",
+    "history": [
+      {
+        "season": 20052006,
+        "points": 30,
+        "gamesPlayed": 28
+      },
+      {
+        "season": 20062007,
+        "points": 43,
+        "gamesPlayed": 29
+      },
+      {
+        "season": 20072008,
+        "points": 45,
+        "gamesPlayed": 31
+      },
+      {
+        "season": 20072008,
+        "points": 47,
+        "gamesPlayed": 37
+      },
+      {
+        "season": 20082009,
+        "points": 15,
+        "gamesPlayed": 42
+      },
+      {
+        "season": 20082009,
+        "points": 5,
+        "gamesPlayed": 16
+      },
+      {
+        "season": 20092010,
+        "points": 23,
+        "gamesPlayed": 27
+      },
+      {
+        "season": 20092010,
+        "points": 0,
+        "gamesPlayed": 1
+      },
+      {
+        "season": 20092010,
+        "points": 29,
+        "gamesPlayed": 38
+      },
+      {
+        "season": 20092010,
+        "points": 6,
+        "gamesPlayed": 7
+      },
+      {
+        "season": 20102011,
+        "points": 19,
+        "gamesPlayed": 40
+      },
+      {
+        "season": 20112012,
+        "points": 11,
+        "gamesPlayed": 40
+      },
+      {
+        "season": 20122013,
+        "points": 34,
+        "gamesPlayed": 41
+      },
+      {
+        "season": 20132014,
+        "points": 33,
+        "gamesPlayed": 40
+      },
+      {
+        "season": 20132014,
+        "points": 0,
+        "gamesPlayed": 2
+      },
+      {
+        "season": 20142015,
+        "points": 2,
+        "gamesPlayed": 14
+      },
+      {
+        "season": 20142015,
+        "points": 27,
+        "gamesPlayed": 45
+      },
+      {
+        "season": 20152016,
+        "points": 11,
+        "gamesPlayed": 41
+      },
+      {
+        "season": 20152016,
+        "points": 6,
+        "gamesPlayed": 16
+      },
+      {
+        "season": 20162017,
+        "points": 28,
+        "gamesPlayed": 57
+      },
+      {
+        "season": 20172018,
+        "points": 38,
+        "gamesPlayed": 69
+      },
+      {
+        "season": 20182019,
+        "points": 35,
+        "gamesPlayed": 72
+      },
+      {
+        "season": 20192020,
+        "points": 56,
+        "gamesPlayed": 55
+      },
+      {
+        "season": 20202021,
+        "points": 42,
+        "gamesPlayed": 56
+      },
+      {
+        "season": 20212022,
+        "points": 58,
+        "gamesPlayed": 60
+      },
+      {
+        "season": 20222023,
+        "points": 46,
+        "gamesPlayed": 81
+      },
+      {
+        "season": 20232024,
+        "points": 56,
+        "gamesPlayed": 62
+      },
+      {
+        "season": 20242025,
+        "points": 65,
+        "gamesPlayed": 71
+      },
+      {
+        "season": 20252026,
+        "points": 65,
+        "gamesPlayed": 72
+      },
+      {
+        "season": 20262027,
+        "points": 5,
+        "gamesPlayed": 7
+      }
+    ]
   },
   "8479425": {
-    "points": 10,
-    "gp": 14
+    "points": 12,
+    "gp": 16,
+    "position": "D",
+    "history": [
+      {
+        "season": 20112012,
+        "points": 1,
+        "gamesPlayed": 6
+      },
+      {
+        "season": 20122013,
+        "points": 17,
+        "gamesPlayed": 33
+      },
+      {
+        "season": 20132014,
+        "points": 15,
+        "gamesPlayed": 43
+      },
+      {
+        "season": 20142015,
+        "points": 24,
+        "gamesPlayed": 33
+      },
+      {
+        "season": 20142015,
+        "points": 17,
+        "gamesPlayed": 23
+      },
+      {
+        "season": 20142015,
+        "points": 0,
+        "gamesPlayed": 1
+      },
+      {
+        "season": 20152016,
+        "points": 4,
+        "gamesPlayed": 40
+      },
+      {
+        "season": 20152016,
+        "points": 16,
+        "gamesPlayed": 13
+      },
+      {
+        "season": 20152016,
+        "points": 4,
+        "gamesPlayed": 12
+      },
+      {
+        "season": 20152016,
+        "points": 2,
+        "gamesPlayed": 5
+      },
+      {
+        "season": 20162017,
+        "points": 61,
+        "gamesPlayed": 59
+      },
+      {
+        "season": 20162017,
+        "points": 4,
+        "gamesPlayed": 5
+      },
+      {
+        "season": 20162017,
+        "points": 2,
+        "gamesPlayed": 10
+      },
+      {
+        "season": 20172018,
+        "points": 39,
+        "gamesPlayed": 67
+      },
+      {
+        "season": 20172018,
+        "points": 3,
+        "gamesPlayed": 8
+      },
+      {
+        "season": 20182019,
+        "points": 23,
+        "gamesPlayed": 46
+      },
+      {
+        "season": 20182019,
+        "points": 24,
+        "gamesPlayed": 31
+      },
+      {
+        "season": 20182019,
+        "points": 1,
+        "gamesPlayed": 2
+      },
+      {
+        "season": 20182019,
+        "points": 11,
+        "gamesPlayed": 10
+      },
+      {
+        "season": 20192020,
+        "points": 31,
+        "gamesPlayed": 65
+      },
+      {
+        "season": 20202021,
+        "points": 26,
+        "gamesPlayed": 56
+      },
+      {
+        "season": 20202021,
+        "points": 23,
+        "gamesPlayed": 22
+      },
+      {
+        "season": 20202021,
+        "points": 2,
+        "gamesPlayed": 3
+      },
+      {
+        "season": 20202021,
+        "points": 4,
+        "gamesPlayed": 7
+      },
+      {
+        "season": 20212022,
+        "points": 38,
+        "gamesPlayed": 78
+      },
+      {
+        "season": 20212022,
+        "points": 2,
+        "gamesPlayed": 10
+      },
+      {
+        "season": 20212022,
+        "points": 0,
+        "gamesPlayed": 3
+      },
+      {
+        "season": 20222023,
+        "points": 38,
+        "gamesPlayed": 60
+      },
+      {
+        "season": 20222023,
+        "points": 1,
+        "gamesPlayed": 4
+      },
+      {
+        "season": 20232024,
+        "points": 48,
+        "gamesPlayed": 81
+      },
+      {
+        "season": 20242025,
+        "points": 33,
+        "gamesPlayed": 61
+      },
+      {
+        "season": 20242025,
+        "points": 6,
+        "gamesPlayed": 8
+      },
+      {
+        "season": 20242025,
+        "points": 0,
+        "gamesPlayed": 2
+      },
+      {
+        "season": 20252026,
+        "points": 49,
+        "gamesPlayed": 82
+      },
+      {
+        "season": 20252026,
+        "points": 5,
+        "gamesPlayed": 5
+      },
+      {
+        "season": 20262027,
+        "points": 12,
+        "gamesPlayed": 16
+      }
+    ]
   },
   "8484873": {
-    "points": 5,
-    "gp": 10
+    "points": 8,
+    "gp": 13,
+    "position": "D",
+    "history": [
+      {
+        "season": 20142015,
+        "points": 5,
+        "gamesPlayed": 6
+      },
+      {
+        "season": 20152016,
+        "points": 3,
+        "gamesPlayed": 6
+      },
+      {
+        "season": 20172018,
+        "points": 6,
+        "gamesPlayed": 8
+      },
+      {
+        "season": 20182019,
+        "points": 2,
+        "gamesPlayed": 2
+      },
+      {
+        "season": 20192020,
+        "points": 9,
+        "gamesPlayed": 25
+      },
+      {
+        "season": 20202021,
+        "points": 29,
+        "gamesPlayed": 16
+      },
+      {
+        "season": 20202021,
+        "points": 3,
+        "gamesPlayed": 9
+      },
+      {
+        "season": 20212022,
+        "points": 1,
+        "gamesPlayed": 4
+      },
+      {
+        "season": 20212022,
+        "points": 62,
+        "gamesPlayed": 24
+      },
+      {
+        "season": 20222023,
+        "points": 42,
+        "gamesPlayed": 42
+      },
+      {
+        "season": 20222023,
+        "points": 25,
+        "gamesPlayed": 32
+      },
+      {
+        "season": 20222023,
+        "points": 9,
+        "gamesPlayed": 7
+      },
+      {
+        "season": 20222023,
+        "points": 26,
+        "gamesPlayed": 19
+      },
+      {
+        "season": 20222023,
+        "points": 12,
+        "gamesPlayed": 7
+      },
+      {
+        "season": 20232024,
+        "points": 51,
+        "gamesPlayed": 51
+      },
+      {
+        "season": 20232024,
+        "points": 12,
+        "gamesPlayed": 19
+      },
+      {
+        "season": 20232024,
+        "points": 13,
+        "gamesPlayed": 7
+      },
+      {
+        "season": 20242025,
+        "points": 48,
+        "gamesPlayed": 39
+      },
+      {
+        "season": 20242025,
+        "points": 11,
+        "gamesPlayed": 7
+      },
+      {
+        "season": 20252026,
+        "points": 10,
+        "gamesPlayed": 14
+      },
+      {
+        "season": 20252026,
+        "points": 32,
+        "gamesPlayed": 35
+      },
+      {
+        "season": 20252026,
+        "points": 4,
+        "gamesPlayed": 3
+      },
+      {
+        "season": 20262027,
+        "points": 8,
+        "gamesPlayed": 13
+      }
+    ]
   },
   "8482077": {
-    "points": 10,
-    "gp": 12
+    "points": 12,
+    "gp": 14,
+    "position": "L",
+    "history": [
+      {
+        "season": 20142015,
+        "points": 20,
+        "gamesPlayed": 33
+      },
+      {
+        "season": 20152016,
+        "points": 31,
+        "gamesPlayed": 33
+      },
+      {
+        "season": 20152016,
+        "points": 0,
+        "gamesPlayed": 1
+      },
+      {
+        "season": 20162017,
+        "points": 20,
+        "gamesPlayed": 31
+      },
+      {
+        "season": 20162017,
+        "points": 0,
+        "gamesPlayed": 2
+      },
+      {
+        "season": 20162017,
+        "points": 3,
+        "gamesPlayed": 4
+      },
+      {
+        "season": 20172018,
+        "points": 27,
+        "gamesPlayed": 28
+      },
+      {
+        "season": 20172018,
+        "points": 1,
+        "gamesPlayed": 6
+      },
+      {
+        "season": 20172018,
+        "points": 3,
+        "gamesPlayed": 5
+      },
+      {
+        "season": 20182019,
+        "points": 3,
+        "gamesPlayed": 5
+      },
+      {
+        "season": 20182019,
+        "points": 88,
+        "gamesPlayed": 53
+      },
+      {
+        "season": 20182019,
+        "points": 5,
+        "gamesPlayed": 6
+      },
+      {
+        "season": 20182019,
+        "points": 4,
+        "gamesPlayed": 7
+      },
+      {
+        "season": 20192020,
+        "points": 17,
+        "gamesPlayed": 35
+      },
+      {
+        "season": 20202021,
+        "points": 35,
+        "gamesPlayed": 23
+      },
+      {
+        "season": 20202021,
+        "points": 2,
+        "gamesPlayed": 6
+      },
+      {
+        "season": 20212022,
+        "points": 22,
+        "gamesPlayed": 33
+      },
+      {
+        "season": 20222023,
+        "points": 9,
+        "gamesPlayed": 51
+      },
+      {
+        "season": 20222023,
+        "points": 10,
+        "gamesPlayed": 12
+      },
+      {
+        "season": 20232024,
+        "points": 9,
+        "gamesPlayed": 38
+      },
+      {
+        "season": 20232024,
+        "points": 16,
+        "gamesPlayed": 18
+      },
+      {
+        "season": 20242025,
+        "points": 63,
+        "gamesPlayed": 77
+      },
+      {
+        "season": 20252026,
+        "points": 51,
+        "gamesPlayed": 59
+      },
+      {
+        "season": 20262027,
+        "points": 12,
+        "gamesPlayed": 14
+      }
+    ]
   },
   "8483516": {
-    "points": 8,
-    "gp": 12
+    "points": 11,
+    "gp": 14,
+    "position": "R",
+    "history": [
+      {
+        "season": 20182019,
+        "points": 12,
+        "gamesPlayed": 15
+      },
+      {
+        "season": 20182019,
+        "points": 3,
+        "gamesPlayed": 3
+      },
+      {
+        "season": 20182019,
+        "points": 9,
+        "gamesPlayed": 9
+      },
+      {
+        "season": 20192020,
+        "points": 3,
+        "gamesPlayed": 3
+      },
+      {
+        "season": 20192020,
+        "points": 6,
+        "gamesPlayed": 4
+      },
+      {
+        "season": 20192020,
+        "points": 34,
+        "gamesPlayed": 23
+      },
+      {
+        "season": 20192020,
+        "points": 2,
+        "gamesPlayed": 4
+      },
+      {
+        "season": 20202021,
+        "points": 32,
+        "gamesPlayed": 45
+      },
+      {
+        "season": 20202021,
+        "points": 14,
+        "gamesPlayed": 29
+      },
+      {
+        "season": 20212022,
+        "points": 63,
+        "gamesPlayed": 59
+      },
+      {
+        "season": 20212022,
+        "points": 26,
+        "gamesPlayed": 26
+      },
+      {
+        "season": 20212022,
+        "points": 7,
+        "gamesPlayed": 6
+      },
+      {
+        "season": 20222023,
+        "points": 50,
+        "gamesPlayed": 40
+      },
+      {
+        "season": 20222023,
+        "points": 13,
+        "gamesPlayed": 7
+      },
+      {
+        "season": 20232024,
+        "points": 34,
+        "gamesPlayed": 39
+      },
+      {
+        "season": 20232024,
+        "points": 8,
+        "gamesPlayed": 6
+      },
+      {
+        "season": 20242025,
+        "points": 4,
+        "gamesPlayed": 7
+      },
+      {
+        "season": 20242025,
+        "points": 51,
+        "gamesPlayed": 40
+      },
+      {
+        "season": 20252026,
+        "points": 51,
+        "gamesPlayed": 70
+      },
+      {
+        "season": 20262027,
+        "points": 11,
+        "gamesPlayed": 14
+      }
+    ]
   },
   "8479410": {
-    "points": 15,
-    "gp": 13
+    "points": 17,
+    "gp": 15,
+    "position": "D",
+    "history": [
+      {
+        "season": 20142015,
+        "points": 8,
+        "gamesPlayed": 25
+      },
+      {
+        "season": 20152016,
+        "points": 57,
+        "gamesPlayed": 67
+      },
+      {
+        "season": 20152016,
+        "points": 0,
+        "gamesPlayed": 5
+      },
+      {
+        "season": 20162017,
+        "points": 0,
+        "gamesPlayed": 4
+      },
+      {
+        "season": 20162017,
+        "points": 43,
+        "gamesPlayed": 50
+      },
+      {
+        "season": 20162017,
+        "points": 1,
+        "gamesPlayed": 7
+      },
+      {
+        "season": 20162017,
+        "points": 4,
+        "gamesPlayed": 4
+      },
+      {
+        "season": 20172018,
+        "points": 40,
+        "gamesPlayed": 79
+      },
+      {
+        "season": 20182019,
+        "points": 32,
+        "gamesPlayed": 75
+      },
+      {
+        "season": 20182019,
+        "points": 7,
+        "gamesPlayed": 10
+      },
+      {
+        "season": 20182019,
+        "points": 1,
+        "gamesPlayed": 3
+      },
+      {
+        "season": 20192020,
+        "points": 34,
+        "gamesPlayed": 70
+      },
+      {
+        "season": 20202021,
+        "points": 30,
+        "gamesPlayed": 56
+      },
+      {
+        "season": 20212022,
+        "points": 38,
+        "gamesPlayed": 78
+      },
+      {
+        "season": 20222023,
+        "points": 64,
+        "gamesPlayed": 79
+      },
+      {
+        "season": 20232024,
+        "points": 19,
+        "gamesPlayed": 34
+      },
+      {
+        "season": 20242025,
+        "points": 53,
+        "gamesPlayed": 77
+      },
+      {
+        "season": 20252026,
+        "points": 59,
+        "gamesPlayed": 78
+      },
+      {
+        "season": 20262027,
+        "points": 17,
+        "gamesPlayed": 15
+      }
+    ]
   },
   "8481524": {
     "points": 1,
-    "gp": 6
+    "gp": 6,
+    "position": "D",
+    "history": [
+      {
+        "season": 20142015,
+        "points": 27,
+        "gamesPlayed": 33
+      },
+      {
+        "season": 20152016,
+        "points": 59,
+        "gamesPlayed": 34
+      },
+      {
+        "season": 20162017,
+        "points": 0,
+        "gamesPlayed": 11
+      },
+      {
+        "season": 20162017,
+        "points": 8,
+        "gamesPlayed": 8
+      },
+      {
+        "season": 20162017,
+        "points": 29,
+        "gamesPlayed": 20
+      },
+      {
+        "season": 20162017,
+        "points": 1,
+        "gamesPlayed": 4
+      },
+      {
+        "season": 20172018,
+        "points": 0,
+        "gamesPlayed": 3
+      },
+      {
+        "season": 20172018,
+        "points": 27,
+        "gamesPlayed": 60
+      },
+      {
+        "season": 20172018,
+        "points": 5,
+        "gamesPlayed": 6
+      },
+      {
+        "season": 20172018,
+        "points": 1,
+        "gamesPlayed": 5
+      },
+      {
+        "season": 20182019,
+        "points": 71,
+        "gamesPlayed": 67
+      },
+      {
+        "season": 20182019,
+        "points": 4,
+        "gamesPlayed": 5
+      },
+      {
+        "season": 20192020,
+        "points": 52,
+        "gamesPlayed": 50
+      },
+      {
+        "season": 20192020,
+        "points": 2,
+        "gamesPlayed": 7
+      },
+      {
+        "season": 20202021,
+        "points": 2,
+        "gamesPlayed": 19
+      },
+      {
+        "season": 20202021,
+        "points": 5,
+        "gamesPlayed": 7
+      },
+      {
+        "season": 20212022,
+        "points": 17,
+        "gamesPlayed": 30
+      },
+      {
+        "season": 20212022,
+        "points": 0,
+        "gamesPlayed": 2
+      },
+      {
+        "season": 20222023,
+        "points": 24,
+        "gamesPlayed": 42
+      },
+      {
+        "season": 20232024,
+        "points": 20,
+        "gamesPlayed": 55
+      },
+      {
+        "season": 20232024,
+        "points": 9,
+        "gamesPlayed": 18
+      },
+      {
+        "season": 20232024,
+        "points": 5,
+        "gamesPlayed": 9
+      },
+      {
+        "season": 20232024,
+        "points": 1,
+        "gamesPlayed": 2
+      },
+      {
+        "season": 20242025,
+        "points": 38,
+        "gamesPlayed": 82
+      },
+      {
+        "season": 20252026,
+        "points": 42,
+        "gamesPlayed": 82
+      },
+      {
+        "season": 20262027,
+        "points": 1,
+        "gamesPlayed": 6
+      }
+    ]
   },
   "8480027": {
-    "points": 13,
-    "gp": 12
+    "points": 14,
+    "gp": 14,
+    "position": "L",
+    "history": [
+      {
+        "season": 20082009,
+        "points": 6,
+        "gamesPlayed": 5
+      },
+      {
+        "season": 20112012,
+        "points": 2,
+        "gamesPlayed": 3
+      },
+      {
+        "season": 20122013,
+        "points": 23,
+        "gamesPlayed": 20
+      },
+      {
+        "season": 20132014,
+        "points": 87,
+        "gamesPlayed": 51
+      },
+      {
+        "season": 20142015,
+        "points": 61,
+        "gamesPlayed": 62
+      },
+      {
+        "season": 20152016,
+        "points": 32,
+        "gamesPlayed": 54
+      },
+      {
+        "season": 20162017,
+        "points": 81,
+        "gamesPlayed": 68
+      },
+      {
+        "season": 20172018,
+        "points": 87,
+        "gamesPlayed": 68
+      },
+      {
+        "season": 20182019,
+        "points": 38,
+        "gamesPlayed": 24
+      },
+      {
+        "season": 20182019,
+        "points": 79,
+        "gamesPlayed": 38
+      },
+      {
+        "season": 20182019,
+        "points": 7,
+        "gamesPlayed": 7
+      },
+      {
+        "season": 20192020,
+        "points": 1,
+        "gamesPlayed": 3
+      },
+      {
+        "season": 20192020,
+        "points": 47,
+        "gamesPlayed": 60
+      },
+      {
+        "season": 20202021,
+        "points": 45,
+        "gamesPlayed": 51
+      },
+      {
+        "season": 20202021,
+        "points": 9,
+        "gamesPlayed": 10
+      },
+      {
+        "season": 20212022,
+        "points": 79,
+        "gamesPlayed": 74
+      },
+      {
+        "season": 20222023,
+        "points": 109,
+        "gamesPlayed": 82
+      },
+      {
+        "season": 20232024,
+        "points": 80,
+        "gamesPlayed": 82
+      },
+      {
+        "season": 20242025,
+        "points": 80,
+        "gamesPlayed": 82
+      },
+      {
+        "season": 20252026,
+        "points": 96,
+        "gamesPlayed": 82
+      },
+      {
+        "season": 20262027,
+        "points": 14,
+        "gamesPlayed": 14
+      }
+    ]
   },
   "8478427": {
-    "points": 19,
-    "gp": 14
+    "points": 21,
+    "gp": 16,
+    "position": "C",
+    "history": [
+      {
+        "season": 20112012,
+        "points": 2,
+        "gamesPlayed": 4
+      },
+      {
+        "season": 20122013,
+        "points": 60,
+        "gamesPlayed": 38
+      },
+      {
+        "season": 20122013,
+        "points": 4,
+        "gamesPlayed": 5
+      },
+      {
+        "season": 20132014,
+        "points": 6,
+        "gamesPlayed": 2
+      },
+      {
+        "season": 20132014,
+        "points": 59,
+        "gamesPlayed": 44
+      },
+      {
+        "season": 20132014,
+        "points": 1,
+        "gamesPlayed": 3
+      },
+      {
+        "season": 20132014,
+        "points": 3,
+        "gamesPlayed": 5
+      },
+      {
+        "season": 20142015,
+        "points": 10,
+        "gamesPlayed": 10
+      },
+      {
+        "season": 20142015,
+        "points": 2,
+        "gamesPlayed": 3
+      },
+      {
+        "season": 20142015,
+        "points": 11,
+        "gamesPlayed": 27
+      },
+      {
+        "season": 20152016,
+        "points": 7,
+        "gamesPlayed": 10
+      },
+      {
+        "season": 20152016,
+        "points": 45,
+        "gamesPlayed": 45
+      },
+      {
+        "season": 20152016,
+        "points": 9,
+        "gamesPlayed": 11
+      },
+      {
+        "season": 20152016,
+        "points": 14,
+        "gamesPlayed": 7
+      },
+      {
+        "season": 20152016,
+        "points": 7,
+        "gamesPlayed": 5
+      },
+      {
+        "season": 20162017,
+        "points": 49,
+        "gamesPlayed": 82
+      },
+      {
+        "season": 20162017,
+        "points": 0,
+        "gamesPlayed": 3
+      },
+      {
+        "season": 20162017,
+        "points": 11,
+        "gamesPlayed": 10
+      },
+      {
+        "season": 20162017,
+        "points": 0,
+        "gamesPlayed": 2
+      },
+      {
+        "season": 20172018,
+        "points": 65,
+        "gamesPlayed": 78
+      },
+      {
+        "season": 20172018,
+        "points": 18,
+        "gamesPlayed": 8
+      },
+      {
+        "season": 20172018,
+        "points": 1,
+        "gamesPlayed": 1
+      },
+      {
+        "season": 20182019,
+        "points": 83,
+        "gamesPlayed": 82
+      },
+      {
+        "season": 20192020,
+        "points": 66,
+        "gamesPlayed": 68
+      },
+      {
+        "season": 20202021,
+        "points": 57,
+        "gamesPlayed": 56
+      },
+      {
+        "season": 20212022,
+        "points": 81,
+        "gamesPlayed": 79
+      },
+      {
+        "season": 20222023,
+        "points": 67,
+        "gamesPlayed": 75
+      },
+      {
+        "season": 20232024,
+        "points": 89,
+        "gamesPlayed": 78
+      },
+      {
+        "season": 20242025,
+        "points": 74,
+        "gamesPlayed": 79
+      },
+      {
+        "season": 20242025,
+        "points": 2,
+        "gamesPlayed": 3
+      },
+      {
+        "season": 20252026,
+        "points": 80,
+        "gamesPlayed": 79
+      },
+      {
+        "season": 20252026,
+        "points": 6,
+        "gamesPlayed": 6
+      },
+      {
+        "season": 20262027,
+        "points": 21,
+        "gamesPlayed": 16
+      }
+    ]
   },
   "MTL": {
-    "points": 16,
-    "gp": 12
+    "points": 20,
+    "gp": 14,
+    "position": "TEAM",
+    "history": []
   },
   "FLA": {
-    "points": 16,
-    "gp": 13
+    "points": 18,
+    "gp": 14,
+    "position": "TEAM",
+    "history": []
   },
   "MTL_PLAYOFF": {
     "points": 0,
-    "gp": 0
+    "gp": 0,
+    "position": "TEAM",
+    "history": []
   },
   "FLA_PLAYOFF": {
     "points": 0,
-    "gp": 0
+    "gp": 0,
+    "position": "TEAM",
+    "history": []
   }
 }
