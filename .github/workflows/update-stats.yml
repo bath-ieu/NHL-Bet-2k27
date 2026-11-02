@@ -1,4 +1,4 @@
-Name: Auto Update NHL Stats
+name: Auto Update NHL Stats
 
 on:
   schedule:
