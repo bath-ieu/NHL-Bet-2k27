@@ -2,8 +2,7 @@ name: Auto Update NHL Stats
 
 on:
   schedule:
-    - cron: '27 9 * * *'
-    timezone: "America/New_York"
+    - cron: '37 14 * * *'
     workflow_dispatch:
     
 jobs:
