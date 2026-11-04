@@ -2,7 +2,7 @@ name: Auto Update NHL Stats
 
 on:
   schedule:
-    - cron: '23 * * * *'
+    - cron: '38 6 * * *'
   workflow_dispatch:
 
 jobs:
