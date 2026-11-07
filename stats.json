@@ -2730,8 +2730,8 @@
     ]
   },
   "8479314": {
-    "points": 22,
-    "gp": 16,
+    "points": 25,
+    "gp": 17,
     "position": "L",
     "history": [
       {
@@ -2846,8 +2846,8 @@
       },
       {
         "season": 20262027,
-        "points": 22,
-        "gamesPlayed": 16
+        "points": 25,
+        "gamesPlayed": 17
       }
     ]
   },
@@ -2994,8 +2994,8 @@
     ]
   },
   "8480801": {
-    "points": 17,
-    "gp": 16,
+    "points": 19,
+    "gp": 17,
     "position": "L",
     "history": [
       {
@@ -3130,8 +3130,8 @@
       },
       {
         "season": 20262027,
-        "points": 17,
-        "gamesPlayed": 16
+        "points": 19,
+        "gamesPlayed": 17
       }
     ]
   },
@@ -3416,7 +3416,7 @@
   },
   "8475158": {
     "points": 17,
-    "gp": 16,
+    "gp": 17,
     "position": "C",
     "history": [
       {
@@ -3592,7 +3592,7 @@
       {
         "season": 20262027,
         "points": 17,
-        "gamesPlayed": 16
+        "gamesPlayed": 17
       }
     ]
   },
@@ -3942,7 +3942,7 @@
   },
   "8484873": {
     "points": 9,
-    "gp": 14,
+    "gp": 15,
     "position": "D",
     "history": [
       {
@@ -4058,13 +4058,13 @@
       {
         "season": 20262027,
         "points": 9,
-        "gamesPlayed": 14
+        "gamesPlayed": 15
       }
     ]
   },
   "8482077": {
     "points": 12,
-    "gp": 16,
+    "gp": 17,
     "position": "L",
     "history": [
       {
@@ -4185,13 +4185,13 @@
       {
         "season": 20262027,
         "points": 12,
-        "gamesPlayed": 16
+        "gamesPlayed": 17
       }
     ]
   },
   "8483516": {
-    "points": 11,
-    "gp": 16,
+    "points": 12,
+    "gp": 17,
     "position": "R",
     "history": [
       {
@@ -4291,8 +4291,8 @@
       },
       {
         "season": 20262027,
-        "points": 11,
-        "gamesPlayed": 16
+        "points": 12,
+        "gamesPlayed": 17
       }
     ]
   },
@@ -4827,7 +4827,7 @@
   },
   "FLA": {
     "points": 20,
-    "gp": 16,
+    "gp": 17,
     "position": "TEAM",
     "history": []
   },
