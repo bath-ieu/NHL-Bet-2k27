@@ -220,11 +220,6 @@
       font-size: 1.05rem;
       color: var(--text-dark);
     }
-    .splitwise-subtitle {
-      font-size: 0.8rem;
-      color: var(--text-muted);
-      margin: 4px 0 6px;
-    }
     .splitwise-row {
       display: grid;
       grid-template-columns: 1fr auto 1fr;
@@ -273,13 +268,6 @@
     .splitwise-arrow-line {
       font-size: 1.5rem;
       line-height: 1;
-      color: var(--text-muted);
-    }
-    .splitwise-total {
-      padding: 11px 4px 0;
-      border-top: 1px solid var(--border-color);
-      font-size: 0.8rem;
-      font-weight: 700;
       color: var(--text-muted);
     }
     .splitwise-empty {
@@ -579,7 +567,6 @@
 
   <div class="splitwise-card" id="splitwise-section" style="display: none;">
     <div class="splitwise-title">💸 Splitwise — Qui doit à qui ?</div>
-    <div class="splitwise-subtitle">Virements simplifiés, calculés sur le bilan actuel. Un seul virement par ligne règle tout.</div>
     <div id="splitwise-list"></div>
   </div>
 
@@ -992,12 +979,9 @@
         return;
       }
       let html = "";
-      let totalCents = 0;
       transfers.forEach(tr => {
-        totalCents += Math.round(tr.amount * 100);
         html += `<div class="splitwise-row">${splitwisePersonHTML(tr.from)}<div class="splitwise-arrow"><div class="splitwise-amount">${formatMoney(tr.amount)} $</div><div class="splitwise-arrow-line">→</div></div>${splitwisePersonHTML(tr.to)}</div>`;
       });
-      html += `<div class="splitwise-total">Total à régler : ${formatMoney(totalCents / 100)} $ en ${transfers.length} virement${transfers.length > 1 ? "s" : ""}.</div>`;
       listEl.innerHTML = html;
     }
 
