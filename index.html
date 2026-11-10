@@ -226,18 +226,54 @@
       margin: 4px 0 6px;
     }
     .splitwise-row {
-      display: flex;
-      justify-content: space-between;
+      display: grid;
+      grid-template-columns: 1fr auto 1fr;
       align-items: center;
       gap: 10px;
-      padding: 11px 4px;
+      padding: 12px 4px;
       border-top: 1px solid var(--border-color);
       font-weight: 700;
       font-size: 0.95rem;
     }
+    .splitwise-person {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 4px;
+      min-width: 0;
+      text-align: center;
+    }
+    .splitwise-avatar {
+      width: 56px;
+      height: 56px;
+      object-fit: contain;
+      border-radius: 12px;
+      background: rgba(235, 242, 247, 0.85);
+      border: 1px solid var(--border-color);
+      padding: 2px;
+    }
+    .splitwise-name {
+      font-size: 0.85rem;
+      font-weight: 800;
+      color: var(--text-dark);
+    }
+    .splitwise-arrow {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0;
+      min-width: 70px;
+    }
     .splitwise-amount {
       color: var(--loss-red);
       white-space: nowrap;
+      font-size: 0.95rem;
+      font-weight: 900;
+    }
+    .splitwise-arrow-line {
+      font-size: 1.5rem;
+      line-height: 1;
+      color: var(--text-muted);
     }
     .splitwise-total {
       padding: 11px 4px 0;
@@ -939,6 +975,14 @@
       return transfers;
     }
 
+    // Une personne dans un virement : même photo que dans le bilan global
+    // (photos/<nom en minuscules>.png), avec son nom en dessous.
+    // Si la photo est absente, elle est cachée et il reste le nom.
+    function splitwisePersonHTML(name) {
+      const avatarFileName = name.toLowerCase();
+      return `<div class="splitwise-person"><img src="photos/${avatarFileName}.png" alt="${name}" class="splitwise-avatar" onerror="this.style.display='none'" /><div class="splitwise-name">${name}</div></div>`;
+    }
+
     function renderSplitwise(userBalances) {
       const listEl = document.getElementById("splitwise-list");
       if (!listEl) return;
@@ -951,7 +995,7 @@
       let totalCents = 0;
       transfers.forEach(tr => {
         totalCents += Math.round(tr.amount * 100);
-        html += `<div class="splitwise-row"><span>${tr.from} → ${tr.to}</span><span class="splitwise-amount">${formatMoney(tr.amount)} $</span></div>`;
+        html += `<div class="splitwise-row">${splitwisePersonHTML(tr.from)}<div class="splitwise-arrow"><div class="splitwise-amount">${formatMoney(tr.amount)} $</div><div class="splitwise-arrow-line">→</div></div>${splitwisePersonHTML(tr.to)}</div>`;
       });
       html += `<div class="splitwise-total">Total à régler : ${formatMoney(totalCents / 100)} $ en ${transfers.length} virement${transfers.length > 1 ? "s" : ""}.</div>`;
       listEl.innerHTML = html;
