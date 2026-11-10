@@ -906,7 +906,8 @@
               if (isWinner && winners.length === 1) {
                 userBalances[p.name] += (totalPotMulti - bet.stakePerPerson);
               } else if (isWinner && winners.length > 1) {
-                // Split Pot
+                // Split Pot : le pot est partagé à parts égales entre les gagnants ex aequo
+                userBalances[p.name] += Math.round((totalPotMulti / winners.length - bet.stakePerPerson) * 100) / 100;
               } else {
                 userBalances[p.name] -= bet.stakePerPerson;
               }
