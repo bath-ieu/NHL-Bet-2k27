@@ -1104,7 +1104,9 @@
           formattedBal = "∞$";
         } else {
           colorClass = bal > 0 ? "positive" : (bal < 0 ? "negative" : "neutral");
-          formattedBal = bal > 0 ? `+${bal}$` : `${bal}$`;
+          // Bilan seulement : les montants avec virgule s'affichent toujours avec 2 décimales (ex. 7.50$), les entiers restent tels quels (ex. 5$)
+          const balText = Number.isInteger(bal) ? `${bal}` : bal.toFixed(2);
+          formattedBal = bal > 0 ? `+${balText}$` : `${balText}$`;
         }
 
         const avatarFileName = user.toLowerCase();
