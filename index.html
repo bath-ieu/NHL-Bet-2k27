@@ -206,6 +206,53 @@
     }
     .refresh-btn-main:active { transform: scale(0.96); }
 
+    .splitwise-card {
+      background: var(--card-bg);
+      backdrop-filter: blur(8px);
+      border-radius: 20px;
+      padding: 18px;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.04);
+      border: 1px solid var(--border-color);
+      margin-bottom: 18px;
+    }
+    .splitwise-title {
+      font-weight: 800;
+      font-size: 1.05rem;
+      color: var(--text-dark);
+    }
+    .splitwise-subtitle {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      margin: 4px 0 6px;
+    }
+    .splitwise-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 10px;
+      padding: 11px 4px;
+      border-top: 1px solid var(--border-color);
+      font-weight: 700;
+      font-size: 0.95rem;
+    }
+    .splitwise-amount {
+      color: var(--loss-red);
+      white-space: nowrap;
+    }
+    .splitwise-total {
+      padding: 11px 4px 0;
+      border-top: 1px solid var(--border-color);
+      font-size: 0.8rem;
+      font-weight: 700;
+      color: var(--text-muted);
+    }
+    .splitwise-empty {
+      padding: 11px 4px 0;
+      border-top: 1px solid var(--border-color);
+      font-weight: 700;
+      color: var(--win-green);
+    }
+
     .filters-container {
       margin-bottom: 18px;
       padding: 0 4px;
@@ -494,10 +541,16 @@
   </div>
   <div class="last-updated-text" id="last-updated">Dernière mise à jour : Chargement...</div>
 
+  <div class="splitwise-card" id="splitwise-section" style="display: none;">
+    <div class="splitwise-title">💸 Splitwise — Qui doit à qui ?</div>
+    <div class="splitwise-subtitle">Virements simplifiés, calculés sur le bilan actuel. Un seul virement par ligne règle tout.</div>
+    <div id="splitwise-list"></div>
+  </div>
+
   <div class="section-header">
     <span class="section-label">Les Paris</span>
-    <button class="refresh-btn-main" onclick="fetchLiveStats()" id="refresh-btn">
-      🔄 Actualiser
+    <button class="refresh-btn-main" onclick="toggleSplitwise()" id="splitwise-btn">
+      💸 Splitwise
     </button>
   </div>
   
@@ -798,9 +851,6 @@
     }
 
     async function fetchLiveStats() {
-      const btn = document.getElementById("refresh-btn");
-      if (btn) btn.innerText = "⏳ Chargement...";
-      
       try {
         const res = await fetch(`./stats.json?t=${Date.now()}`);
         if (res.ok) {
@@ -819,7 +869,6 @@
         lastStatsUpdate = new Date();
       } finally {
         renderApp();
-        if (btn) btn.innerText = "🔄 Actualiser";
       }
     }
 
@@ -841,6 +890,71 @@
     function setFilter(name) {
       currentFilter = name;
       renderApp();
+    }
+
+    let splitwiseVisible = false;
+
+    function toggleSplitwise() {
+      splitwiseVisible = !splitwiseVisible;
+      const el = document.getElementById("splitwise-section");
+      if (el) {
+        el.style.display = splitwiseVisible ? "block" : "none";
+        if (splitwiseVisible) el.scrollIntoView({ behavior: "smooth", block: "nearest" });
+      }
+    }
+
+    function formatMoney(amount) {
+      return Number.isInteger(amount) ? `${amount}` : amount.toFixed(2);
+    }
+
+    // Virements simplifiés, comme Splitwise : on ne règle que les soldes nets du
+    // bilan global (positif = on lui doit de l'argent, négatif = il doit de l'argent).
+    // Le plus gros débiteur paie le plus gros créancier, et on recommence jusqu'à
+    // ce que tout soit à zéro. Au plus (nombre de personnes à régler - 1) virements.
+    // Travaille en cents pour éviter les erreurs d'arrondi (ex. 7,50 $).
+    function simplifyDebts(userBalances) {
+      const debtors = [];
+      const creditors = [];
+      Object.keys(userBalances).forEach(user => {
+        const bal = userBalances[user];
+        if (typeof bal !== "number" || bal === 0) return;
+        const cents = Math.round(bal * 100);
+        if (cents < 0) debtors.push({ name: user, cents: -cents });
+        else if (cents > 0) creditors.push({ name: user, cents });
+      });
+      debtors.sort((a, b) => b.cents - a.cents);
+      creditors.sort((a, b) => b.cents - a.cents);
+
+      const transfers = [];
+      let i = 0;
+      let j = 0;
+      while (i < debtors.length && j < creditors.length) {
+        const amountCents = Math.min(debtors[i].cents, creditors[j].cents);
+        transfers.push({ from: debtors[i].name, to: creditors[j].name, amount: amountCents / 100 });
+        debtors[i].cents -= amountCents;
+        creditors[j].cents -= amountCents;
+        if (debtors[i].cents === 0) i++;
+        if (creditors[j].cents === 0) j++;
+      }
+      return transfers;
+    }
+
+    function renderSplitwise(userBalances) {
+      const listEl = document.getElementById("splitwise-list");
+      if (!listEl) return;
+      const transfers = simplifyDebts(userBalances);
+      if (transfers.length === 0) {
+        listEl.innerHTML = `<div class="splitwise-empty">Personne ne doit rien à personne pour l'instant. 🎉</div>`;
+        return;
+      }
+      let html = "";
+      let totalCents = 0;
+      transfers.forEach(tr => {
+        totalCents += Math.round(tr.amount * 100);
+        html += `<div class="splitwise-row"><span>${tr.from} → ${tr.to}</span><span class="splitwise-amount">${formatMoney(tr.amount)} $</span></div>`;
+      });
+      html += `<div class="splitwise-total">Total à régler : ${formatMoney(totalCents / 100)} $ en ${transfers.length} virement${transfers.length > 1 ? "s" : ""}.</div>`;
+      listEl.innerHTML = html;
     }
 
     function renderApp() {
@@ -1153,6 +1267,8 @@
           </div>
         `;
       });
+
+      renderSplitwise(userBalances);
 
       const lastUpdatedEl = document.getElementById("last-updated");
       if (lastStatsUpdate) {
