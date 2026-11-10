@@ -344,21 +344,6 @@
       box-shadow: 0 2px 4px rgba(0,0,0,0.15);
     }
 
-    .proj-badge {
-      position: absolute;
-      top: -11px;
-      left: 50%;
-      transform: translateX(-50%);
-      background: var(--blue-border);
-      color: white;
-      font-size: 0.65rem;
-      font-weight: 900;
-      padding: 2px 8px;
-      border-radius: 10px;
-      letter-spacing: 0.5px;
-      white-space: nowrap;
-      box-shadow: 0 2px 4px rgba(0,0,0,0.15);
-    }
 
     .participant-name {
       font-size: 1.1rem;
@@ -897,8 +882,6 @@
         bets.forEach(bet => {
           let p1Winning = false;
           let p2Winning = false;
-          let ouOfficial = false;
-          let ouProjected = false;
           let maxPointsMulti = -1;
           let statsListMulti = [];
           let totalPotMulti = 0;
@@ -921,19 +904,15 @@
             if (st.points > bet.target) {
               // OVER officiel : seuil franchi, les points ne redescendent pas.
               p1Winning = true;
-              ouOfficial = true;
             } else if (seasonOver) {
               // UNDER officiel : saison terminée, le seuil n'a pas été franchi.
               p2Winning = true;
-              ouOfficial = true;
             } else if (projected !== null && projected > bet.target) {
               // OVER temporaire : sous le seuil, mais la projection dépasse la cible.
               p1Winning = true;
-              ouProjected = true;
             } else if (projected !== null) {
               // UNDER temporaire : la projection reste sous la cible.
               p2Winning = true;
-              ouProjected = true;
             } else {
               // Pas encore de projection (moins de 3 matchs, ou bet sur une équipe) :
               // UNDER temporaire, comme avant, en attendant.
@@ -1047,7 +1026,7 @@
                 </div>
                 <div class="bet-body">
                   <div class="side-box side-blue ${p1Winning ? 'winning' : ''}">
-                    ${p1Winning ? (ouOfficial ? '<div class="win-badge">WIN</div>' : ouProjected ? '<div class="proj-badge">PROJ</div>' : '') : ''}
+                    ${p1Winning ? '<div class="win-badge">WIN</div>' : ''}
                     <div class="participant-name">${bet.p1.name}</div>
                     <div class="selection-text">${bet.p1.selection}</div>
                     <div class="stat-number-target">${bet.targetDisplay} <span style="font-size: 0.8rem; font-weight: 700;">pts</span></div>
@@ -1058,7 +1037,7 @@
                     ${showProj ? `<div class="stat-projection">${getAdvancedProjectionText(st)}</div>` : ''}
                   </div>
                   <div class="side-box side-red ${p2Winning ? 'winning' : ''}">
-                    ${p2Winning ? (ouOfficial ? '<div class="win-badge">WIN</div>' : ouProjected ? '<div class="proj-badge">PROJ</div>' : '') : ''}
+                    ${p2Winning ? '<div class="win-badge">WIN</div>' : ''}
                     <div class="participant-name">${bet.p2.name}</div>
                     <div class="selection-text">${bet.p2.selection}</div>
                     <div class="stat-number-target">${bet.targetDisplay} <span style="font-size: 0.8rem; font-weight: 700;">pts</span></div>
