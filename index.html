@@ -344,6 +344,22 @@
       box-shadow: 0 2px 4px rgba(0,0,0,0.15);
     }
 
+    .proj-badge {
+      position: absolute;
+      top: -11px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: var(--blue-border);
+      color: white;
+      font-size: 0.65rem;
+      font-weight: 900;
+      padding: 2px 8px;
+      border-radius: 10px;
+      letter-spacing: 0.5px;
+      white-space: nowrap;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.15);
+    }
+
     .participant-name {
       font-size: 1.1rem;
       font-weight: 800;
@@ -733,8 +749,15 @@
       };
     }
 
-    function getAdvancedProjectionText(st) {
-      if (!st || isNaN(st.gp) || st.gp < 3) return "";
+    // Saison 2026-27 : 84 matchs de saison régulière (au lieu de 82).
+    const SEASON_GAMES = 84;
+
+    // Projection numérique (points projetés sur 84 matchs), ou null si pas calculable.
+    // Utilisée par les bets OU : tant que le seuil n'est pas franchi, le gagnant
+    // temporaire est déterminé par la projection. Pas de projection pour une équipe
+    // (position "TEAM") : la formule est faite pour les points d'un joueur.
+    function getProjectedPoints(st) {
+      if (!st || isNaN(st.gp) || st.gp < 3 || st.position === "TEAM") return null;
       const gp = st.gp;
       const pts = st.points;
       const pos = st.position;
@@ -765,8 +788,12 @@
       else weightCurrent = 0.85;
 
       const blendedPpg = (currentPpg * weightCurrent) + (baselinePpg * (1 - weightCurrent));
-      const projected = Math.round(blendedPpg * 82);
-      
+      return Math.round(blendedPpg * SEASON_GAMES);
+    }
+
+    function getAdvancedProjectionText(st) {
+      const projected = getProjectedPoints(st);
+      if (projected === null) return "";
       return `Proj: ~${projected} pts`;
     }
 
@@ -870,6 +897,8 @@
         bets.forEach(bet => {
           let p1Winning = false;
           let p2Winning = false;
+          let ouOfficial = false;
+          let ouProjected = false;
           let maxPointsMulti = -1;
           let statsListMulti = [];
           let totalPotMulti = 0;
@@ -884,8 +913,32 @@
             else if (p2Winning) { userBalances[bet.p2.name] += bet.stake; userBalances[bet.p1.name] -= bet.stake; }
           } else if (bet.type === "OU") {
             const st = getPlayerStat(bet.playerId);
-            p1Winning = st.points > bet.target;
-            p2Winning = st.points <= bet.target;
+            const projected = getProjectedPoints(st);
+            // Fin de saison : 84 matchs joués, le total réel est final. On peut aussi
+            // verrouiller un bet manuellement avec seasonOver: true dans le bet.
+            const seasonOver = st.gp >= SEASON_GAMES || bet.seasonOver === true;
+
+            if (st.points > bet.target) {
+              // OVER officiel : seuil franchi, les points ne redescendent pas.
+              p1Winning = true;
+              ouOfficial = true;
+            } else if (seasonOver) {
+              // UNDER officiel : saison terminée, le seuil n'a pas été franchi.
+              p2Winning = true;
+              ouOfficial = true;
+            } else if (projected !== null && projected > bet.target) {
+              // OVER temporaire : sous le seuil, mais la projection dépasse la cible.
+              p1Winning = true;
+              ouProjected = true;
+            } else if (projected !== null) {
+              // UNDER temporaire : la projection reste sous la cible.
+              p2Winning = true;
+              ouProjected = true;
+            } else {
+              // Pas encore de projection (moins de 3 matchs, ou bet sur une équipe) :
+              // UNDER temporaire, comme avant, en attendant.
+              p2Winning = true;
+            }
 
             if (p1Winning) { userBalances[bet.p1.name] += bet.stake; userBalances[bet.p2.name] -= bet.stake; }
             else if (p2Winning) { userBalances[bet.p2.name] += bet.stake; userBalances[bet.p1.name] -= bet.stake; }
@@ -994,7 +1047,7 @@
                 </div>
                 <div class="bet-body">
                   <div class="side-box side-blue ${p1Winning ? 'winning' : ''}">
-                    ${p1Winning ? '<div class="win-badge">WIN</div>' : ''}
+                    ${p1Winning ? (ouOfficial ? '<div class="win-badge">WIN</div>' : ouProjected ? '<div class="proj-badge">PROJ</div>' : '') : ''}
                     <div class="participant-name">${bet.p1.name}</div>
                     <div class="selection-text">${bet.p1.selection}</div>
                     <div class="stat-number-target">${bet.targetDisplay} <span style="font-size: 0.8rem; font-weight: 700;">pts</span></div>
@@ -1005,7 +1058,7 @@
                     ${showProj ? `<div class="stat-projection">${getAdvancedProjectionText(st)}</div>` : ''}
                   </div>
                   <div class="side-box side-red ${p2Winning ? 'winning' : ''}">
-                    ${p2Winning ? '<div class="win-badge">WIN</div>' : ''}
+                    ${p2Winning ? (ouOfficial ? '<div class="win-badge">WIN</div>' : ouProjected ? '<div class="proj-badge">PROJ</div>' : '') : ''}
                     <div class="participant-name">${bet.p2.name}</div>
                     <div class="selection-text">${bet.p2.selection}</div>
                     <div class="stat-number-target">${bet.targetDisplay} <span style="font-size: 0.8rem; font-weight: 700;">pts</span></div>
