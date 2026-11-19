@@ -219,8 +219,8 @@
     ]
   },
   "8477956": {
-    "points": 26,
-    "gp": 21,
+    "points": 28,
+    "gp": 22,
     "position": "R",
     "history": [
       {
@@ -410,8 +410,8 @@
       },
       {
         "season": 20262027,
-        "points": 26,
-        "gamesPlayed": 21
+        "points": 28,
+        "gamesPlayed": 22
       }
     ]
   },
@@ -583,8 +583,8 @@
     ]
   },
   "8481618": {
-    "points": 10,
-    "gp": 21,
+    "points": 11,
+    "gp": 22,
     "position": "C",
     "history": [
       {
@@ -714,14 +714,14 @@
       },
       {
         "season": 20262027,
-        "points": 10,
-        "gamesPlayed": 21
+        "points": 11,
+        "gamesPlayed": 22
       }
     ]
   },
   "8480018": {
-    "points": 17,
-    "gp": 15,
+    "points": 18,
+    "gp": 16,
     "position": "C",
     "history": [
       {
@@ -826,14 +826,14 @@
       },
       {
         "season": 20262027,
-        "points": 17,
-        "gamesPlayed": 15
+        "points": 18,
+        "gamesPlayed": 16
       }
     ]
   },
   "8483457": {
-    "points": 19,
-    "gp": 21,
+    "points": 22,
+    "gp": 22,
     "position": "D",
     "history": [
       {
@@ -963,14 +963,14 @@
       },
       {
         "season": 20262027,
-        "points": 19,
-        "gamesPlayed": 21
+        "points": 22,
+        "gamesPlayed": 22
       }
     ]
   },
   "8483515": {
-    "points": 13,
-    "gp": 21,
+    "points": 14,
+    "gp": 22,
     "position": "L",
     "history": [
       {
@@ -1115,8 +1115,8 @@
       },
       {
         "season": 20262027,
-        "points": 13,
-        "gamesPlayed": 21
+        "points": 14,
+        "gamesPlayed": 22
       }
     ]
   },
@@ -1341,7 +1341,7 @@
   },
   "8481559": {
     "points": 27,
-    "gp": 21,
+    "gp": 22,
     "position": "C",
     "history": [
       {
@@ -1462,7 +1462,7 @@
       {
         "season": 20262027,
         "points": 27,
-        "gamesPlayed": 21
+        "gamesPlayed": 22
       }
     ]
   },
@@ -4795,8 +4795,8 @@
     ]
   },
   "MTL": {
-    "points": 28,
-    "gp": 21,
+    "points": 30,
+    "gp": 22,
     "position": "TEAM",
     "history": []
   },
