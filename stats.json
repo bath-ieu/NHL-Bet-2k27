@@ -1224,7 +1224,7 @@
   },
   "8482109": {
     "points": 22,
-    "gp": 22,
+    "gp": 23,
     "position": "L",
     "history": [
       {
@@ -1335,7 +1335,7 @@
       {
         "season": 20262027,
         "points": 22,
-        "gamesPlayed": 22
+        "gamesPlayed": 23
       }
     ]
   },
@@ -1609,8 +1609,8 @@
     ]
   },
   "8476468": {
-    "points": 17,
-    "gp": 22,
+    "points": 19,
+    "gp": 23,
     "position": "C",
     "history": [
       {
@@ -1775,8 +1775,8 @@
       },
       {
         "season": 20262027,
-        "points": 17,
-        "gamesPlayed": 22
+        "points": 19,
+        "gamesPlayed": 23
       }
     ]
   },
@@ -4623,8 +4623,8 @@
     ]
   },
   "8478427": {
-    "points": 32,
-    "gp": 23,
+    "points": 33,
+    "gp": 24,
     "position": "C",
     "history": [
       {
@@ -4789,8 +4789,8 @@
       },
       {
         "season": 20262027,
-        "points": 32,
-        "gamesPlayed": 23
+        "points": 33,
+        "gamesPlayed": 24
       }
     ]
   },
