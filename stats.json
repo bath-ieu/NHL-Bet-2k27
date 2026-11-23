@@ -1,7 +1,7 @@
 {
   "8482671": {
-    "points": 17,
-    "gp": 23,
+    "points": 18,
+    "gp": 24,
     "position": "D",
     "history": [
       {
@@ -91,8 +91,8 @@
       },
       {
         "season": 20262027,
-        "points": 17,
-        "gamesPlayed": 23
+        "points": 18,
+        "gamesPlayed": 24
       }
     ]
   },
@@ -4512,7 +4512,7 @@
   },
   "8480027": {
     "points": 26,
-    "gp": 22,
+    "gp": 23,
     "position": "L",
     "history": [
       {
@@ -4618,7 +4618,7 @@
       {
         "season": 20262027,
         "points": 26,
-        "gamesPlayed": 22
+        "gamesPlayed": 23
       }
     ]
   },
